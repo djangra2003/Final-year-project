@@ -32,8 +32,6 @@ const Home: React.FC = () => {
 
       {/* Tour Booking */}
       <TourBooking />
-      {/* Gallery */}
-      <Gallery />
 
       {/* Footer */}
       <Footer />
