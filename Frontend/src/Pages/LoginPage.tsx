@@ -3,10 +3,12 @@ import { TextField, Button, Typography, Box, Divider, Link as MuiLink } from "@m
 import { Link } from "react-router-dom";
 import flight from "../assets/login.png";
 import { AccountCircle, Lock } from "@mui/icons-material";
+import Header from "../Components/Header";
 
 const LoginPage: React.FC = () => {
   return (
     <Box className="flex h-screen">
+      <Header />
       {/* Left Section: Image */}
       <Box
         sx={{

@@ -88,7 +88,7 @@ const SearchBar: React.FC = () => {
           Rain or Shine? Find Out Here!
         </h2>
         <div
-          className="w-full max-w-md bg-white p-4 rounded-md shadow-md opacity-90"
+          className="w-full max-w-md p-4 rounded-md shadow-md opacity-90"
           style={{
             marginLeft: "-350px", // Shift the search box slightly to the left
             transform: "translateX(-10%)", // Fine-tune its position further

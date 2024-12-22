@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Google } from "@mui/icons-material";
 import { validateEmail, validatePassword } from "../utils/utils";
+import Header from "../Components/Header";
 
 const SignupPage: React.FC = () => {
   // State to store form inputs and errors
@@ -62,6 +63,7 @@ const SignupPage: React.FC = () => {
 
   return (
     <Box className="flex h-screen">
+      <Header/>
       {/* Left Section: Image */}
       <Box
         className="w-1/2 bg-cover bg-center"
