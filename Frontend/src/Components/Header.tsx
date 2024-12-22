@@ -45,9 +45,9 @@ const Header: React.FC = () => {
             backdropFilter: "blur(10px)",
           }}
         >
-          <Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
+          <Link to='/'><Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
             Home
-          </Button>
+          </Button></Link>
           <Divider
             orientation="vertical"
             flexItem
