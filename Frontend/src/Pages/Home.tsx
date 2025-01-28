@@ -7,6 +7,7 @@ import Sidebar from "../Components/Sidebar";
 import TourBooking from "../Components/TourBooking";
 import Footer from "../Components/Footer";
 import WelcomeSection from "../Components/WelcomeSection";
+import Gallery from "../Components/Gallery";
 import { Grid, Box } from "@mui/material";
 
 
@@ -29,9 +30,13 @@ const Home: React.FC = () => {
           <Sidebar />
         </Grid>
       </Grid>
+      
+      {/* Gallery */}
+      <Gallery />
 
       {/* Tour Booking */}
       <TourBooking />
+
 
       {/* Footer */}
       <Footer />
