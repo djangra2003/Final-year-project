@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import beachImage from "../assets/guides.png"; // Path to your image
 import tidalImage from "../assets/games.png"; // Path to your image
-import hotelImage from "../assets/hotel 1.png"; // Remove space in filename
+import hotelImage from "../assets/hotel 1.png";
+import { Box, Typography } from "@mui/material";
 
 const images = [beachImage, tidalImage, hotelImage];
 
@@ -29,13 +30,27 @@ const Gallery = () => {
 
   return (
     <div className="relative w-full overflow-hidden bg-white py-10">
-      <h2 className="text-center text-3xl font-bold text-blue-700">
-        Tides of Beauty: Photo Collection
-      </h2>
-      <div
-        ref={galleryRef}
-        className="mt-6 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide"
-      >
+      {/* Centered Heading */}
+      <Box className="relative flex flex-col items-center justify-center h-40 text-center">
+        {/* Overlapping Background Text */}
+        <Typography
+          variant="h2"
+          className="absolute text-6xl font-bold text-gray-400 opacity-50 tracking-wider"
+        >
+          GALLERY
+        </Typography>
+
+        {/* Main Title */}
+        <Typography
+          variant="h4"
+          className="relative text-3xl font-semibold text-blue-600 z-10"
+        >
+          Tides of Beauty: Photo Collection
+        </Typography>
+      </Box>
+
+      {/* Image Gallery */}
+      <div ref={galleryRef} className="mt-6 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide">
         <div className="flex w-max">
           {images.concat(images).map((src, index) => (
             <img
