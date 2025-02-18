@@ -1,7 +1,11 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AboutUs from "./Pages/AboutUs";
+import BeachesPage from "./Pages/BeachesPage";
+import ContactUs from "./Pages/ContactUs";
 import Home from "./Pages/Home";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
-import { createBrowserRouter , RouterProvider } from "react-router-dom";
+import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 
 const App: React.FC = () => {
 
@@ -18,7 +22,22 @@ const App: React.FC = () => {
       path:"/signup",
       element:<SignupPage/>
     },
-
+    {
+      path:"/contact",
+      element:<ContactUs />
+    },
+    {
+      path: "/about",
+      element: <AboutUs />
+    },
+    {
+      path: "/beaches",
+      element: <BeachesPage />
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPasswordPage/>
+    },
   ])
   return (
     <div className="font-sans bg-gray-50">

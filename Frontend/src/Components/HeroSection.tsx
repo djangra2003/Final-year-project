@@ -4,7 +4,11 @@ import hero2 from "../assets/herosection2.png";
 import hero3 from "../assets/herosection3.png";
 import { Box, Typography } from "@mui/material";
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  title: string;
+  subtitle: string;
+}
+const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
   const images = [hero1, hero2, hero3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -80,7 +84,7 @@ const HeroSection: React.FC = () => {
             textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
           }}
         >
-          Discover India's Coastal Gems
+          {title}
         </Typography>
         <Typography
           variant="h5"
@@ -89,7 +93,7 @@ const HeroSection: React.FC = () => {
             textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
           }}
         >
-          Your ultimate guide to beaches across the nation
+          {subtitle}
         </Typography>
       </Box>
     </Box>

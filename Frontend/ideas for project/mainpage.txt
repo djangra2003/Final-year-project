@@ -1,0 +1,73 @@
+import Layout from "./components/layout"
+import { TextField, Button, Card, CardContent, Typography } from "@mui/material"
+import Image from "next/image"
+
+export default function Home() {
+  return (
+    <Layout>
+      <div className="bg-blue-100 py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl font-bold mb-8 text-center">Find Your Perfect Beach Getaway</h1>
+          <div className="flex justify-center mb-8">
+            <TextField
+              variant="outlined"
+              placeholder="Search beaches by name, location, or activities"
+              className="w-full max-w-2xl bg-white"
+              InputProps={{
+                endAdornment: (
+                  <Button variant="contained" color="primary">
+                    Search
+                  </Button>
+                ),
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-semibold mb-8">Featured Beaches</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[1, 2, 3].map((i) => (
+            <Card key={i}>
+              <Image
+                src={`/placeholder.svg?height=200&width=300`}
+                alt={`Beach ${i}`}
+                width={300}
+                height={200}
+                className="w-full"
+              />
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Beautiful Beach {i}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+      <div className="bg-gray-100 py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-semibold mb-8 text-center">What Our Users Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <Card key={i}>
+                <CardContent>
+                  <Typography variant="body1" component="p" className="mb-4">
+                    "Beach Buddy made planning our vacation so easy! We found the perfect beach for our family."
+                  </Typography>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    - Happy User {i}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Layout>
+  )
+}
+

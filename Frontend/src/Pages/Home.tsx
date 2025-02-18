@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     <Box sx={{ fontFamily: "sans-serif", backgroundColor: "#f9fafb" }}>
       {/* Header and Hero Section */}
       <Header />
-      <HeroSection />
+      <HeroSection title="Discover India's Coastal Gems" subtitle="Your ultimate guide to beaches across the nation" />
       {/* Main Content with Sidebar on the Right */}
       <Grid container spacing={4} sx={{ px: 2 }}>
         <Grid item xs={12} md={8}>

@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import beachImage from "../assets/login.png";
-import { Link } from "react-router-dom";
-import {
-  TextField,
-  Button,
-  Typography,
-  Divider,
-  Box,
-  Paper,
-} from "@mui/material";
 import { Google } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Divider,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import beachImage from "../assets/login.png";
 import { validateEmail, validatePassword } from "../utils/utils";
-import Header from "../Components/Header";
 
 const SignupPage: React.FC = () => {
   // State to store form inputs and errors
@@ -46,7 +45,7 @@ const SignupPage: React.FC = () => {
 
   // Handle Form Submit
   const handleSubmit = () => {
-    let newErrors = { email: "", password: "" };
+    const newErrors = { email: "", password: "" };
     if (!validateEmail(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
@@ -63,7 +62,6 @@ const SignupPage: React.FC = () => {
 
   return (
     <Box className="flex h-screen">
-      <Header/>
       {/* Left Section: Image */}
       <Box
         className="w-1/2 bg-cover bg-center"
