@@ -1,8 +1,15 @@
 import { Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui/material"
 import type React from "react"
-import tidalImage from "../assets/games.png"
-import beachImage from "../assets/guides.png"
-import hotelImage from "../assets/hotel 1.png"
+import varkala from "../assets/varkala.jpg"
+import marina from "../assets/marina.png"
+import radhanagar from "../assets/radhanagar.png"
+import baga from "../assets/baga.png"
+import varca from "../assets/varca.png"
+import dhanushkodi from "../assets/dhanushkodi.png"
+import candolim from "../assets/candolim.png"
+import kovalam from "../assets/kovalam.png"
+import palolem from "../assets/palolem.png"
+import om from "../assets/om.png"
 
 interface Beach {
   name: string
@@ -11,16 +18,16 @@ interface Beach {
 }
 
 const beaches: Beach[] = [
-  { name: "Varkala Beach", location: "Kerala", image: beachImage },
-  { name: "Marina Beach", location: "Tamil Nadu", image: tidalImage },
-  { name: "Baga Beach", location: "Goa", image: hotelImage },
-  { name: "Radhanagar Beach", location: "Andaman", image: beachImage },
-  { name: "Varca Beach", location: "Goa", image: tidalImage },
-  { name: "Calangute Beach", location: "Goa", image: hotelImage },
-  { name: "Calangute Beach", location: "Goa", image: hotelImage },
-  { name: "Calangute Beach", location: "Goa", image: hotelImage },
-  { name: "Calangute Beach", location: "Goa", image: hotelImage },
-  { name: "Calangute Beach", location: "Goa", image: hotelImage },
+  { name: "Varkala Beach", location: "Kerala", image: varkala },
+  { name: "Marina Beach", location: "Tamil Nadu", image: marina },
+  { name: "Radhanagar Beach", location: "Havelock Island", image: radhanagar },
+  { name: "Baga Beach", location: "Goa", image: baga },
+  { name: "Varca Beach", location: "South Goa", image: varca },
+  { name: "Dhanushkodi Beach Point", location: "Tamil Nadu", image: dhanushkodi },
+  { name: "Candolim Beach", location: "North Goa", image: candolim },
+  { name: "Kovalam Beach", location: "Kerela", image: kovalam },
+  { name: "Palolem Beach", location: "Goa", image: palolem },
+  { name: "Om Beach", location: "Karnataka", image: om },
 ]
 
 const Sidebar: React.FC = () => {

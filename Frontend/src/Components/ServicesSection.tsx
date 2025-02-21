@@ -3,6 +3,7 @@ import { Box, Typography, Button, Card, CardContent, CardMedia } from "@mui/mate
 import beachImage from "../assets/guides.png"; // Path to your image
 import tidalImage from "../assets/games.png"; // Path to your image
 import hotelImage from "../assets/hotel 1.png"; // Path to your image
+import tidal from "../assets/tidal.png";
 
 interface Service {
   title: string;
@@ -29,11 +30,17 @@ const services: Service[] = [
       "Find the perfect stay near your favorite beach! Explore a wide range of hotels, from cozy budget stays to luxurious beachfront resorts. Book hassle-free and enjoy a relaxing getaway by the sea.",
     image: hotelImage,
   },
+  {
+    title: "Tidal Insights",
+    description:
+      "Understanding tides is key to a safe and enjoyable beach visit. Check tidal timings to plan activities like swimming, fishing, or exploring tidal pools. Avoid venturing too far during high tide, and observe patterns for safety. With the right timing, every beach visit becomes memorable!",
+    image: tidal,
+  },
 ];
 
 const ServicesSection: React.FC = () => {
   return (
-    <Box sx={{ p: 4 }}>
+    <Box sx={{ p: { xs: 2, sm: 4 } }}>
       {/* Container for Overlapping Text */}
       <Box sx={{ position: "relative", display: "inline-block", textAlign: "center" }}>
         {/* Main Title */}
@@ -64,7 +71,7 @@ const ServicesSection: React.FC = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
           gap: 4,
           mt: 4,
         }}
@@ -84,7 +91,7 @@ const ServicesSection: React.FC = () => {
             <CardMedia
               component="img"
               alt={service.title}
-              height="200"
+              height="150" // Reduced height for smaller boxes
               image={service.image}
               sx={{
                 objectFit: "cover",
@@ -97,6 +104,7 @@ const ServicesSection: React.FC = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                p: { xs: 2, sm: 3 }, // Reduced padding for smaller boxes
               }}
             >
               <Box>
@@ -106,7 +114,7 @@ const ServicesSection: React.FC = () => {
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  sx={{ flexGrow: 1, mb: 2, lineHeight: 1.5 , fontSize:15 }}
+                  sx={{ flexGrow: 1, mb: 2, lineHeight: 1.5, fontSize: { xs: "0.875rem", sm: "1rem", md: "1.25rem" } }} // Reduced font size
                 >
                   {service.description}
                 </Typography>

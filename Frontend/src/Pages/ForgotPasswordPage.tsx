@@ -10,6 +10,7 @@ const ForgotPasswordPage: React.FC = () => {
   const [contactMethod, setContactMethod] = useState<'email' | 'phone'>('email');
   const [contact, setContact] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isContactValid, setIsContactValid] = useState<boolean>(true);
 
   const handleMethodChange = (
     _event: React.MouseEvent<HTMLElement>,
@@ -19,6 +20,7 @@ const ForgotPasswordPage: React.FC = () => {
       setContactMethod(newMethod);
       setContact('');
       setError('');
+      setIsContactValid(true);
     }
   };
 
@@ -26,15 +28,24 @@ const ForgotPasswordPage: React.FC = () => {
     if (contactMethod === 'email') {
       if (!validateEmail(contact)) {
         setError('Please enter a valid email address');
+        setIsContactValid(false);
         return false;
       }
     } else {
-      if (!/^\d{10}$/.test(contact)) {
+      if (!/^\d{9}$/.test(contact)) {
         setError('Please enter a valid 10-digit phone number');
+        setIsContactValid(false);
         return false;
       }
     }
+    setIsContactValid(true);
     return true;
+  };
+
+  const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setContact(value);
+    validateContact();
   };
 
   const handleSubmit = () => {
@@ -103,12 +114,12 @@ const ForgotPasswordPage: React.FC = () => {
               placeholder={contactMethod === 'email' ? "Enter your email" : "Enter your phone number"}
               variant="outlined"
               value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              error={!!error}
+              onChange={handleContactChange}
+              error={!isContactValid}
               helperText={error}
               type={contactMethod === 'phone' ? "tel" : "email"}
               InputProps={{
-                startAdornment: contactMethod === 'email' ? 
+                startAdornment: contactMethod === 'email' ?
                   <AccountCircle sx={{ color: "gray", mr: 1 }} /> :
                   <Phone sx={{ color: "gray", mr: 1 }} />,
               }}
@@ -142,4 +153,4 @@ const ForgotPasswordPage: React.FC = () => {
   );
 };
 
-export default ForgotPasswordPage; 
+export default ForgotPasswordPage;

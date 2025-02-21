@@ -9,13 +9,15 @@ const images = [
   { src: beachImage, caption: "Scenic Beach Views" },
   { src: tidalImage, caption: "Tidal Waves" },
   { src: hotelImage, caption: "Luxury Hotel" },
+  { src: beachImage, caption: "Scenic Beach Views" },
+  { src: tidalImage, caption: "Tidal Waves" },
+  { src: hotelImage, caption: "Luxury Hotel" },
 ];
 
 const Gallery = () => {
   const galleryRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<null | { src: string, caption: string }>(null);
-  const [scrollAmount, setScrollAmount] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<null | { src: string; caption: string }>(null);
 
   useEffect(() => {
     const gallery = galleryRef.current;
@@ -23,28 +25,28 @@ const Gallery = () => {
 
     const interval = setInterval(() => {
       if (!gallery) return;
-      setScrollAmount(prev => {
-        const newAmount = prev + 1;
-        return newAmount >= gallery.scrollWidth / 2 ? 0 : newAmount;
+      gallery.scrollBy({
+        left: 1,
+        behavior: "smooth",
       });
-      gallery.scrollLeft = scrollAmount;
     }, 30);
 
     return () => clearInterval(interval);
-  }, [isPlaying, scrollAmount]);
+  }, [isPlaying]);
 
-  const handleScroll = (direction: 'left' | 'right') => {
+  const handleScroll = (direction: "left" | "right") => {
     const gallery = galleryRef.current;
     if (!gallery) return;
-    
+
     const scrollDistance = 300;
-    const newScrollAmount = direction === 'left' 
-      ? gallery.scrollLeft - scrollDistance 
-      : gallery.scrollLeft + scrollDistance;
-    
+    const newScrollAmount =
+      direction === "left"
+        ? gallery.scrollLeft - scrollDistance
+        : gallery.scrollLeft + scrollDistance;
+
     gallery.scrollTo({
       left: newScrollAmount,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -71,21 +73,33 @@ const Gallery = () => {
 
       {/* Controls */}
       <div className="flex justify-center gap-4 mb-4">
-        <IconButton onClick={() => handleScroll('left')} className="bg-blue-100 hover:bg-blue-200">
+        <IconButton
+          onClick={() => handleScroll("left")}
+          className="bg-blue-100 hover:bg-blue-200"
+        >
           <ChevronLeft />
         </IconButton>
-        <IconButton onClick={() => setIsPlaying(!isPlaying)} className="bg-blue-100 hover:bg-blue-200">
+        <IconButton
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="bg-blue-100 hover:bg-blue-200"
+        >
           {isPlaying ? <Pause /> : <PlayArrow />}
         </IconButton>
-        <IconButton onClick={() => handleScroll('right')} className="bg-blue-100 hover:bg-blue-200">
+        <IconButton
+          onClick={() => handleScroll("right")}
+          className="bg-blue-100 hover:bg-blue-200"
+        >
           <ChevronRight />
         </IconButton>
       </div>
 
       {/* Image Gallery */}
-      <div ref={galleryRef} className="mt-6 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div
+        ref={galleryRef}
+        className="mt-6 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide"
+      >
         <div className="flex w-max">
-          {images.concat(images).map((image, index) => (
+          {images.map((image, index) => (
             <div key={index} className="relative mx-2 group">
               <img
                 src={image.src}
@@ -94,8 +108,10 @@ const Gallery = () => {
                 className="h-64 w-auto rounded-lg shadow-lg transition-transform duration-300 cursor-pointer
                          group-hover:scale-105 group-hover:shadow-xl"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg
-                            opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div
+                className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
                 <Typography variant="body2" className="text-center">
                   {image.caption}
                 </Typography>

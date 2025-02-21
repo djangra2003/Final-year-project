@@ -8,6 +8,7 @@ interface HeroSectionProps {
   title: string;
   subtitle: string;
 }
+
 const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
   const images = [hero1, hero2, hero3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -73,7 +74,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
         alignItems="center"
         textAlign="center"
         color="white"
-        px={2}
+        px={{ xs: 2, sm: 4 }}
       >
         <Typography
           variant="h2"
@@ -82,6 +83,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
           sx={{
             fontStyle: "italic",
             textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
           }}
         >
           {title}
@@ -91,6 +93,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
           mt={2}
           sx={{
             textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
+            fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
           }}
         >
           {subtitle}

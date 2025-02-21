@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Grid, IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import booking from "../assets/booking.jpg";
 
 const TourBooking: React.FC = () => {
   const [adults, setAdults] = useState<number>(1);
@@ -16,7 +17,7 @@ const TourBooking: React.FC = () => {
     <Box
       sx={{
         position: "relative",
-        backgroundImage: "url('/assets/search-flight.jpg')",
+        backgroundImage: `url(${booking})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         py: 8,

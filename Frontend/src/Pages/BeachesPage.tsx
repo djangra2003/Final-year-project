@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Link as RouterLink } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowRight } from "@mui/icons-material";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import HeroSection from "../Components/HeroSection";
+import { Link } from "react-router-dom";
 
 interface Subsection {
   id: string;
@@ -19,22 +20,21 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: "blue-flag",
+  {
+    id: "blue-flag",
     title: "Blue Flag beaches",
     subsections: [
-      { id: "gujrat", title: "Gujrat" },
       { id: "odisha", title: "Odisha" },
       { id: "andhra-pradesh", title: "Andhra Pradesh" },
       { id: "tamil-nadu", title: "Tamil Nadu" },
       { id: "puducherry", title: "Puducherry" },
       { id: "andaman-and-nicobar", title: "Andaman and Nicobar" },
       { id: "lakshadweep", title: "Lakshadweep" },
-      { id: "kerela", title: "Kerela" },
+      { id: "kerala", title: "Kerala" },
       { id: "karnataka", title: "Karnataka" },
       { id: "diu-and-daman", title: "Diu and Daman" },
-      
     ],
-   },
+  },
   {
     id: "west-coast",
     title: "West coast",
@@ -65,8 +65,6 @@ const sections: Section[] = [
       { id: "lakshadweep", title: "Lakshadweep" },
     ],
   },
-  // { id: "see-also", title: "See also" },
-  // { id: "references", title: "References" },
 ];
 
 const BeachWiki: React.FC = () => {
@@ -92,14 +90,14 @@ const BeachWiki: React.FC = () => {
       <HeroSection title="Beaches" subtitle="Discover the Best Beaches in India" />
 
       {/* Main Wrapper */}
-      <Box className="flex min-h-screen bg-white relative">
+      <Box className="flex min-h-screen bg-gray-50 relative">
         {/* Left Sidebar (Sticky below HeroSection) */}
         <Box
-          className="w-64 h-screen overflow-y-auto border-r border-gray-200 bg-white p-4"
+          className="w-64 h-screen overflow-y-auto border-r border-gray-200 bg-white p-4 shadow-md"
           style={{ position: "sticky", top: "0px" }} // Sidebar starts after HeroSection
         >
-          <Box className="flex items-center justify-between mb-2 pb-2 border-b border-gray-200">
-            <Typography variant="subtitle1" className="font-bold">
+          <Box className="flex items-center justify-between mb-4 pb-2 border-b border-gray-200">
+            <Typography variant="h6" className="font-bold text-gray-800">
               Contents
             </Typography>
             <button onClick={() => setContentVisible(!contentVisible)} className="text-blue-600 text-sm hover:underline">
@@ -108,15 +106,15 @@ const BeachWiki: React.FC = () => {
           </Box>
 
           {contentVisible && (
-            <Box className="space-y-1">
+            <Box className="space-y-2">
               {sections.map((section) => (
                 <Box key={section.id}>
                   <Box
-                    className="flex items-center hover:bg-gray-100 rounded px-2 py-1 cursor-pointer"
+                    className="flex items-center hover:bg-gray-100 rounded px-3 py-2 cursor-pointer transition-colors"
                     onClick={() => (section.subsections ? toggleSection(section.id) : scrollToSection(section.id))}
                   >
                     {section.subsections && (
-                      <IconButton size="small" className="p-0 mr-1">
+                      <IconButton size="small" className="p-0 mr-2">
                         {expandedSections.includes(section.id) ? (
                           <KeyboardArrowDown fontSize="small" />
                         ) : (
@@ -129,12 +127,12 @@ const BeachWiki: React.FC = () => {
                     </Typography>
                   </Box>
                   {section.subsections && expandedSections.includes(section.id) && (
-                    <Box className="ml-4">
+                    <Box className="ml-6 space-y-1">
                       {section.subsections.map((subsection) => (
                         <Box
                           key={subsection.id}
                           onClick={() => scrollToSection(subsection.id)}
-                          className="flex items-center hover:bg-gray-100 rounded px-2 py-1 cursor-pointer"
+                          className="flex items-center hover:bg-gray-100 rounded px-3 py-2 cursor-pointer transition-colors"
                         >
                           <Typography className="text-blue-600 hover:underline text-sm">{subsection.title}</Typography>
                         </Box>
@@ -148,205 +146,139 @@ const BeachWiki: React.FC = () => {
         </Box>
 
         {/* Main Content */}
-        <Box className="ml-64 p-8 flex-grow">
-        <Typography variant="h4" id="west-coast" className="mb-6">
-            Blue Flag Beaches
+        <Box className="ml-4 p-8 flex-grow bg-white shadow-inner">
+          <Typography variant="h4" id="blue-flag" className="mb-6 text-gray-800">
+            Blue Flag Beaches in India
           </Typography>
 
-          <Typography variant="h5" id="gujarat" className="mb-4">
-            Gujarat
-          </Typography>
+          {/* Odisha */}
+          <Box id="odisha" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Odisha
+            </Typography>
+            <Box className="flex flex-col md:flex-row md:space-x-4">
+              <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
+                <Link to="/beaches/puri" className="text-gray-600 hover:underline">
+                  Puri Beach
+                </Link>
+              </Box>
+              <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
+                <Link to="/beaches/pati-sonepur" className="text-gray-600 hover:underline">
+                  Pati Sonepur Sea Beach
+                </Link>
+              </Box>
+            </Box>
+          </Box>
 
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Gujarat </span> are:
-          </Typography>
+          {/* Andhra Pradesh */}
+          <Box id="andhra-pradesh" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Andhra Pradesh
+            </Typography>
+            <Box className="bg-blue-100 p-2 rounded">
+              <Link to="/beaches/rushikonda" className="text-gray-600 hover:underline">
+                Rushikonda Beach
+              </Link>
+            </Box>
+          </Box>
 
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Shivrajpur beach in Dwarka, at Shivrajpur village 12 km from Dwarka on Dwarka-Okha Highway.</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-            Odisha
-          </Typography>
+          {/* Tamil Nadu */}
+          <Box id="tamil-nadu" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Tamil Nadu
+            </Typography>
+            <Box className="bg-blue-100 p-2 rounded">
+              <Link to="/beaches/kovalam" className="text-gray-600 hover:underline">
+                Kovalam Beach
+              </Link>
+            </Box>
+          </Box>
 
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Odisha </span> are:
-          </Typography>
+          {/* Puducherry */}
+          <Box id="puducherry" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Puducherry
+            </Typography>
+            <Box className="bg-blue-100 p-2 rounded">
+              <Link to="/beaches/eden" className="text-gray-600 hover:underline">
+                Eden Beach
+              </Link>
+            </Box>
+          </Box>
 
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Puri Beach or Puri beach in Puri</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Pati Sonepur Sea Beach in Ganjam district</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-            Andhra Pradesh
-          </Typography>
+          {/* Andaman and Nicobar */}
+          <Box id="andaman-and-nicobar" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Andaman and Nicobar
+            </Typography>
+            <Box className="bg-blue-100 p-2 rounded">
+              <Link to="/beaches/radhanagar" className="text-gray-600 hover:underline">
+                Radhanagar Beach
+              </Link>
+            </Box>
+          </Box>
 
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Andhra Pradesh </span> are:
-          </Typography>
+          {/* Lakshadweep */}
+          <Box id="lakshadweep" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Lakshadweep
+            </Typography>
+            <Box className="flex flex-col md:flex-row md:space-x-4">
+              <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
+                <Link to="/beaches/minicoy-thundi" className="text-gray-600 hover:underline">
+                  Minicoy Thundi Beach
+                </Link>
+              </Box>
+              <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
+                <Link to="/beaches/kadmat" className="text-gray-600 hover:underline">
+                  Kadmat Beach
+                </Link>
+              </Box>
+            </Box>
+          </Box>
 
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Rushikonda Beach in Visakhapatnam.</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-            Tamil Nadu
-          </Typography>
+          {/* Kerala */}
+          <Box id="kerala" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Kerala
+            </Typography>
+            <Box className="bg-blue-100 p-2 rounded">
+              <Link to="/beaches/kappad" className="text-gray-600 hover:underline">
+                Kappad Beach
+              </Link>
+            </Box>
+          </Box>
 
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Tamil Nadu </span> are:
-          </Typography>
+          {/* Karnataka */}
+          <Box id="karnataka" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Karnataka
+            </Typography>
+            <Box className="flex flex-col md:flex-row md:space-x-4">
+              <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
+                <Link to="/beaches/kasarkod" className="text-gray-600 hover:underline">
+                  Kasarkod Beach
+                </Link>
+              </Box>
+              <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
+                <Link to="/beaches/padubidri" className="text-gray-600 hover:underline">
+                  Padubidri Beach
+                </Link>
+              </Box>
+            </Box>
+          </Box>
 
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Kovalam beach, 40 km south of Chennai.</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-            Gujarat
-          </Typography>
-
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Pudducherry </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Eden Beach in Chinna Veerampattinam</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-          Andaman and Nicobar
-          </Typography>
-
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Andaman and Nicobar </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Radhanagar beach or Beach No 7 in Havelock Islands</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-          Lakshadweep
-          </Typography>
-
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Lakshadweep </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Minicoy Thundi beach in Minicoy.</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Kadmat beach in Kadmat island.</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-          Kerala
-          </Typography>
-
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Kerala </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Kappad beach on north fringe of Kozhikode</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-          Karnataka
-          </Typography>
-
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Karnataka </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Kasarkod beach in Kasarkod village in Uttara Kannada district</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Padubidri Beach in Udupi district.</span></li>
-          </ul>
-          <Typography variant="h5" id="gujarat" className="mb-4">
-          Diu and Daman
-          </Typography>
-
-          <Typography className="mb-4">
-            The blue flag beaches of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Diu and Daman </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Ghoghla beach in Diu</span></li>
-          </ul>
-          <Typography variant="h4" id="west-coast" className="mb-6">
-            West coast
-          </Typography>
-
-          <Typography variant="h5" id="gujarat" className="mb-4">
-            Gujarat
-          </Typography>
-
-          <Typography className="mb-4">
-            The beaches along the western state of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Gujarat </span> are:
-          </Typography>
-
-          <ul className="list-disc pl-8 space-y-2">
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Dumas Beach</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Suvali Beach</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Umbharat Beach</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Dandi Beach</span></li>
-            <li><span className="text-red-600 hover:underline cursor-pointer">Dabhari Beach</span></li>
-            <li><span className="text-red-600 hover:underline cursor-pointer">Diu Beach</span></li>
-            <li><span className="text-blue-600 hover:underline cursor-pointer">Tithal Beach</span></li>
-            <li><span className="text-red-600 hover:underline cursor-pointer">Mandavi Beach</span></li>
-            <li><span className="text-red-600 hover:underline cursor-pointer">Khambhat Beach</span></li>
-          </ul>
-          <Typography variant="h5" id="maharashtra" className="mb-4">
-          Maharashtra
-        </Typography>
-        <Typography className="mb-4">
-            The beaches along the western state of
-            <span className="text-blue-600 hover:underline cursor-pointer"> Maharashtra </span> are:
-          </Typography>
-        <ul className="list-disc pl-8 space-y-2">
-          <li>Aksa Beach</li>
-          <li>Alibaug Beach</li>
-          <li>Gorai Beach</li>
-          <li>Juhu Beach</li>
-          <li>Manori Beach</li>
-          <li>Marvé Beach</li>
-          <li>Versova Beach</li>
-          <li>Agardanda Beach</li>
-          <li>Diveagar Beach</li>
-          <li>Ganpatipule Beach</li>
-          <li>Guhagar Beach</li>
-          <li>Kelwa Beach</li>
-          <li>Tarkarli Beach</li>
-          <li>Shivaji Park Beach</li>
-          <li>Anjarle Beach</li>
-          <li>Dapoli Beach</li>
-          <li>Dahanu Beach</li>
-          <li>Srivardhan Beach</li>
-          <li>Kihim Beach</li>
-          <li>Mandwa Beach</li>
-          <li>Velneshwar Beach</li>
-          <li>Vengurla Beach</li>
-          <li>Bassein Beach</li>
-          <li>Bhandarpule Beach</li>
-          <li>Nagaon Beach</li>
-          <li>Revdanda Beach</li>
-          <li>Rewas Beach</li>
-          <li>Kashid Beach</li>
-          <li>Karde (Murud) Beach</li>
-          <li>Harihareshwar Beach</li>
-          <li>Bagmandla Beach</li>
-          <li>Kelshi Beach</li>
-          <li>Harnai Beach</li>
-          <li>Bordi Beach</li>
-          <li>Ratnagiri Beach</li>
-          <li>Awas Beach</li>
-          <li>Sasawne Beach</li>
-          <li>Malvan Beach</li>
-        </ul>
+          {/* Diu and Daman */}
+          <Box id="diu-and-daman" className="mb-6">
+            <Typography variant="h5" className="mb-2 text-gray-700">
+              Diu and Daman
+            </Typography>
+            <Box className="bg-blue-100 p-2 rounded">
+              <Link to="/beaches/ghoghla" className="text-gray-600 hover:underline">
+                Ghoghla Beach
+              </Link>
+            </Box>
+          </Box>
         </Box>
       </Box>
 
