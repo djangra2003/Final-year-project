@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import XIcon from '@mui/icons-material/X';
 import backgroundImage from '../assets/footer.png'
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
@@ -25,11 +26,11 @@ const Footer: React.FC = () => {
         <div>
           <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li>&gt; Home</li>
-            <li>&gt; Explore Beaches</li>
-            <li>&gt; Activities & Adventures</li>
-            <li>&gt; Blog</li>
-            <li>&gt; Contact Us</li>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/location'>Explore Beaches</Link></li>
+            <li><Link to='/activities'>Activities & Adventures</Link></li>
+            <li><Link to='/blog'>Blog</Link></li>
+            <li><Link to='/contact'>Contact Us</Link></li>
           </ul>
         </div>
 

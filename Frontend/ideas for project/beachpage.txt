@@ -1,0 +1,78 @@
+import Layout from "../components/layout"
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material"
+import Image from "next/image"
+
+export default function Beaches() {
+  return (
+    <Layout>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-8">Discover Beaches</h1>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <TextField label="Search" variant="outlined" fullWidth />
+          <FormControl fullWidth>
+            <InputLabel>Location</InputLabel>
+            <Select label="Location">
+              <MenuItem value="all">All Locations</MenuItem>
+              {/* Add more locations */}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel>Activities</InputLabel>
+            <Select label="Activities">
+              <MenuItem value="all">All Activities</MenuItem>
+              {/* Add more activities */}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel>Rating</InputLabel>
+            <Select label="Rating">
+              <MenuItem value="all">All Ratings</MenuItem>
+              {/* Add more rating options */}
+            </Select>
+          </FormControl>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Card key={i}>
+              <Image
+                src={`/placeholder.svg?height=200&width=300`}
+                alt={`Beach ${i}`}
+                width={300}
+                height={200}
+                className="w-full"
+              />
+              <CardContent>
+                <Typography variant="h5" component="div" className="mb-2">
+                  Beach Name {i}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" className="mb-2">
+                  Location • Rating: 4.5/5
+                </Typography>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Surfing</span>
+                  <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    Snorkeling
+                  </span>
+                </div>
+                <Button variant="contained" color="primary">
+                  View Details
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </Layout>
+  )
+}
+

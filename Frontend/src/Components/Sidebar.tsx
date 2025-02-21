@@ -1,25 +1,34 @@
-import React from "react";
-import { Typography, Card, CardMedia, CardContent, Paper, Grid } from "@mui/material";
-import beachImage from "../assets/guides.png"; // Path to your image
-import tidalImage from "../assets/games.png"; // Path to your image
-import hotelImage from "../assets/hotel 1.png"; // Path to your image
-
+import { Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui/material"
+import type React from "react"
+import varkala from "../assets/varkala.jpg"
+import marina from "../assets/marina.png"
+import radhanagar from "../assets/radhanagar.png"
+import baga from "../assets/baga.png"
+import varca from "../assets/varca.png"
+import dhanushkodi from "../assets/dhanushkodi.png"
+import candolim from "../assets/candolim.png"
+import kovalam from "../assets/kovalam.png"
+import palolem from "../assets/palolem.png"
+import om from "../assets/om.png"
 
 interface Beach {
-  name: string;
-  location: string;
-  image: string;
+  name: string
+  location: string
+  image: string
 }
 
 const beaches: Beach[] = [
-  { name: "Varkala Beach", location: "Kerala", image: beachImage },
-  { name: "Marina Beach", location: "Tamil Nadu", image:tidalImage  },
-  { name: "Baga Beach", location: "Goa", image:hotelImage  },
-  { name: "Radhanagar Beach", location: "Andaman", image:beachImage  },
-  { name: "Varca Beach", location: "Goa", image: tidalImage },
-  { name: "Varca Beach", location: "Goa", image: hotelImage },
-
-];
+  { name: "Varkala Beach", location: "Kerala", image: varkala },
+  { name: "Marina Beach", location: "Tamil Nadu", image: marina },
+  { name: "Radhanagar Beach", location: "Havelock Island", image: radhanagar },
+  { name: "Baga Beach", location: "Goa", image: baga },
+  { name: "Varca Beach", location: "South Goa", image: varca },
+  { name: "Dhanushkodi Beach Point", location: "Tamil Nadu", image: dhanushkodi },
+  { name: "Candolim Beach", location: "North Goa", image: candolim },
+  { name: "Kovalam Beach", location: "Kerela", image: kovalam },
+  { name: "Palolem Beach", location: "Goa", image: palolem },
+  { name: "Om Beach", location: "Karnataka", image: om },
+]
 
 const Sidebar: React.FC = () => {
   return (
@@ -29,40 +38,42 @@ const Sidebar: React.FC = () => {
         backgroundColor: "grey.100",
         borderRadius: 2,
         boxShadow: 3,
-        maxWidth: "24rem",
-        margin: "auto", // Center the paper
-        padding: 2, // Minimal padding
+        width: "100%",
+        padding: 3,
       }}
     >
       {/* Title */}
       <Typography
         variant="h6"
-        align="center"
-        fontWeight="600"
-        color="grey.700"
-        mb={2}
-        textTransform="uppercase"
+        sx={{
+          fontWeight: "600",
+          color: "grey.800",
+          mb: 3,
+          fontSize: "2.125rem",
+        }}
       >
         Explore India's Pristine Shores
       </Typography>
 
       {/* Beach Cards Grid */}
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={2}>
         {beaches.map((beach, index) => (
-          <Grid item xs={6} key={index} display="flex" justifyContent="center">
+          <Grid item xs={6} key={index}>
             <Card
               sx={{
-                width: "160px", // Fixed square size
-                height: "200px",
+                width: "100%",
+                aspectRatio: "1 / 1",
                 border: "1px solid",
-                borderColor: "grey.300",
+                borderColor: "grey.200",
                 borderRadius: 2,
                 boxShadow: 1,
-                transition: "transform 0.2s ease-in-out, box-shadow 0.2s",
+                transition: "box-shadow 0.2s ease-in-out",
                 "&:hover": {
-                  transform: "translateY(-4px)",
-                  boxShadow: 6,
+                  boxShadow: 3,
                 },
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               {/* Image */}
@@ -72,26 +83,39 @@ const Sidebar: React.FC = () => {
                 alt={beach.name}
                 sx={{
                   width: "100%",
-                  height: "70%",
+                  height: "60%",
                   objectFit: "cover",
                 }}
               />
               {/* Content */}
               <CardContent
                 sx={{
-                  padding: "4px",
-                  textAlign: "center",
+                  padding: 1,
+                  flexGrow: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
                 }}
               >
                 <Typography
                   variant="subtitle2"
-                  fontWeight="600"
-                  color="grey.800"
-                  lineHeight="1.2"
+                  sx={{
+                    fontWeight: "600",
+                    color: "grey.800",
+                    fontSize: "0.875rem",
+                    lineHeight: 1.2,
+                    mb: 0.5,
+                  }}
                 >
-                  {beach.name}
+                  {index + 1}. {beach.name}
                 </Typography>
-                <Typography variant="caption" color="grey.500">
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: "grey.500",
+                    fontSize: "0.75rem",
+                  }}
+                >
                   {beach.location}
                 </Typography>
               </CardContent>
@@ -100,7 +124,7 @@ const Sidebar: React.FC = () => {
         ))}
       </Grid>
     </Paper>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
