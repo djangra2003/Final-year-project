@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import hero1 from "../assets/herosection1.png";
 import hero2 from "../assets/herosection2.png";
 import hero3 from "../assets/herosection3.png";
+import hero4 from "../assets/footer.png";
 import { Box, Typography } from "@mui/material";
 
 interface HeroSectionProps {
@@ -10,7 +11,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
-  const images = [hero1, hero2, hero3];
+  const images = [hero1, hero2, hero3,hero4];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Automatically switch images every 4 seconds

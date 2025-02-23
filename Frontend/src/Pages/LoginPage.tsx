@@ -29,12 +29,38 @@ const LoginPage: React.FC = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = () => {
-    if (formData.username.trim() === "" || !validatePassword(formData.password)) {
-      alert("Please fill out all fields correctly.");
-      return;
+  const handleSubmit = async () => {
+    try {
+      if (formData.username.trim() === "" || !validatePassword(formData.password)) {
+        alert("Please fill out all fields correctly.");
+        return;
+      }
+
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store token in localStorage
+      localStorage.setItem('token', data.token);
+      
+      // Navigate to home page
+      navigate("/");
+    } catch (error: any) {
+      alert(error.message || 'An error occurred during login');
     }
-    navigate("/"); // Navigate to home page
   };
 
   // Handle key press event for Enter key

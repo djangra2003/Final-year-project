@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import beachImage from "../assets/guides.png"; // Path to your image
 import tidalImage from "../assets/games.png"; // Path to your image
 import hotelImage from "../assets/hotel 1.png";
+import valkara from "../assets/varkala.jpg";
 import { Box, Typography, IconButton, Modal, Fade } from "@mui/material";
 import { PlayArrow, Pause, ChevronLeft, ChevronRight, Close } from "@mui/icons-material";
 
@@ -9,7 +10,7 @@ const images = [
   { src: beachImage, caption: "Scenic Beach Views" },
   { src: tidalImage, caption: "Tidal Waves" },
   { src: hotelImage, caption: "Luxury Hotel" },
-  { src: beachImage, caption: "Scenic Beach Views" },
+  { src: valkara, caption: "Scenic Beach Views" },
   { src: tidalImage, caption: "Tidal Waves" },
   { src: hotelImage, caption: "Luxury Hotel" },
 ];
@@ -18,6 +19,7 @@ const Gallery = () => {
   const galleryRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [selectedImage, setSelectedImage] = useState<null | { src: string; caption: string }>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const gallery = galleryRef.current;
@@ -49,6 +51,25 @@ const Gallery = () => {
       behavior: "smooth",
     });
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (selectedImage) {
+      if (event.key === "ArrowRight") {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setSelectedImage(images[(currentIndex + 1) % images.length]);
+      } else if (event.key === "ArrowLeft") {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+        setSelectedImage(images[(currentIndex - 1 + images.length) % images.length]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [currentIndex, selectedImage]);
 
   return (
     <div className="relative w-full overflow-hidden bg-white py-10">
@@ -104,7 +125,10 @@ const Gallery = () => {
               <img
                 src={image.src}
                 alt={image.caption}
-                onClick={() => setSelectedImage(image)}
+                onClick={() => {
+                  setSelectedImage(image);
+                  setCurrentIndex(index);
+                }}
                 className="h-64 w-auto rounded-lg shadow-lg transition-transform duration-300 cursor-pointer
                          group-hover:scale-105 group-hover:shadow-xl"
               />
