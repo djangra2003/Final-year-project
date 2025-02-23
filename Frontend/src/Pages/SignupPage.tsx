@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import beachImage from "../assets/login.png";
 import { validateEmail, validatePassword } from "../utils/utils";
 
@@ -16,7 +16,7 @@ const SignupPage: React.FC = () => {
   // State to store form inputs and errors
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    email: "", 
     password: "",
   });
   const [errors, setErrors] = useState({
@@ -24,16 +24,7 @@ const SignupPage: React.FC = () => {
     password: "",
   });
 
-  // // Email Validation
-  // const validateEmail = (email: string) => {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return emailRegex.test(email);
-  // };
-
-  // // Password Validation: Min 6 characters
-  // const validatePassword = (password: string) => {
-  //   return password.length >= 6;
-  // };
+  const navigate = useNavigate();
 
   // Handle Input Change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,19 +35,66 @@ const SignupPage: React.FC = () => {
   };
 
   // Handle Form Submit
-  const handleSubmit = () => {
-    const newErrors = { email: "", password: "" };
-    if (!validateEmail(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
-    }
-    if (!validatePassword(formData.password)) {
-      newErrors.password = "Password must be at least 8 characters.";
-    }
+  const handleSubmit = async () => {
+    try {
+      const newErrors = { email: "", password: "" };
+      if (!validateEmail(formData.email)) {
+        newErrors.email = "Please enter a valid email address.";
+      }
+      if (!validatePassword(formData.password)) {
+        newErrors.password = "Password must be at least 8 characters.";
+      }
 
-    setErrors(newErrors);
+      setErrors(newErrors);
 
-    if (!newErrors.email && !newErrors.password) {
-      alert("Sign-up successful!"); // Replace with backend API call
+      if (newErrors.email || newErrors.password) {
+        return;
+      }
+
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+
+      // Store token in localStorage
+      localStorage.setItem('token', data.token);
+      
+      // Navigate to home page
+      navigate("/");
+    } catch (error: any) {
+      alert(error.message || 'An error occurred during signup');
+    }
+  };
+
+  // Handle Google Sign In
+  const handleGoogleSignIn = async () => {
+    try {
+      // Make API call to backend endpoint that initiates Google OAuth flow
+      const response = await fetch('/api/auth/google', {
+        method: 'GET',
+        credentials: 'include' // Important for handling cookies
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to initiate Google authentication');
+      }
+
+      const data = await response.json();
+      // Redirect to Google's OAuth consent screen
+      window.location.href = data.authUrl;
+      
+    } catch (error) {
+      console.error('Google authentication error:', error);
+      alert('Failed to authenticate with Google. Please try again.');
     }
   };
 
@@ -165,6 +203,7 @@ const SignupPage: React.FC = () => {
             color="inherit"
             sx={{ borderRadius: "50px"}}
             startIcon={<Google />}
+            onClick={handleGoogleSignIn}
           >
             Sign in with Google
           </Button>
