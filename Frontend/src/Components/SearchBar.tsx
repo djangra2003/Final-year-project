@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button, CircularProgress } from "@mui/material";
 import weatherImage from "../assets/map 1.png"; // Replace with your image path
 
-const API_KEY = "ca695dcbc66c5fa3d0cb955033fd918f"; // Replace with your OpenWeatherMap API key
+const API_KEY = "d6415f00dd1055c7373167ce14275fbc"; // Replace with your OpenWeatherMap API key
 
 interface WeatherData {
   temperature: number;
@@ -64,6 +64,12 @@ const SearchBar: React.FC = () => {
     );
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -84,7 +90,15 @@ const SearchBar: React.FC = () => {
         Rain or Shine? Find Out Here!
       </Typography>
       <Box sx={{ display: "flex", width: "100%", maxWidth: "500px", bgcolor: "rgba(255, 255, 255, 0.9)", borderRadius: 1, overflow: "hidden" }}>
-        <TextField fullWidth variant="outlined" placeholder="Enter city name" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} sx={{ bgcolor: "white" }} />
+        <TextField 
+          fullWidth 
+          variant="outlined" 
+          placeholder="Enter city name" 
+          value={searchInput} 
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+          sx={{ bgcolor: "white" }} 
+        />
         <Button variant="contained" onClick={handleSearch} sx={{ borderRadius: "0 4px 4px 0" }}>
           Search
         </Button>

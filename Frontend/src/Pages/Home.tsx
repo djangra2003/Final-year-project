@@ -1,14 +1,14 @@
+import { Box, Grid } from "@mui/material";
 import React from "react";
+import Footer from "../Components/Footer";
+import Gallery from "../Components/Gallery";
 import Header from "../Components/Header";
 import HeroSection from "../Components/HeroSection";
 import SearchBar from "../Components/SearchBar";
 import ServicesSection from "../Components/ServicesSection";
 import Sidebar from "../Components/Sidebar";
 import TourBooking from "../Components/TourBooking";
-import Footer from "../Components/Footer";
 import WelcomeSection from "../Components/WelcomeSection";
-import Gallery from "../Components/Gallery";
-import { Grid, Box } from "@mui/material";
 
 const Home: React.FC = () => {
   return (
@@ -17,8 +17,15 @@ const Home: React.FC = () => {
       <Header />
       <HeroSection title="Discover India's Coastal Gems" subtitle="Your ultimate guide to beaches across the nation" />
 
-      {/* Main Content with Sidebar on the Right */}
-      <Grid container spacing={4} sx={{ px: { xs: 2, sm: 4 } }}>
+      {/* Main Content with Sidebar */}
+      <Grid 
+        container 
+        spacing={{ xs: 2, md: 4 }} 
+        sx={{ 
+          px: { xs: 2, sm: 4 },
+          flexDirection: { xs: 'column-reverse', md: 'row' } 
+        }}
+      >
         <Grid item xs={12} md={8}>
           {/* Welcome Section */}
           <WelcomeSection />

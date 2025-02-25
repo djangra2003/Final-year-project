@@ -1,4 +1,4 @@
-import { Google } from "@mui/icons-material";
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import {
   Box,
   Button,
@@ -76,153 +76,153 @@ const SignupPage: React.FC = () => {
   };
 
   // Handle Google Sign In
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (credentialResponse: any) => {
     try {
-      // Make API call to backend endpoint that initiates Google OAuth flow
-      const response = await fetch('/api/auth/google', {
-        method: 'GET',
-        credentials: 'include' // Important for handling cookies
+      const res = await fetch('http://localhost:5000/api/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: credentialResponse.credential })
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to initiate Google authentication');
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Google signup failed');
       }
 
-      const data = await response.json();
-      // Redirect to Google's OAuth consent screen
-      window.location.href = data.authUrl;
-      
-    } catch (error) {
-      console.error('Google authentication error:', error);
-      alert('Failed to authenticate with Google. Please try again.');
+      // Store token in localStorage
+      localStorage.setItem('token', data.token);
+
+      // Navigate to home page
+      navigate("/");
+    } catch (error: any) {
+      alert(error.message || 'An error occurred during Google signup');
     }
   };
 
   return (
-    <Box className="flex h-screen">
-      {/* Left Section: Image */}
-      <Box
-        className="w-1/2 bg-cover bg-center"
-        sx={{
-          backgroundImage: `url(${beachImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      ></Box>
+    <GoogleOAuthProvider clientId="312125406891-jr87qn3usq6p05kthp51mldg13fldhgv.apps.googleusercontent.com">
+      <Box className="flex h-screen">
+        {/* Left Section: Image */}
+        <Box
+          className="w-1/2 bg-cover bg-center"
+          sx={{
+            backgroundImage: `url(${beachImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></Box>
 
-      {/* Right Section: Form */}
-      <Box
-        className="w-1/2 flex items-center justify-center bg-white"
-        component={Paper}
-        elevation={6}
-      >
-        <Box className="w-full max-w-md px-8 py-6">
-          {/* Heading */}
-          <Typography variant="h4" align="center" fontWeight="bold" gutterBottom>
-            Welcome to Beach Buddy!
-          </Typography>
-          <Typography variant="body2" align="center" color="textSecondary" gutterBottom>
-            Create your account
-          </Typography>
-          <Divider className="mb-4" />
-
-          {/* Username Input */}
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Username"
-            name="username"
-            variant="outlined"
-            placeholder="Enter your username"
-            onChange={handleChange}
-            value={formData.username}
-            InputProps={{
-              startAdornment: <i className="fas fa-user text-gray-400 mr-2" />,
-            }}
-          />
-
-          {/* Email Input */}
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Email"
-            name="email"
-            variant="outlined"
-            placeholder="Enter your email"
-            onChange={handleChange}
-            value={formData.email}
-            error={!!errors.email}
-            helperText={errors.email}
-            InputProps={{
-              startAdornment: <i className="fas fa-envelope text-gray-400 mr-2" />,
-            }}
-          />
-
-          {/* Password Input */}
-          <TextField
-            fullWidth
-            margin="normal"
-            type="password"
-            label="Password"
-            name="password"
-            variant="outlined"
-            onChange={handleChange}
-            placeholder="Enter your password"
-            value={formData.password}
-            error={!!errors.password}
-            helperText={errors.password}
-            InputProps={{
-              startAdornment: <i className="fas fa-lock text-gray-400 mr-2" />,
-            }}
-          />
-
-          {/* Sign Up Button */}
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 ,  borderRadius: "50px"}}
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </Button>
-
-          {/* OR Divider */}
-          <Box display="flex" alignItems="center" my={2}>
-            <Divider sx={{ flex: 1 }} />
-            <Typography variant="body2" color="textSecondary" mx={2}>
-              Or
+        {/* Right Section: Form */}
+        <Box
+          className="w-1/2 flex items-center justify-center bg-white"
+          component={Paper}
+          elevation={6}
+        >
+          <Box className="w-full max-w-md px-8 py-6">
+            {/* Heading */}
+            <Typography variant="h4" align="center" fontWeight="bold" gutterBottom>
+              Welcome to Beach Buddy!
             </Typography>
-            <Divider sx={{ flex: 1 }} />
+            <Typography variant="body2" align="center" color="textSecondary" gutterBottom>
+              Create your account
+            </Typography>
+            <Divider className="mb-4" />
+
+            {/* Username Input */}
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Username"
+              name="username"
+              variant="outlined"
+              placeholder="Enter your username"
+              onChange={handleChange}
+              value={formData.username}
+              InputProps={{
+                startAdornment: <i className="fas fa-user text-gray-400 mr-2" />,
+              }}
+            />
+
+            {/* Email Input */}
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Email"
+              name="email"
+              variant="outlined"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              value={formData.email}
+              error={!!errors.email}
+              helperText={errors.email}
+              InputProps={{
+                startAdornment: <i className="fas fa-envelope text-gray-400 mr-2" />,
+              }}
+            />
+
+            {/* Password Input */}
+            <TextField
+              fullWidth
+              margin="normal"
+              type="password"
+              label="Password"
+              name="password"
+              variant="outlined"
+              onChange={handleChange}
+              placeholder="Enter your password"
+              value={formData.password}
+              error={!!errors.password}
+              helperText={errors.password}
+              InputProps={{
+                startAdornment: <i className="fas fa-lock text-gray-400 mr-2" />,
+              }}
+            />
+
+            {/* Sign Up Button */}
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              sx={{ mt: 2 ,  borderRadius: "50px"}}
+              onClick={handleSubmit}
+            >
+              Sign Up
+            </Button>
+
+            {/* OR Divider */}
+            <Box display="flex" alignItems="center" my={2}>
+              <Divider sx={{ flex: 1 }} />
+              <Typography variant="body2" color="textSecondary" mx={2}>
+                Or
+              </Typography>
+              <Divider sx={{ flex: 1 }} />
+            </Box>
+
+            {/* Google Sign-in */}
+            <GoogleLogin
+              onSuccess={handleGoogleSignIn}
+              onError={() => console.error('Google Sign In Error')}
+            />
+
+            {/* Login Redirect */}
+            <Typography
+              variant="body2"
+              align="center"
+              color="textSecondary"
+              mt={3}
+            >
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-600 hover:underline font-medium">
+                Login
+              </Link>
+            </Typography>
           </Box>
-
-          {/* Google Sign-in */}
-          <Button
-            fullWidth
-            variant="outlined"
-            color="inherit"
-            sx={{ borderRadius: "50px"}}
-            startIcon={<Google />}
-            onClick={handleGoogleSignIn}
-          >
-            Sign in with Google
-          </Button>
-
-          {/* Login Redirect */}
-          <Typography
-            variant="body2"
-            align="center"
-            color="textSecondary"
-            mt={3}
-          >
-            Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline font-medium">
-              Login
-            </Link>
-          </Typography>
         </Box>
       </Box>
-    </Box>
+    </GoogleOAuthProvider>
   );
 };
 

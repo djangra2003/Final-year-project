@@ -1,7 +1,7 @@
+import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React from "react";
-import { Box, Typography, Button, Card, CardContent, CardMedia } from "@mui/material";
-import beachImage from "../assets/guides.png"; // Path to your image
 import tidalImage from "../assets/games.png"; // Path to your image
+import beachImage from "../assets/guides.png"; // Path to your image
 import hotelImage from "../assets/hotel 1.png"; // Path to your image
 import tidal from "../assets/tidal.png";
 
@@ -15,13 +15,13 @@ const services: Service[] = [
   {
     title: "Guide to India's Beaches",
     description:
-      "Discover India’s stunning beaches, from Goa’s lively shores to Kerala’s tranquil backwaters and Andaman’s pristine beauty. Enjoy thrilling water sports, relax under palm trees, or savor fresh seafood. Let the waves guide you to unforgettable coastal adventures!",
+      "Discover India's stunning beaches, from Goa's lively shores to Kerala's tranquil backwaters and Andaman's pristine beauty. Enjoy thrilling water sports, relax under palm trees, or savor fresh seafood. Let the waves guide you to unforgettable coastal adventures!",
     image: beachImage,
   },
   {
     title: "Tidal Insights: Plan Ahead",
     description:
-      "Understanding tides is key to a safe and enjoyable beach visit. Check tidal timings to plan your activities, whether it’s swimming, fishing, or exploring tidal pools. Stay informed and make the most of your coastal adventure!",
+      "Understanding tides is key to a safe and enjoyable beach visit. Check tidal timings to plan your activities, whether it's swimming, fishing, or exploring tidal pools. Stay informed and make the most of your coastal adventure!",
     image: tidalImage,
   },
   {
@@ -42,9 +42,18 @@ const ServicesSection: React.FC = () => {
   return (
     <Box sx={{ p: { xs: 2, sm: 4 } }}>
       {/* Container for Overlapping Text */}
-      <Box sx={{ position: "relative", display: "inline-block", textAlign: "center" }}>
+      <Box sx={{ position: "relative", textAlign: "center", mb: { xs: 4, sm: 6 } }}>
         {/* Main Title */}
-        <Typography variant="h4" align="center" gutterBottom color="primary" sx={{ zIndex: 2 }}>
+        <Typography 
+          variant="h4" 
+          align="center" 
+          gutterBottom 
+          color="primary" 
+          sx={{ 
+            fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+            zIndex: 2 
+          }}
+        >
           Discover The Wide Range Of Services We Offer
         </Typography>
 
@@ -71,8 +80,13 @@ const ServicesSection: React.FC = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
-          gap: 4,
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)"
+          },
+          gap: { xs: 2, sm: 3, md: 4 },
           mt: 4,
         }}
       >

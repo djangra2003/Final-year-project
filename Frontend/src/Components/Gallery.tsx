@@ -1,10 +1,10 @@
+import { ChevronLeft, ChevronRight, Close, Pause, PlayArrow } from "@mui/icons-material";
+import { Box, Fade, IconButton, Modal, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import beachImage from "../assets/guides.png"; // Path to your image
 import tidalImage from "../assets/games.png"; // Path to your image
+import beachImage from "../assets/guides.png"; // Path to your image
 import hotelImage from "../assets/hotel 1.png";
 import valkara from "../assets/varkala.jpg";
-import { Box, Typography, IconButton, Modal, Fade } from "@mui/material";
-import { PlayArrow, Pause, ChevronLeft, ChevronRight, Close } from "@mui/icons-material";
 
 const images = [
   { src: beachImage, caption: "Scenic Beach Views" },
@@ -52,33 +52,34 @@ const Gallery = () => {
     });
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (selectedImage) {
-      if (event.key === "ArrowRight") {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setSelectedImage(images[(currentIndex + 1) % images.length]);
-      } else if (event.key === "ArrowLeft") {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-        setSelectedImage(images[(currentIndex - 1 + images.length) % images.length]);
-      }
-    }
-  };
+  // Remove unused handleKeyDown function since the keyboard handling is done in useEffect
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+    const handleKeyDownEvent = (event: KeyboardEvent) => {
+      if (selectedImage) {
+        if (event.key === "ArrowRight") {
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+          setSelectedImage(images[(currentIndex + 1) % images.length]);
+        } else if (event.key === "ArrowLeft") {
+          setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+          setSelectedImage(images[(currentIndex - 1 + images.length) % images.length]);
+        }
+      }
     };
-  }, [currentIndex, selectedImage]);
+
+    document.addEventListener("keydown", handleKeyDownEvent);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDownEvent);
+    };
+  }, [currentIndex, selectedImage, images]);
 
   return (
     <div className="relative w-full overflow-hidden bg-white py-10">
-      {/* Centered Heading */}
-      <Box className="relative flex flex-col items-center justify-center h-40 text-center">
+      <Box className="relative flex flex-col items-center justify-center h-40 text-center px-4">
         {/* Overlapping Background Text */}
         <Typography
           variant="h2"
-          className="absolute text-6xl font-bold text-gray-400 opacity-50 tracking-wider"
+          className="absolute text-4xl md:text-6xl font-bold text-gray-400 opacity-50 tracking-wider"
         >
           GALLERY
         </Typography>
@@ -86,14 +87,14 @@ const Gallery = () => {
         {/* Main Title */}
         <Typography
           variant="h4"
-          className="relative text-3xl font-semibold text-blue-600 z-10"
+          className="relative text-xl md:text-3xl font-semibold text-blue-600 z-10"
         >
           Tides of Beauty: Photo Collection
         </Typography>
       </Box>
 
       {/* Controls */}
-      <div className="flex justify-center gap-4 mb-4">
+      <div className="flex justify-center gap-2 md:gap-4 mb-4">
         <IconButton
           onClick={() => handleScroll("left")}
           className="bg-blue-100 hover:bg-blue-200"
@@ -121,7 +122,7 @@ const Gallery = () => {
       >
         <div className="flex w-max">
           {images.map((image, index) => (
-            <div key={index} className="relative mx-2 group">
+            <div key={index} className="relative mx-1 md:mx-2 group">
               <img
                 src={image.src}
                 alt={image.caption}
@@ -129,7 +130,7 @@ const Gallery = () => {
                   setSelectedImage(image);
                   setCurrentIndex(index);
                 }}
-                className="h-64 w-auto rounded-lg shadow-lg transition-transform duration-300 cursor-pointer
+                className="h-48 md:h-64 w-auto rounded-lg shadow-lg transition-transform duration-300 cursor-pointer
                          group-hover:scale-105 group-hover:shadow-xl"
               />
               <div
