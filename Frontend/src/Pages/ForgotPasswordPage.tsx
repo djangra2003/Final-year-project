@@ -32,7 +32,7 @@ const ForgotPasswordPage: React.FC = () => {
         return false;
       }
     } else {
-      if (!/^\d{9}$/.test(contact)) {
+      if (!/^\d{10}$/.test(contact)) {
         setError('Please enter a valid 10-digit phone number');
         setIsContactValid(false);
         return false;
@@ -48,11 +48,29 @@ const ForgotPasswordPage: React.FC = () => {
     validateContact();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateContact()) {
-      // Add API call here to send OTP
-      console.log(`Sending OTP to ${contactMethod}: ${contact}`);
-      navigate('/verify-otp'); // Create this route and page for OTP verification
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/send-otp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ contactMethod, contact })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to send OTP');
+        }
+
+        console.log(`OTP sent to ${contactMethod}: ${contact}`);
+        navigate('/verify-otp'); // Create this route and page for OTP verification
+      } catch (error: any) {
+        setError(error.message || 'An error occurred while sending OTP');
+        setIsContactValid(false);
+      }
     }
   };
 

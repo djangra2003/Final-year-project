@@ -1,7 +1,16 @@
-import { AppBar, Box, Button, Divider, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Divider, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { useState } from "react";
 
 const Header: React.FC = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   return (
     <AppBar
       position="absolute"
@@ -27,27 +36,40 @@ const Header: React.FC = () => {
           sx={{
             color: "white",
             textShadow: "0 2px 4px rgba(0,0,0,0.3)",
-            display: { xs: "none", sm: "block" }, // Hide on small screens
           }}
         >
           Beach Buddy
         </Typography>
 
+        {/* Mobile Menu Button */}
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ display: { sm: "none" } }}
+          onClick={handleDrawerToggle}
+        >
+          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+        </IconButton>
+
         {/* Navigation Links with Separators */}
         <Box
           sx={{
-            display: { xs: "none", sm: "flex" }, // Hide on small screens
+            display: { xs: mobileOpen ? "flex" : "none", sm: "flex" },
+            flexDirection: { xs: "column", sm: "row" },
             alignItems: "center",
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
-            borderRadius: "50px",
+            backgroundColor: { xs: "rgba(0, 0, 0, 0.8)", sm: "transparent" },
+            position: { xs: "absolute", sm: "static" },
+            top: { xs: 64, sm: "auto" },
+            left: 0,
+            right: 0,
             px: { xs: 2, sm: 3 },
-            py: 1,
-            backdropFilter: "blur(10px)",
-            flexGrow: 1,
-            justifyContent: "center",
+            py: { xs: 2, sm: 1 },
+            backdropFilter: { xs: "blur(10px)", sm: "none" },
+            zIndex: { xs: 9, sm: "auto" },
           }}
         >
-          <Link to="/">
+          <Link to="/" onClick={handleDrawerToggle}>
             <Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
               Home
             </Button>
@@ -55,9 +77,9 @@ const Header: React.FC = () => {
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)" }}
+            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)", display: { xs: "none", sm: "block" } }}
           />
-          <Link to="/beaches">
+          <Link to="/beaches" onClick={handleDrawerToggle}>
             <Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
               Beaches
             </Button>
@@ -65,7 +87,7 @@ const Header: React.FC = () => {
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)" }}
+            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)", display: { xs: "none", sm: "block" } }}
           />
           <Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
             Activities
@@ -73,9 +95,9 @@ const Header: React.FC = () => {
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)" }}
+            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)", display: { xs: "none", sm: "block" } }}
           />
-          <Link to="/about">
+          <Link to="/about" onClick={handleDrawerToggle}>
             <Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
               About Us
             </Button>
@@ -83,9 +105,9 @@ const Header: React.FC = () => {
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)" }}
+            sx={{ mx: 1, borderColor: "rgba(255, 255, 255, 0.5)", display: { xs: "none", sm: "block" } }}
           />
-          <Link to="/contact">
+          <Link to="/contact" onClick={handleDrawerToggle}>
             <Button color="inherit" sx={{ textTransform: "none", mx: 1 }}>
               Contact Us
             </Button>
@@ -93,7 +115,7 @@ const Header: React.FC = () => {
         </Box>
 
         {/* Buttons */}
-        <Box sx={{ display: "flex", gap: 2, flexShrink: 0 }}>
+        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2, flexShrink: 0 }}>
           <Link to="/signup" style={{ textDecoration: "none" }}>
             <Button
               variant="outlined"

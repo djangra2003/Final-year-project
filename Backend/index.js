@@ -1,6 +1,9 @@
+require('dotenv').config(); // Load environment variables
+
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
+const otpRoutes = require('./routes/otpRoutes'); // Import OTP routes
 const pool = require('./config/db');
 
 const app = express();
@@ -36,6 +39,7 @@ initializeDatabase();
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/otp', otpRoutes); // Use OTP routes
 
 // Test route
 app.get('/', (req, res) => {
