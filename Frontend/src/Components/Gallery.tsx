@@ -52,8 +52,6 @@ const Gallery = () => {
     });
   };
 
-  // Remove unused handleKeyDown function since the keyboard handling is done in useEffect
-
   useEffect(() => {
     const handleKeyDownEvent = (event: KeyboardEvent) => {
       if (selectedImage) {
