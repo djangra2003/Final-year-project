@@ -1,10 +1,10 @@
-import React from "react";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import XIcon from '@mui/icons-material/X';
-import backgroundImage from '../assets/footer.png'
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import React from "react";
 import { Link } from "react-router-dom";
+import backgroundImage from '../assets/footer.png';
 
 const Footer: React.FC = () => {
   return (

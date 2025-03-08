@@ -9,10 +9,14 @@ interface Message {
   content: string;
 }
 
+const GEMINI_API_KEY = 'AIzaSyDrMMEEtmiUcokCTyYQv94JZBqfS2LLDa0';
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+
 const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const chatLogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,28 +26,50 @@ const ChatBot: React.FC = () => {
   }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setIsLoading(true);
 
     try {
-      const response = await fetch('/chat', {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({
+          contents: [{
+            role: "user",
+            parts: [{ text: `You are a beach travel assistant. Answer this query: ${userMessage}` }]
+          }]
+        })
       });
 
-      const data = await response.json();
-      if (data.assistant_message) {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.assistant_message }]);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('API Error:', errorData);
+        throw new Error(errorData.error?.message || 'Failed to get response from Gemini');
       }
+
+      const data = await response.json();
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
+      } else {
+        throw new Error('Invalid response format from API');
+      }
+
     } catch (err) {
-      console.error('Error:', err);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Error: Unable to connect to server.' }]);
+      console.error('Error details:', err);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: 'I apologize, but I encountered an error. Please try again in a moment.' 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,21 +84,22 @@ const ChatBot: React.FC = () => {
     <Box
       sx={{
         position: 'fixed',
-        bottom: 20,
-        right: 20,
+        bottom: { xs: 0, sm: 20 },
+        right: { xs: 0, sm: 20 },
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
+        width: { xs: '100%', sm: 'auto' }
       }}
     >
-      <Collapse in={isOpen} orientation="vertical" timeout={300}>
+      <Collapse in={isOpen} orientation="vertical" timeout={300} sx={{ width: '100%' }}>
         <Paper
           elevation={3}
           sx={{
-            width: 320,
-            height: 450,
-            mb: 2,
+            width: { xs: '100%', sm: 320 },
+            height: { xs: '100vh', sm: 450 },
+            mb: { xs: 0, sm: 2 },
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
@@ -157,6 +184,9 @@ const ChatBot: React.FC = () => {
             backgroundColor: 'primary.dark',
           },
           display: isOpen ? 'none' : 'flex',
+          position: { xs: 'fixed', sm: 'static' },
+          bottom: { xs: 20, sm: 'auto' },
+          right: { xs: 20, sm: 'auto' },
         }}
       >
         <ChatIcon />
