@@ -6,7 +6,10 @@ import ContactUs from "./Pages/ContactUs";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import Home from "./Pages/Home";
 import LoginPage from "./Pages/LoginPage";
+import ProfilePage from "./Pages/ProfilePage";
 import SignupPage from "./Pages/SignupPage";
+import { ThemeProvider } from './context/ThemeContext';
+import { UserProvider } from './context/UserContext';
 
 const App: React.FC = () => {
 
@@ -39,12 +42,20 @@ const App: React.FC = () => {
       path: "/forgot-password",
       element: <ForgotPasswordPage/>
     },
+    {
+      path: "/profile",
+      element: <ProfilePage />
+    }
   ])
   return (
-    <div className="font-sans bg-gray-50">
-      <RouterProvider router={router} />
-      <ChatBot />
-    </div>
+    <ThemeProvider>
+      <UserProvider>
+        <div className="font-sans bg-gray-50">
+          <RouterProvider router={router} />
+          <ChatBot />
+        </div>
+      </UserProvider>
+    </ThemeProvider>
   );
 };
 

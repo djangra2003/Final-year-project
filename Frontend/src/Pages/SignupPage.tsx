@@ -11,12 +11,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import beachImage from "../assets/login.png";
 import { validateEmail, validatePassword } from "../utils/utils";
+import Header from "../Components/Header";
 
 const SignupPage: React.FC = () => {
   // State to store form inputs and errors
   const [formData, setFormData] = useState({
     username: "",
-    email: "", 
+    email: "",
     password: "",
   });
   const [errors, setErrors] = useState({
@@ -105,6 +106,7 @@ const SignupPage: React.FC = () => {
   return (
     <GoogleOAuthProvider clientId="312125406891-jr87qn3usq6p05kthp51mldg13fldhgv.apps.googleusercontent.com">
       <Box className="flex h-screen">
+        <Header />
         {/* Left Section: Image */}
         <Box
           className="w-1/2 bg-cover bg-center"

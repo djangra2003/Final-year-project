@@ -1,8 +1,10 @@
-import { AccountCircle, Lock } from "@mui/icons-material";
-import { Box, Button, Divider, TextField, Typography, Grid } from "@mui/material";
+import { AccountCircle, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Box, Button, Divider, Grid, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import flight from "../assets/login.png";
+import Header from "../Components/Header";
+import { useUser } from "../context/UserContext";
 import { validatePassword } from "../utils/utils";
 
 interface FormData {
@@ -12,11 +14,14 @@ interface FormData {
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const { setUser } = useUser();
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
   });
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const isUsernameValid = formData.username.trim() !== "";
@@ -29,7 +34,18 @@ const LoginPage: React.FC = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = async () => {
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+
     try {
       if (formData.username.trim() === "" || !validatePassword(formData.password)) {
         alert("Please fill out all fields correctly.");
@@ -41,10 +57,7 @@ const LoginPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password
-        })
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();
@@ -53,25 +66,36 @@ const LoginPage: React.FC = () => {
         throw new Error(data.message || 'Login failed');
       }
 
-      // Store token in localStorage
+      // Store token and user data in localStorage
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify({
+        username: data.user.username,
+        email: data.user.email
+      }));
       
+      // Update user context
+      setUser({
+        username: data.user.username,
+        email: data.user.email
+      });
+
       // Navigate to home page
       navigate("/");
     } catch (error: any) {
-      alert(error.message || 'An error occurred during login');
+      setError(error.message || 'An error occurred during login');
     }
   };
 
   // Handle key press event for Enter key
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && isFormValid) {
-      handleSubmit();
+      handleSubmit(e);
     }
   };
 
   return (
     <Box className="flex h-screen">
+      <Header />
       <Grid container>
         {/* Left Section: Image */}
         <Grid item xs={12} md={6}>
@@ -140,7 +164,7 @@ const LoginPage: React.FC = () => {
                   fullWidth
                   id="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
                   variant="outlined"
                   value={formData.password}
@@ -153,6 +177,18 @@ const LoginPage: React.FC = () => {
                   }
                   InputProps={{
                     startAdornment: <Lock sx={{ color: "gray", mr: 1 }} />,
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                 />
               </Box>
@@ -190,6 +226,12 @@ const LoginPage: React.FC = () => {
                   Sign up
                 </Link>
               </Typography>
+
+              {error && (
+                <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+                  {error}
+                </Typography>
+              )}
             </Box>
           </Box>
         </Grid>
