@@ -1,17 +1,20 @@
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
   Button,
   Divider,
+  IconButton,
+  InputAdornment,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import beachImage from "../assets/login.png";
-import { validateEmail, validatePassword } from "../utils/utils";
 import Header from "../Components/Header";
+import { validateEmail, validatePassword } from "../utils/utils";
 
 const SignupPage: React.FC = () => {
   // State to store form inputs and errors
@@ -24,6 +27,7 @@ const SignupPage: React.FC = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -68,7 +72,11 @@ const SignupPage: React.FC = () => {
 
       // Store token in localStorage
       localStorage.setItem('token', data.token);
-      
+      localStorage.setItem('user', JSON.stringify({
+        username: formData.username,
+        email: formData.email
+      }));
+
       // Navigate to home page
       navigate("/");
     } catch (error: any) {
@@ -101,6 +109,14 @@ const SignupPage: React.FC = () => {
     } catch (error: any) {
       alert(error.message || 'An error occurred during Google signup');
     }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
   };
 
   return (
@@ -169,9 +185,9 @@ const SignupPage: React.FC = () => {
             <TextField
               fullWidth
               margin="normal"
-              type="password"
               label="Password"
               name="password"
+              type={showPassword ? 'text' : 'password'}
               variant="outlined"
               onChange={handleChange}
               placeholder="Enter your password"
@@ -180,6 +196,17 @@ const SignupPage: React.FC = () => {
               helperText={errors.password}
               InputProps={{
                 startAdornment: <i className="fas fa-lock text-gray-400 mr-2" />,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
               }}
             />
 

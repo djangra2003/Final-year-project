@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BeachDetails from "./Components/BeachDetails";
 import ChatBot from "./Components/ChatBot";
 import AboutUs from "./Pages/AboutUs";
 import BeachesPage from "./Pages/BeachesPage";
@@ -8,6 +9,7 @@ import Home from "./Pages/Home";
 import LoginPage from "./Pages/LoginPage";
 import ProfilePage from "./Pages/ProfilePage";
 import SignupPage from "./Pages/SignupPage";
+import UserProfile from "./Pages/UserProfile";
 import { ThemeProvider } from './context/ThemeContext';
 import { UserProvider } from './context/UserContext';
 
@@ -39,12 +41,20 @@ const App: React.FC = () => {
       element: <BeachesPage />
     },
     {
+      path: "/beaches/:beachId",
+      element: <BeachDetails />
+    },
+    {
       path: "/forgot-password",
       element: <ForgotPasswordPage/>
     },
     {
       path: "/profile",
       element: <ProfilePage />
+    },
+    {
+      path: "/user-profile",
+      element: <UserProfile />
     }
   ])
   return (
