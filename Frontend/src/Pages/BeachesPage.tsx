@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { Box, Typography, IconButton, Link as RouterLink } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowRight } from "@mui/icons-material";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import HeroSection from "../Components/HeroSection";
+import { Box, IconButton, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
+import HeroSection from "../Components/HeroSection";
 
 interface Subsection {
   id: string;
@@ -158,12 +158,12 @@ const BeachWiki: React.FC = () => {
             </Typography>
             <Box className="flex flex-col md:flex-row md:space-x-4">
               <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
-                <Link to="/beaches/puri" className="text-gray-600 hover:underline">
+                <Link to={`/beaches/puri`} className="text-gray-600 hover:underline">
                   Puri Beach
                 </Link>
               </Box>
               <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
-                <Link to="/beaches/pati-sonepur" className="text-gray-600 hover:underline">
+                <Link to={`/beaches/pati-sonepur`} className="text-gray-600 hover:underline">
                   Pati Sonepur Sea Beach
                 </Link>
               </Box>
@@ -176,7 +176,7 @@ const BeachWiki: React.FC = () => {
               Andhra Pradesh
             </Typography>
             <Box className="bg-blue-100 p-2 rounded">
-              <Link to="/beaches/rushikonda" className="text-gray-600 hover:underline">
+              <Link to={`/beaches/rushikonda`} className="text-gray-600 hover:underline">
                 Rushikonda Beach
               </Link>
             </Box>
@@ -188,7 +188,7 @@ const BeachWiki: React.FC = () => {
               Tamil Nadu
             </Typography>
             <Box className="bg-blue-100 p-2 rounded">
-              <Link to="/beaches/kovalam" className="text-gray-600 hover:underline">
+              <Link to={`/beaches/kovalam`} className="text-gray-600 hover:underline">
                 Kovalam Beach
               </Link>
             </Box>
@@ -200,7 +200,7 @@ const BeachWiki: React.FC = () => {
               Puducherry
             </Typography>
             <Box className="bg-blue-100 p-2 rounded">
-              <Link to="/beaches/eden" className="text-gray-600 hover:underline">
+              <Link to={`/beaches/eden`} className="text-gray-600 hover:underline">
                 Eden Beach
               </Link>
             </Box>
@@ -212,7 +212,7 @@ const BeachWiki: React.FC = () => {
               Andaman and Nicobar
             </Typography>
             <Box className="bg-blue-100 p-2 rounded">
-              <Link to="/beaches/radhanagar" className="text-gray-600 hover:underline">
+              <Link to={`/beaches/radhanagar`} className="text-gray-600 hover:underline">
                 Radhanagar Beach
               </Link>
             </Box>
@@ -225,12 +225,12 @@ const BeachWiki: React.FC = () => {
             </Typography>
             <Box className="flex flex-col md:flex-row md:space-x-4">
               <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
-                <Link to="/beaches/minicoy-thundi" className="text-gray-600 hover:underline">
+                <Link to={`/beaches/minicoy-thundi`} className="text-gray-600 hover:underline">
                   Minicoy Thundi Beach
                 </Link>
               </Box>
               <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
-                <Link to="/beaches/kadmat" className="text-gray-600 hover:underline">
+                <Link to={`/beaches/kadmat`} className="text-gray-600 hover:underline">
                   Kadmat Beach
                 </Link>
               </Box>
@@ -243,7 +243,7 @@ const BeachWiki: React.FC = () => {
               Kerala
             </Typography>
             <Box className="bg-blue-100 p-2 rounded">
-              <Link to="/beaches/kappad" className="text-gray-600 hover:underline">
+              <Link to={`/beaches/kappad`} className="text-gray-600 hover:underline">
                 Kappad Beach
               </Link>
             </Box>
@@ -256,12 +256,12 @@ const BeachWiki: React.FC = () => {
             </Typography>
             <Box className="flex flex-col md:flex-row md:space-x-4">
               <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
-                <Link to="/beaches/kasarkod" className="text-gray-600 hover:underline">
+                <Link to={`/beaches/kasarkod`} className="text-gray-600 hover:underline">
                   Kasarkod Beach
                 </Link>
               </Box>
               <Box className="bg-blue-100 p-2 rounded mb-2 md:mb-0 md:w-1/2">
-                <Link to="/beaches/padubidri" className="text-gray-600 hover:underline">
+                <Link to={`/beaches/padubidri`} className="text-gray-600 hover:underline">
                   Padubidri Beach
                 </Link>
               </Box>
@@ -274,7 +274,7 @@ const BeachWiki: React.FC = () => {
               Diu and Daman
             </Typography>
             <Box className="bg-blue-100 p-2 rounded">
-              <Link to="/beaches/ghoghla" className="text-gray-600 hover:underline">
+              <Link to={`/beaches/ghoghla`} className="text-gray-600 hover:underline">
                 Ghoghla Beach
               </Link>
             </Box>

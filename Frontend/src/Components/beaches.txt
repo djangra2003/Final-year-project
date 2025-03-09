@@ -1,0 +1,306 @@
+import { Box, Container, Grid, ImageList, ImageListItem, Paper, Typography, Icon } from '@mui/material';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import Footer from './Footer';
+import Header from './Header';
+import HeroSection from './HeroSection';
+import beaches from './beaches.json';
+import { BeachAccess, DirectionsBoatFilled, LocalDining, LocalHotel, SportsVolleyball } from '@mui/icons-material';
+
+const BeachDetails: React.FC = () => {
+  const { beachId } = useParams<{ beachId: string }>();
+  const beach = beaches[beachId || ''];
+
+  if (!beach) {
+    return (
+      <Box>
+        <Header />
+        <Container>
+          <Typography variant="h4">Beach not found</Typography>
+        </Container>
+        <Footer />
+      </Box>
+    );
+  }
+
+  return (
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f5f5f5' }}>
+      <Header />
+      <HeroSection
+        title={beach.name}
+        subtitle={`Discover the beauty of ${beach.name}, ${beach.location}`}
+      />
+
+      <Container maxWidth="lg" sx={{ my: 8, flex: 1 }}>
+        <Grid container spacing={4}>
+          {/* Beach Information */}
+          <Grid item xs={12} md={8}>
+            <Paper elevation={3} sx={{ p: 4, borderRadius: 2, mb: 4, backgroundColor: '#fff' }}>
+              <Typography variant="h4" gutterBottom sx={{ borderBottom: '2px solid #f0f0f0', pb: 2, mb: 4 }}>
+                About {beach.name}
+              </Typography>
+              <Typography variant="body1" paragraph>
+                {beach.description}
+              </Typography>
+
+              {/* Updated Images Section */}
+              <Box sx={{ width: '100%', mb: 3 }}>
+                <ImageList
+                  variant="quilted"
+                  cols={3}
+                  rowHeight={200}
+                  sx={{
+                    mb: 2,
+                    '& .MuiImageListItem-root': {
+                      overflow: 'hidden',
+                      borderRadius: 2,
+                      transition: 'transform 0.3s ease-in-out',
+                      '&:hover': {
+                        transform: 'scale(1.05)',
+                      },
+                    },
+                  }}
+                >
+                  {beach.images.map((img, index) => (
+                    <ImageListItem
+                      key={index}
+                      cols={index === 0 ? 2 : 1}
+                      rows={index === 0 ? 2 : 1}
+                    >
+                      <img
+                        src={img}
+                        alt={`${beach.name} view ${index + 1}`}
+                        loading="lazy"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+              </Box>
+
+              {/* Activities section with reduced spacing */}
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    borderBottom: '2px solid #f0f0f0',
+                    pb: 1,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <SportsVolleyball sx={{ mr: 1 }} />
+                  Activities
+                </Typography>
+                <Grid container spacing={2}>
+                  {beach.activities.map((activity, index) => (
+                    <Grid item xs={12} sm={6} key={index}>
+                      <Typography
+                        component="div"
+                        sx={{
+                          p: 2,
+                          bgcolor: 'background.paper',
+                          borderRadius: 2,
+                          boxShadow: 1,
+                          transition: 'background-color 0.3s ease-in-out',
+                          '&:hover': {
+                            bgcolor: 'action.hover',
+                          },
+                        }}
+                      >
+                        • {activity}
+                      </Typography>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
+
+              {/* Attractions with consistent styling */}
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    borderBottom: '2px solid #f0f0f0',
+                    pb: 1,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <BeachAccess sx={{ mr: 1 }} />
+                  Key Attractions
+                </Typography>
+                <Grid container spacing={2}>
+                  {beach.attractions.map((attraction, index) => (
+                    <Grid item xs={12} sm={6} key={index}>
+                      <Typography
+                        component="div"
+                        sx={{
+                          p: 2,
+                          bgcolor: 'background.paper',
+                          borderRadius: 2,
+                          boxShadow: 1,
+                          transition: 'background-color 0.3s ease-in-out',
+                          '&:hover': {
+                            bgcolor: 'action.hover',
+                          },
+                        }}
+                      >
+                        • {attraction}
+                      </Typography>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
+
+              {/* Rest of the sections with consistent spacing */}
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    borderBottom: '2px solid #f0f0f0',
+                    pb: 1,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <LocalHotel sx={{ mr: 1 }} />
+                  Accommodation Options
+                </Typography>
+                <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+                  <Typography variant="body1" paragraph>
+                    Budget: {beach.accommodation.budget}
+                  </Typography>
+                  <Typography variant="body1">
+                    Luxury: {beach.accommodation.luxury}
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Food Specialties */}
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    borderBottom: '2px solid #f0f0f0',
+                    pb: 1,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <LocalDining sx={{ mr: 1 }} />
+                  Local Cuisine
+                </Typography>
+                <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+                  <Box component="ul" sx={{ pl: 3 }}>
+                    {beach.foodSpecialties.map((food, index) => (
+                      <Typography component="li" key={index} paragraph>
+                        {food}
+                      </Typography>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* Travel Tips */}
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    borderBottom: '2px solid #f0f0f0',
+                    pb: 1,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <DirectionsBoatFilled sx={{ mr: 1 }} />
+                  Travel Tips
+                </Typography>
+                <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+                  <Box component="ul" sx={{ pl: 3 }}>
+                    {beach.tips.map((tip, index) => (
+                      <Typography component="li" key={index} paragraph>
+                        {tip}
+                      </Typography>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+
+              <Typography variant="h5" gutterBottom sx={{ mt: 4, borderBottom: '2px solid #f0f0f0', pb: 1, mb: 2 }}>
+                Best Time to Visit
+              </Typography>
+              <Typography variant="body1" paragraph>
+                {beach.bestTimeToVisit}
+              </Typography>
+
+              <Typography variant="h5" gutterBottom sx={{ mt: 4, borderBottom: '2px solid #f0f0f0', pb: 1, mb: 2 }}>
+                How to Reach
+              </Typography>
+              <Typography variant="body1" paragraph>
+                {beach.howToReach}
+              </Typography>
+
+              {/* Nearby Places */}
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    borderBottom: '2px solid #f0f0f0',
+                    pb: 1,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <BeachAccess sx={{ mr: 1 }} />
+                  Nearby Attractions
+                </Typography>
+                <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+                  <Box component="ul" sx={{ pl: 3 }}>
+                    {beach.nearbyPlaces.map((place, index) => (
+                      <Typography component="li" key={index} paragraph>
+                        {place}
+                      </Typography>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
+
+          {/* Google Maps */}
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 2, borderRadius: 2, height: '400px', position: 'sticky', top: '20px', backgroundColor: '#fff' }}>
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD2g-C9ct5FYg8mQOZZn-h2IDCu47-p6kg&q=${beach.coordinates.lat},${beach.coordinates.lng}&zoom=15`}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+      <Footer />
+    </Box>
+  );
+};
+
+export default BeachDetails;

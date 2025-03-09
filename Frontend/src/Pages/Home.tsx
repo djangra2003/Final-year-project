@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import Footer from "../Components/Footer";
 import Gallery from "../Components/Gallery";
@@ -11,6 +11,8 @@ import TourBooking from "../Components/TourBooking";
 import WelcomeSection from "../Components/WelcomeSection";
 
 const Home: React.FC = () => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}'); // Fetch user data from local storage
+
   return (
     <Box sx={{ fontFamily: "sans-serif", backgroundColor: "#f9fafb" }}>
       {/* Header and Hero Section */}
@@ -46,6 +48,7 @@ const Home: React.FC = () => {
 
       {/* Footer */}
       <Footer />
+
     </Box>
   );
 };
