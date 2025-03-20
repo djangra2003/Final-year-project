@@ -12,7 +12,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
-  const images = [hero1, hero2, hero3,hero4,hero5];
+  const images = [hero1, hero2, hero3, hero4, hero5];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Automatically switch images every 4 seconds
@@ -62,7 +62,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
         height="100%"
         sx={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       ></Box>
-
       {/* Content */}
       <Box
         position="absolute"
@@ -77,6 +76,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
         textAlign="center"
         color="white"
         px={{ xs: 2, sm: 4 }}
+        zIndex={2}
       >
         <Typography
           variant="h2"

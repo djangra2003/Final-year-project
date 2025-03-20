@@ -5,6 +5,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const otpRoutes = require('./routes/otpRoutes'); // Import OTP routes
 const pool = require('./config/db');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 
