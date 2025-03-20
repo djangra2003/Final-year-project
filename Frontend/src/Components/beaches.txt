@@ -1,11 +1,11 @@
-import { Box, Container, Grid, ImageList, ImageListItem, Paper, Typography, Icon } from '@mui/material';
+import { BeachAccess, DirectionsBoatFilled, LocalDining, LocalHotel, SportsVolleyball } from '@mui/icons-material';
+import { Box, Container, Grid, ImageList, ImageListItem, Paper, Typography } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import HeroSection from './HeroSection';
 import beaches from './beaches.json';
-import { BeachAccess, DirectionsBoatFilled, LocalDining, LocalHotel, SportsVolleyball } from '@mui/icons-material';
 
 const BeachDetails: React.FC = () => {
   const { beachId } = useParams<{ beachId: string }>();
