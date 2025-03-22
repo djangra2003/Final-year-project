@@ -5,7 +5,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const otpRoutes = require('./routes/otpRoutes'); // Import OTP routes
 const pool = require('./config/db');
-const bcrypt = require('bcryptjs');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 
@@ -41,6 +41,7 @@ initializeDatabase();
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/otp', otpRoutes); // Use OTP routes
+app.use('/api/contact', contactRoutes);
 
 // Test route
 app.get('/', (req, res) => {

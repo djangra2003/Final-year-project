@@ -63,7 +63,7 @@ const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isAuthenticated, checkAuth } = useUser();
   const location = useLocation();
-  const isLoginOrSignupPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/forgot-password' || location.pathname === '/profile'
+  const isLoginOrSignupPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/forgot-password' || location.pathname === '/profile' 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
