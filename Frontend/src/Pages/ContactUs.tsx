@@ -17,16 +17,46 @@ const ContactUs: React.FC = () => {
     message: "",
   })
   const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [snackbarMessage, setSnackbarMessage] = useState("")
+  const [severity, setSeverity] = useState<"success" | "error">("success")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setOpenSnackbar(true)
-    setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" })
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSnackbarMessage("Message sent successfully! We'll get back to you soon.")
+        setSeverity("success")
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" })
+      } else {
+        setSnackbarMessage(data.message || "Failed to send message. Please try again.")
+        setSeverity("error")
+      }
+    } catch (error) {
+      console.error('Error sending message:', error)
+      setSnackbarMessage("Failed to send message. Please try again later.")
+      setSeverity("error")
+    } finally {
+      setIsSubmitting(false)
+      setOpenSnackbar(true)
+    }
   }
 
   return (
@@ -165,8 +195,9 @@ const ContactUs: React.FC = () => {
                   fullWidth
                   size="large"
                   className="bg-blue-600 hover:bg-blue-700 py-3 text-white"
+                  disabled={isSubmitting}
                 >
-                  Submit
+                  {isSubmitting ? "Sending..." : "Submit"}
                 </Button>
               </form>
             </CardContent>
@@ -174,9 +205,17 @@ const ContactUs: React.FC = () => {
         </Box>
       </Container>
 
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={() => setOpenSnackbar(false)}>
-        <Alert severity="success" onClose={() => setOpenSnackbar(false)}>
-          Message sent successfully! We'll get back to you soon.
+      <Snackbar 
+        open={openSnackbar} 
+        autoHideDuration={6000} 
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert 
+          severity={severity} 
+          onClose={() => setOpenSnackbar(false)}
+          sx={{ width: '100%' }}
+        >
+          {snackbarMessage}
         </Alert>
       </Snackbar>
       <Footer />
@@ -185,4 +224,3 @@ const ContactUs: React.FC = () => {
 }
 
 export default ContactUs
-

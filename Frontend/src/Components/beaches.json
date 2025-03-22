@@ -1,4 +1,218 @@
 {
+    "Rushikonda Beach": {
+    "description": "A pristine beach in Visakhapatnam, Andhra Pradesh, known for its golden sands, clear waters, and water sports activities.",
+    "coordinates": {
+        "lat": 17.7833,
+        "lng": 83.3500
+    },
+    "images": [],
+    "activities": [
+        "Swimming",
+        "Surfing",
+        "Beach Volleyball",
+        "Parasailing",
+        "Jet Skiing"
+    ],
+    "bestTimeToVisit": "October to March for pleasant weather and water activities.",
+    "howToReach": "Located 8 km from Visakhapatnam city center. Well-connected by road and public transport.",
+    "attractions": [
+        "Blue Flag Certified Beach",
+        "Water Sports Center",
+        "Beach Shacks",
+        "Sunset Views"
+    ],
+    "accommodation": {
+        "budget": "Beach resorts and hotels in Visakhapatnam city",
+        "luxury": "Luxury beach resorts and hotels in Rushikonda area"
+    },
+    "foodSpecialties": [
+        "Andhra Seafood",
+        "Local Street Food",
+        "Beach Shacks"
+    ],
+    "tips": [
+        "Carry sunscreen and water",
+        "Visit during early morning or evening",
+        "Try local seafood",
+        "Book water sports in advance"
+    ],
+    "location": "Visakhapatnam, Andhra Pradesh",
+    "nearbyPlaces": [
+        "RK Beach (5 km)",
+        "Kailasagiri Hill (10 km)",
+        "INS Kurusura Submarine Museum (8 km)"
+    ]
+},
+    "Eden Beach": {
+    "description": "A beautiful beach in Puducherry, known for its serene atmosphere and French colonial influence.",
+    "coordinates": {
+        "lat": 11.9167,
+        "lng": 79.8333
+    },
+    "images": [],
+    "activities": [
+        "Swimming",
+        "Beach Walks",
+        "Sunbathing",
+        "Photography"
+    ],
+    "bestTimeToVisit": "October to March for pleasant weather.",
+    "howToReach": "Located in Puducherry city. Well-connected by road and rail.",
+    "attractions": [
+        "French Architecture",
+        "Beach Promenade",
+        "Sunrise Views",
+        "Local Markets"
+    ],
+    "accommodation": {
+        "budget": "Guesthouses and budget hotels in Puducherry",
+        "luxury": "Heritage hotels and luxury resorts"
+    },
+    "foodSpecialties": [
+        "French Cuisine",
+        "South Indian Food",
+        "Seafood"
+    ],
+    "tips": [
+        "Visit early morning for sunrise",
+        "Explore French Quarter nearby",
+        "Try local cafes"
+    ],
+    "location": "Puducherry",
+    "nearbyPlaces": [
+        "French Quarter (1 km)",
+        "Sri Aurobindo Ashram (2 km)",
+        "Paradise Beach (8 km)"
+    ]
+},
+    "Padubidri Beach": {
+    "description": "A serene beach in Karnataka, known for its clean waters and peaceful atmosphere.",
+    "coordinates": {
+        "lat": 13.1833,
+        "lng": 74.7500
+    },
+    "images": [],
+    "activities": [
+        "Swimming",
+        "Beach Walks",
+        "Sunbathing",
+        "Photography"
+    ],
+    "bestTimeToVisit": "October to March for pleasant weather.",
+    "howToReach": "Located near Udupi. Well-connected by road and rail.",
+    "attractions": [
+        "Clean Waters",
+        "Sunset Views",
+        "Local Temples",
+        "Beach Shacks"
+    ],
+    "accommodation": {
+        "budget": "Local hotels and guesthouses",
+        "luxury": "Beach resorts in Udupi"
+    },
+    "foodSpecialties": [
+        "Udupi Cuisine",
+        "Seafood",
+        "Local Street Food"
+    ],
+    "tips": [
+        "Visit during low tide",
+        "Carry water and snacks",
+        "Respect local customs"
+    ],
+    "location": "Udupi, Karnataka",
+    "nearbyPlaces": [
+        "Malpe Beach (5 km)",
+        "St. Mary's Island (10 km)",
+        "Udupi Temple (15 km)"
+    ]
+},
+    "Kasarkod Beach": {
+    "description": "A pristine beach in Karnataka, known for its natural beauty and peaceful environment.",
+    "coordinates": {
+        "lat": 14.5500,
+        "lng": 74.3167
+    },
+    "images": [],
+    "activities": [
+        "Swimming",
+        "Beach Walks",
+        "Bird Watching",
+        "Photography"
+    ],
+    "bestTimeToVisit": "October to March for pleasant weather.",
+    "howToReach": "Located near Karwar. Well-connected by road and rail.",
+    "attractions": [
+        "Blue Flag Certified Beach",
+        "Clean Waters",
+        "Sunset Views",
+        "Local Culture"
+    ],
+    "accommodation": {
+        "budget": "Local hotels and guesthouses",
+        "luxury": "Beach resorts in Karwar"
+    },
+    "foodSpecialties": [
+        "Konkan Cuisine",
+        "Seafood",
+        "Local Street Food"
+    ],
+    "tips": [
+        "Visit during low tide",
+        "Carry water and snacks",
+        "Respect local customs"
+    ],
+    "location": "Karwar, Karnataka",
+    "nearbyPlaces": [
+        "Karwar Beach (5 km)",
+        "Sadashivgad Fort (10 km)",
+        "Devbagh Beach (15 km)"
+    ]
+},
+    "Minicoy Thundi Beach": {
+    "description": "A pristine beach in Lakshadweep, known for its crystal-clear waters and coral reefs.",
+    "coordinates": {
+        "lat": 8.2833,
+        "lng": 73.0500
+    },
+    "images": [],
+    "activities": [
+        "Snorkeling",
+        "Scuba Diving",
+        "Beach Walks",
+        "Coral Reef Exploration"
+    ],
+    "bestTimeToVisit": "October to March for pleasant weather and water activities.",
+    "howToReach": "Accessible via flights to Agatti and then by boat to Minicoy.",
+    "attractions": [
+        "Coral Reefs",
+        "Crystal Clear Waters",
+        "Marine Life",
+        "Local Culture"
+    ],
+    "accommodation": {
+        "budget": "Beach huts and local accommodations",
+        "luxury": "Luxury beach resorts"
+    },
+    "foodSpecialties": [
+        "Local Seafood",
+        "Malayali Cuisine",
+        "Coconut-based Dishes"
+    ],
+    "tips": [
+        "Book accommodations in advance",
+        "Carry sunscreen and water",
+        "Respect local customs",
+        "Try water activities"
+    ],
+    "location": "Minicoy, Lakshadweep",
+    "nearbyPlaces": [
+        "Minicoy Lighthouse (2 km)",
+        "Juma Masjid (3 km)",
+        "Other Islands of Lakshadweep"
+    ]
+},
+
     "Radhanagar Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
