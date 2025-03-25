@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Box, Typography, TextField, Button, Grid, IconButton, Alert, Autocomplete } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { Alert, Autocomplete, Box, Button, Grid, IconButton, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
 import booking from "../assets/booking.jpg";
 
 // Using Amadeus API for flight search
