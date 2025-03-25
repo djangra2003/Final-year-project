@@ -1,20 +1,14 @@
+require('dotenv').config();
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'beach_buddy',
-  password: '9811761000',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL, // Use DATABASE_URL from Render's environment variables
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false, // Needed for cloud databases
 });
 
 // Test the connection
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-  } else {
-    console.log('Database connected successfully!');
-  }
-});
+pool.connect()
+  .then(() => console.log("✅ Connected to PostgreSQL Database!"))
+  .catch(err => console.error("❌ Database Connection Error:", err));
 
 module.exports = pool;
