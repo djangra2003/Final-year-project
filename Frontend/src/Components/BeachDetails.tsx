@@ -27,6 +27,10 @@ interface Beach {
   nearbyPlaces: string[];
 }
 
+interface BeachesData {
+  [key: string]: Beach;
+}
+
 const BeachDetails: React.FC = () => {
   const { beachId } = useParams<{ beachId: string }>();
   
@@ -42,7 +46,7 @@ const BeachDetails: React.FC = () => {
   console.log('Available beach keys:', Object.keys(beachesData));
   
   // Access the beach data using the converted name
-  const beach = beachesData[convertUrlToJsonFormat(beachId || '')];
+  const beach = (beachesData as BeachesData)[convertUrlToJsonFormat(beachId || '')];
 
   if (!beach) {
     return (
@@ -62,16 +66,21 @@ const BeachDetails: React.FC = () => {
     );
   }
 
-  const beachName = convertUrlToJsonFormat(beachId || '').replace(/([A-Z])/g, ' $1').trim();
-
   return (
     <>
       <Header />
       <HeroSection 
-        title={beachName}
+        title={convertUrlToJsonFormat(beachId || '')}
         subtitle={beach.location}
       />
       <Box sx={{ p: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          {convertUrlToJsonFormat(beachId || '')}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+          {beach.location}
+        </Typography>
+
         <Grid container spacing={3}>
           {/* Description */}
           <Grid item xs={12}>
