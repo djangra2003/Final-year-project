@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import booking from "../assets/booking.jpg";
 
 // Using Amadeus API for flight search
-const AMADEUS_API_KEY = 'dQsYKCN9McCRGAqFdJ4XL8LcfPApJMfG'; // Replace with your Amadeus API key
-const AMADEUS_API_SECRET = 'oOVzBSossGR7Rcwe'; // Replace with your Amadeus API secret
+const AMADEUS_API_KEY = 'mgmiQPIkPCXGHqnLU8Hv8qqYirJ5PTrS'; // Replace with your Amadeus API key
+const AMADEUS_API_SECRET = 'U0jWBXYAE1veKCQa'; // Replace with your Amadeus API secret
 
 interface Location {
   name: string;
@@ -63,8 +63,8 @@ const TourBooking: React.FC = () => {
   const incrementChildren = () => setChildren((prev) => prev + 1);
   const decrementChildren = () => setChildren((prev) => (prev > 0 ? prev - 1 : 0));
 
-  // Search for locations as user types
-  const searchLocations = async (searchTerm: string) => {
+   // Search for locations as user types
+   const searchLocations = async (searchTerm: string) => {
     if (!searchTerm) return;
     
     try {
@@ -333,21 +333,21 @@ const TourBooking: React.FC = () => {
 
           {/* Display Flight Results */}
           {flights.length > 0 && (
-            <Box sx={{ mt: 4 }}>
-              <Typography variant="h6" gutterBottom>Available Flights:</Typography>
-              {flights.map((flight, index) => (
-                <Box key={index} sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: 1 }}>
-                  <Typography>
-                    {flight.itineraries[0].segments[0].departure.iataCode} →{" "}
-                    {flight.itineraries[0].segments[0].arrival.iataCode}
-                  </Typography>
-                  <Typography>
-                    Price: ₹{flight.price.total}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-          )}
+             <Box sx={{ mt: 4 }}>
+               <Typography variant="h6" gutterBottom>Available Flights:</Typography>
+               {flights.map((flight, index) => (
+                 <Box key={index} sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: 1 }}>
+                   <Typography>
+                     {flight.itineraries[0].segments[0].departure.iataCode} →{" "}
+                     {flight.itineraries[0].segments[0].arrival.iataCode}
+                   </Typography>
+                   <Typography>
+                     Price: ₹{flight.price.total}
+                   </Typography>
+                 </Box>
+               ))}
+             </Box>
+           )}
         </Box>
       </Box>
     </Box>
