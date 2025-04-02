@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
-
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 
@@ -14,6 +14,8 @@ app.use(express.json());
 
 // Use auth routes
 app.use('/api/auth', authRoutes);
+// Use contact routes
+app.use('/api/contacts', contactRoutes);
 
 // Create database tables
 const createTablesQuery = `
