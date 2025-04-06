@@ -2,8 +2,8 @@
     "Rushikonda Beach": {
     "description": "A pristine beach in Visakhapatnam, Andhra Pradesh, known for its golden sands, clear waters, and water sports activities.",
     "coordinates": {
-        "lat": 17.7833,
-        "lng": 83.3500
+        "lat": 17.7825,
+        "lng": 83.3851   
     },
     "images": [],
     "activities": [
@@ -46,8 +46,8 @@
     "Eden Beach": {
     "description": "A beautiful beach in Puducherry, known for its serene atmosphere and French colonial influence.",
     "coordinates": {
-        "lat": 11.9167,
-        "lng": 79.8333
+        "lat": 11.8814,
+        "lng": 79.8242
     },
     "images": [],
     "activities": [
@@ -88,8 +88,8 @@
     "Padubidri Beach": {
     "description": "A serene beach in Karnataka, known for its clean waters and peaceful atmosphere.",
     "coordinates": {
-        "lat": 13.1833,
-        "lng": 74.7500
+        "lat": 13.1309,
+        "lng": 74.7625
     },
     "images": [],
     "activities": [
@@ -130,8 +130,8 @@
     "Kasarkod Beach": {
     "description": "A pristine beach in Karnataka, known for its natural beauty and peaceful environment.",
     "coordinates": {
-        "lat": 14.5500,
-        "lng": 74.3167
+        "lat": 14.2630,
+        "lng": 74.4315
     },
     "images": [],
     "activities": [
@@ -172,8 +172,8 @@
     "Minicoy Thundi Beach": {
     "description": "A pristine beach in Lakshadweep, known for its crystal-clear waters and coral reefs.",
     "coordinates": {
-        "lat": 8.2833,
-        "lng": 73.0500
+        "lat": 8.2752,
+        "lng": 73.0224
     },
     "images": [],
     "activities": [
@@ -216,8 +216,8 @@
     "Radhanagar Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 11.9845,
+            "lng": 92.9508
         },
         "images": [],
         "activities": [
@@ -257,8 +257,8 @@
     "Bharatpur Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 11.8362,
+            "lng": 93.0337
         },
         "images": [],
         "activities": [
@@ -298,8 +298,8 @@
     "Laxmanpur Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 11.8470,
+            "lng": 93.0156
         },
         "images": [],
         "activities": [
@@ -339,8 +339,8 @@
     "Kala Patthar Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 12.0006,
+            "lng": 93.0071
         },
         "images": [],
         "activities": [
@@ -380,8 +380,8 @@
     "Elephant Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 12.0081,
+            "lng": 92.9416
         },
         "images": [],
         "activities": [
@@ -421,8 +421,8 @@
     "Baratang Island": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 12.2114,
+            "lng": 92.8112
         },
         "images": [],
         "activities": [
@@ -462,8 +462,8 @@
     "Wandoor Beach": {
         "description": "A stunning beach in the Andaman and Nicobar Islands, known for its crystal-clear waters, white sands, and rich marine life.",
         "coordinates": {
-            "lat": 11.5,
-            "lng": 92.7
+            "lat": 11.5948,
+            "lng": 92.6079
         },
         "images": [],
         "activities": [
@@ -503,8 +503,8 @@
     "Promenade Beach": {
         "description": "A beautiful beach in Pondicherry, known for its pristine waters, peaceful ambiance, and cultural charm.",
         "coordinates": {
-            "lat": 11.9,
-            "lng": 79.8
+            "lat": 11.9313,
+            "lng": 79.8358
         },
         "images": [],
         "activities": [
@@ -544,8 +544,8 @@
     "Karaikal Beach": {
         "description": "A beautiful beach in Pondicherry, known for its pristine waters, peaceful ambiance, and cultural charm.",
         "coordinates": {
-            "lat": 11.9,
-            "lng": 79.8
+            "lat": 10.9182,
+            "lng": 79.853
         },
         "images": [],
         "activities": [
@@ -585,8 +585,8 @@
     "Yanam Beach": {
         "description": "A beautiful beach in Pondicherry, known for its pristine waters, peaceful ambiance, and cultural charm.",
         "coordinates": {
-            "lat": 11.9,
-            "lng": 79.8
+            "lat": 16.7333,
+            "lng": 82.2167
         },
         "images": [],
         "activities": [
@@ -626,8 +626,8 @@
     "Auroville Beach": {
         "description": "A beautiful beach in Pondicherry, known for its pristine waters, peaceful ambiance, and cultural charm.",
         "coordinates": {
-            "lat": 11.9,
-            "lng": 79.8
+            "lat": 11.9865,
+            "lng": 79.8497
         },
         "images": [],
         "activities": [
@@ -708,8 +708,8 @@
     "Serenity Beach": {
         "description": "A beautiful beach in Pondicherry, known for its pristine waters, peaceful ambiance, and cultural charm.",
         "coordinates": {
-            "lat": 11.9,
-            "lng": 79.8
+            "lat": 11.9733,
+            "lng": 79.8448
         },
         "images": [],
         "activities": [
@@ -749,8 +749,8 @@
     "Marina Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 13.0500,
+            "lng": 80.2824
         },
         "images": [],
         "activities": [
@@ -790,8 +790,8 @@
     "Edward Elliot's Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 12.9989,
+            "lng": 80.2718
         },
         "images": [],
         "activities": [
@@ -831,8 +831,8 @@
     "Kasimedu's N4 Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 13.1255,
+            "lng": 80.2976
         },
         "images": [],
         "activities": [
@@ -872,8 +872,8 @@
     "Golden Beach, Chennai": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 12.9131,
+            "lng": 80.2528
         },
         "images": [],
         "activities": [
@@ -913,8 +913,8 @@
     "Thiruvanmayur Beach, Chennai": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 12.9764,
+            "lng": 80.2670
         },
         "images": [],
         "activities": [
@@ -954,8 +954,8 @@
     "Silver Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 11.7398,
+            "lng": 79.7868
         },
         "images": [],
         "activities": [
@@ -995,8 +995,8 @@
     "Covelong Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.85,
+            "lng": 79.83
         },
         "images": [],
         "activities": [
@@ -1036,8 +1036,8 @@
     "Mahabalipuram Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 12.6121,
+            "lng": 80.1969
         },
         "images": [],
         "activities": [
@@ -1077,8 +1077,8 @@
     "Olaikuda Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 17.714294,
+            "lng": 83.323685
         },
         "images": [],
         "activities": [
@@ -1118,8 +1118,8 @@
     "Ariyaman/kushi Beach, Rameswaram": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 9.4480,
+            "lng": 79.2230
         },
         "images": [],
         "activities": [
@@ -1159,8 +1159,8 @@
     "Pamban Beach, Rameswaram": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 9.2792,
+            "lng": 79.2053
         },
         "images": [],
         "activities": [
@@ -1200,8 +1200,8 @@
     "Dhanushkodi Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 9.2151,
+            "lng": 79.3585
         },
         "images": [],
         "activities": [
@@ -1241,8 +1241,8 @@
     "Velankanni Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 10.6800,
+            "lng": 79.8536
         },
         "images": [],
         "activities": [
@@ -1282,8 +1282,8 @@
     "Sothavilai Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.0933,
+            "lng": 77.4553
         },
         "images": [],
         "activities": [
@@ -1323,8 +1323,8 @@
     "Kanyakumari Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.0866,
+            "lng": 77.5544
         },
         "images": [],
         "activities": [
@@ -1364,8 +1364,8 @@
     "Vattakotai Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.1250,
+            "lng": 77.5653
         },
         "images": [],
         "activities": [
@@ -1405,8 +1405,8 @@
     "Sanguthurai Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.0999,
+            "lng": 77.42361
         },
         "images": [],
         "activities": [
@@ -1446,8 +1446,8 @@
     "Sengumal Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 9.2938,
+            "lng": 79.3258
         },
         "images": [],
         "activities": [
@@ -1487,8 +1487,8 @@
     "Thoothukudi Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.7642,
+            "lng": 78.1348
         },
         "images": [],
         "activities": [
@@ -1528,8 +1528,8 @@
     "Tiruchendur Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 8.4863,
+            "lng": 78.1221
         },
         "images": [],
         "activities": [
@@ -1569,8 +1569,8 @@
     "Poompuhar Beach": {
         "description": "A scenic beach in Tamil Nadu, known for its long coastline, cultural heritage, and vibrant ambiance.",
         "coordinates": {
-            "lat": 12.9,
-            "lng": 80.2
+            "lat": 11.1434,
+            "lng": 79.8578
         },
         "images": [],
         "activities": [
@@ -1610,8 +1610,8 @@
     "Talsari Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 21.6031,
+            "lng": 87.4626
         },
         "images": [],
         "activities": [
@@ -1651,8 +1651,8 @@
     "Dagara Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 21.5533,
+            "lng": 87.2809
         },
         "images": [],
         "activities": [
@@ -1692,8 +1692,8 @@
     "Chandipur-on-Sea": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 21.4399,
+            "lng":  87.0149
         },
         "images": [],
         "activities": [
@@ -1733,8 +1733,8 @@
     "Gahirmatha Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 20.2922,
+            "lng": 86.7658
         },
         "images": [],
         "activities": [
@@ -1774,8 +1774,8 @@
     "Satabhaya Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 21.48,
+            "lng": 86.29
         },
         "images": [],
         "activities": [
@@ -1815,8 +1815,8 @@
     "Pentha Sea Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 20.5396,
+            "lng": 86.7884
         },
         "images": [],
         "activities": [
@@ -1856,8 +1856,8 @@
     "Hukitola Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 20.404,
+            "lng": 86.791
         },
         "images": [],
         "activities": [
@@ -1897,8 +1897,8 @@
     "Paradeep Sea Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 20.2526,
+            "lng": 86.6576
         },
         "images": [],
         "activities": [
@@ -1938,8 +1938,8 @@
     "Astaranga Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.9307,
+            "lng": 86.2822
         },
         "images": [],
         "activities": [
@@ -1979,8 +1979,8 @@
     "Beleswar Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.8276,
+            "lng": 85.9437
         },
         "images": [],
         "activities": [
@@ -2020,8 +2020,8 @@
     "Konark Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.8642,
+            "lng": 86.1074
         },
         "images": [],
         "activities": [
@@ -2061,8 +2061,8 @@
     "Chandrabhaga Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.8662,
+            "lng": 86.1154
         },
         "images": [],
         "activities": [
@@ -2102,8 +2102,8 @@
     "Ramachandi Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.8544,
+            "lng": 86.0597
         },
         "images": [],
         "activities": [
@@ -6977,8 +6977,8 @@
     "Agardanda Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.2811,
+            "lng": 72.9924
         },
         "images": [],
         "activities": [
@@ -7015,8 +7015,8 @@
     "Diveagar Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.1920,
+            "lng": 72.9789
         },
         "images": [],
         "activities": [
@@ -7053,8 +7053,8 @@
     "Ganpatipule Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.1471,
+            "lng": 73.2653
         },
         "images": [],
         "activities": [
@@ -7091,8 +7091,8 @@
     "Guhagar Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.4890,
+            "lng": 73.1847
         },
         "images": [],
         "activities": [
@@ -7129,8 +7129,8 @@
     "Kelwa Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 19.6109,
+            "lng": 72.7300
         },
         "images": [],
         "activities": [
@@ -7167,8 +7167,8 @@
     "Tarkarli Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 16.0137,
+            "lng": 73.4898
         },
         "images": [],
         "activities": [
@@ -7205,8 +7205,8 @@
     "Shivaji Park Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 19.026724,
+            "lng": 72.838047
         },
         "images": [],
         "activities": [
@@ -7243,8 +7243,8 @@
     "Anjarle Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.8473,
+            "lng": 73.0879
         },
         "images": [],
         "activities": [
@@ -7281,8 +7281,8 @@
     "Dapoli Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.75,
+            "lng": 73.12
         },
         "images": [],
         "activities": [
@@ -7319,8 +7319,8 @@
     "Dahanu Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 19.9912,
+            "lng": 72.7225
         },
         "images": [],
         "activities": [
@@ -7357,8 +7357,8 @@
     "Srivardhan Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.0415,
+            "lng": 73.0106
         },
         "images": [],
         "activities": [
@@ -7395,8 +7395,8 @@
     "Kihim Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.7229,
+            "lng": 72.8637
         },
         "images": [],
         "activities": [
@@ -7433,8 +7433,8 @@
     "Mandwa Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.8031,
+            "lng": 72.8787
         },
         "images": [],
         "activities": [
@@ -7471,8 +7471,8 @@
     "Velneshwar Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.3786,
+            "lng": 73.2095
         },
         "images": [],
         "activities": [
@@ -7509,8 +7509,8 @@
     "Vengurla Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.3786,
+            "lng": 73.2095
         },
         "images": [],
         "activities": [
@@ -7585,8 +7585,8 @@
     "Bhandarpule Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.1235,
+            "lng": 73.2712
         },
         "images": [],
         "activities": [
@@ -7623,8 +7623,8 @@
     "Nagaon Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.6143,
+            "lng": 72.9030
         },
         "images": [],
         "activities": [
@@ -7661,8 +7661,8 @@
     "Revdanda Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.5581,
+            "lng": 72.9198
         },
         "images": [],
         "activities": [
@@ -7699,8 +7699,8 @@
     "Rewas Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.8294,
+            "lng": 72.9419
         },
         "images": [],
         "activities": [
@@ -7737,8 +7737,8 @@
     "Kashid Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.4460,
+            "lng": 72.9029
         },
         "images": [],
         "activities": [
@@ -7775,8 +7775,8 @@
     "Karde (Murud) Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.7742,
+            "lng": 73.1136
         },
         "images": [],
         "activities": [
@@ -7813,8 +7813,8 @@
     "Harihareshwar Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.9951,
+            "lng": 73.0206
         },
         "images": [],
         "activities": [
@@ -7851,8 +7851,8 @@
     "Bagmandla Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.967,
+            "lng": 73.120
         },
         "images": [],
         "activities": [
@@ -7889,8 +7889,8 @@
     "Kelshi Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.9193,
+            "lng": 73.0542
         },
         "images": [],
         "activities": [
@@ -7927,8 +7927,8 @@
     "Harnai Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 17.8110,
+            "lng": 73.0936
         },
         "images": [],
         "activities": [
@@ -7965,8 +7965,8 @@
     "Bordi Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 20.0998,
+            "lng": 72.7326
         },
         "images": [],
         "activities": [
@@ -8003,8 +8003,8 @@
     "Ratnagiri Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 16.9944,
+            "lng": 73.3000
         },
         "images": [],
         "activities": [
@@ -8041,8 +8041,8 @@
     "Awas Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.7668,
+            "lng": 72.8652
         },
         "images": [],
         "activities": [
@@ -8079,8 +8079,8 @@
     "Sasawne Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 18.8630,
+            "lng": 72.8630
         },
         "images": [],
         "activities": [
@@ -8117,8 +8117,8 @@
     "Malvan Beach": {
         "description": "A beautiful beach in Maharashtra with scenic views and water activities.",
         "coordinates": {
-            "lat": 18.5,
-            "lng": 73.0
+            "lat": 16.0499,
+            "lng": 73.4687
         },
         "images": [],
         "activities": [
@@ -8155,8 +8155,8 @@
     "puri": {
         "description": "Puri Beach is one of the finest beaches in Eastern India. Known for its spiritual significance and natural beauty, this beach attracts millions of visitors annually. The golden sands stretch for kilometers along the Bay of Bengal, offering spectacular sunrise views and religious importance due to its proximity to the Jagannath Temple.",
         "coordinates": {
-            "lat": 19.7985,
-            "lng": 85.8248
+            "lat": 19.7947,
+            "lng": 85.8253
         },
         "images": [
             "/src/assets/puri.png",
@@ -8205,8 +8205,8 @@
     "kovalam": {
         "description": "Kovalam is an internationally renowned beach destination featuring three adjacent crescent beaches. The southernmost, Lighthouse Beach, is the most popular. Known for its pristine waters and ayurvedic treatments, it offers a perfect blend of leisure and wellness.",
         "coordinates": {
-            "lat": 8.3988,
-            "lng": 76.9782
+            "lat": 8.3838,
+            "lng": 76.9804
         },
         "images": [
             "kovalam.png"
@@ -8253,8 +8253,8 @@
     "radhanagar": {
         "description": "Often rated as Asia's best beach, Radhanagar Beach (Beach No. 7) is known for its pristine white sands, turquoise waters, and lush green forest backdrop. This beach offers one of the most spectacular sunset views in India.",
         "coordinates": {
-            "lat": 11.9832,
-            "lng": 92.9512
+            "lat": 11.9845,
+            "lng": 92.9508
         },
         "images": [
             "radhanagar.png"
@@ -8301,7 +8301,7 @@
     "marina": {
         "description": "Marina Beach is the second-longest urban beach in the world, stretching for 13 kilometers along the Bay of Bengal. This historic beach features numerous landmarks, monuments, and is a cultural hub of Chennai.",
         "coordinates": {
-            "lat": 13.05,
+            "lat": 13.0500,
             "lng": 80.2824
         },
         "images": [
@@ -8348,8 +8348,8 @@
     "rushikonda": {
         "description": "Rushikonda Beach is known for its golden sands and clear waters. It is a popular spot for water sports and offers a serene environment for relaxation.",
         "coordinates": {
-            "lat": 17.7,
-            "lng": 83.35
+            "lat": 17.7825,
+            "lng": 83.3851
         },
         "images": [
             "rushikonda.png"
@@ -8394,8 +8394,8 @@
     "eden": {
         "description": "Eden Beach is a serene and less-crowded beach in Puducherry. It is known for its clean waters and peaceful environment.",
         "coordinates": {
-            "lat": 11.9132,
-            "lng": 79.8144
+            "lat": 11.9416,
+            "lng": 79.8083
         },
         "images": [
             "eden.png"
@@ -8439,8 +8439,8 @@
     "minicoy-thundi": {
         "description": "Minicoy Thundi Beach is known for its white sands and clear blue waters. It is a popular spot for water sports and offers a serene environment for relaxation.",
         "coordinates": {
-            "lat": 8.2833,
-            "lng": 73.0167
+            "lat": 8.2752,
+            "lng": 73.0224
         },
         "images": [
             "minicoy.png"
@@ -8485,8 +8485,8 @@
     "kadmat": {
         "description": "Kadmat Beach is known for its pristine white sands and clear blue waters. It is a popular spot for water sports and offers a serene environment for relaxation.",
         "coordinates": {
-            "lat": 11.1833,
-            "lng": 72.7667
+            "lat": 11.223,
+            "lng": 72.776
         },
         "images": [
             "kadmat.png"
@@ -8531,8 +8531,8 @@
     "kappad": {
         "description": "Kappad Beach is historically significant as it is the place where Vasco da Gama landed in 1498. It is known for its serene environment and clear waters.",
         "coordinates": {
-            "lat": 11.8667,
-            "lng": 75.3333
+            "lat": 11.3807,
+            "lng": 75.7261
         },
         "images": [
             "kappad.png"
@@ -8576,8 +8576,8 @@
     "kasarkod": {
         "description": "Kasarkod Beach is known for its clean waters and serene environment. It is a popular spot for relaxation and offers a peaceful getaway.",
         "coordinates": {
-            "lat": 12.9167,
-            "lng": 74.8833
+            "lat": 14.2630,
+            "lng": 74.4315
         },
         "images": [
             "kasarkod.png"
@@ -8621,8 +8621,8 @@
     "padubidri": {
         "description": "Padubidri Beach is known for its clean waters and serene environment. It is a popular spot for relaxation and offers a peaceful getaway.",
         "coordinates": {
-            "lat": 13.1667,
-            "lng": 74.75
+            "lat": 13.1309,
+            "lng": 74.7625
         },
         "images": [
             "padubidri.png"
@@ -8666,8 +8666,8 @@
     "ghoghla": {
         "description": "Ghoghla Beach is known for its clean waters and serene environment. It is a popular spot for relaxation and offers a peaceful getaway.",
         "coordinates": {
-            "lat": 20.7167,
-            "lng": 70.9667
+            "lat": 20.7385,
+            "lng": 71.0087
         },
         "images": [
             "ghoghla.png",
@@ -8713,8 +8713,8 @@
             "Shivrajpur Beach": {
             "description": "A beautiful and pristine beach near Dwarka, Gujarat, known for its clear blue waters, white sands, and eco-friendly tourism initiatives.",
             "coordinates": {
-                "lat": 22.3386,
-                "lng": 68.9633
+                "lat": 22.3330,
+                "lng": 68.9536
             },
             "images": [],
             "activities": [
