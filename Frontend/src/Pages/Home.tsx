@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
 import Footer from "../Components/Footer";
 import Gallery from "../Components/Gallery";
@@ -9,10 +9,9 @@ import ServicesSection from "../Components/ServicesSection";
 import Sidebar from "../Components/Sidebar";
 import TourBooking from "../Components/TourBooking";
 import WelcomeSection from "../Components/WelcomeSection";
+import Reviews from "../Components/Reviews"; // ✅ Import Reviews component
 
 const Home: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem('user') || '{}'); // Fetch user data from local storage
-
   return (
     <Box sx={{ fontFamily: "sans-serif", backgroundColor: "#f9fafb" }}>
       {/* Header and Hero Section */}
@@ -29,9 +28,7 @@ const Home: React.FC = () => {
         }}
       >
         <Grid item xs={12} md={8}>
-          {/* Welcome Section */}
           <WelcomeSection />
-          {/* SearchBar */}
           <SearchBar />
           <ServicesSection />
         </Grid>
@@ -46,9 +43,13 @@ const Home: React.FC = () => {
       {/* Tour Booking */}
       <TourBooking />
 
+      {/* ✅ Reviews Section placed just before Footer */}
+      <Box sx={{ mt: 6, mx: "auto", maxWidth: "1500px" }}>
+        <Reviews />
+      </Box>
+
       {/* Footer */}
       <Footer />
-
     </Box>
   );
 };
