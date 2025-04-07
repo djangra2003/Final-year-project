@@ -21,7 +21,7 @@
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
     "@splinetool/react-spline": "^4.0.0",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.6.3",
     "lucide-react": "^0.474.0",
