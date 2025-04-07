@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import hero4 from "../assets/candolim.png";
-import hero5 from "../assets/dhanushkodi.png";
-import hero1 from "../assets/herosection1.png";
-import hero2 from "../assets/herosection2.png";
-import hero3 from "../assets/herosection3.png";
+import hero5 from "../assets/radhanagar.png";
+import hero1 from "../assets/herosection1.jpg";
+import hero2 from "../assets/herosection2.jpg";
+import hero3 from "../assets/herosection3.jpg";
 
 interface HeroSectionProps {
   title: string;
