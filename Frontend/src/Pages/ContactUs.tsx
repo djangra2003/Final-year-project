@@ -31,7 +31,7 @@ const ContactUs: React.FC = () => {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact/submit', {
+      const response = await fetch('http://localhost:5000/api/contacts/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

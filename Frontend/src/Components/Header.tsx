@@ -189,20 +189,6 @@ const Header: React.FC = () => {
                   Beaches
                 </Button>
               </Link>
-              <Link to="/activities">
-                <Button
-                  color="inherit"
-                  sx={{
-                    '&:hover': {
-                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
-                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
-                      transition: 'all 0.3s ease-in-out',
-                    },
-                  }}
-                >
-                  Activities
-                </Button>
-              </Link>
               <Link to="/about">
                 <Button
                   color="inherit"
@@ -214,7 +200,7 @@ const Header: React.FC = () => {
                     },
                   }}
                 >
-                  About
+                  About Us
                 </Button>
               </Link>
               <Link to="/contact">
@@ -228,7 +214,7 @@ const Header: React.FC = () => {
                     },
                   }}
                 >
-                  Contact
+                  Contact Us
                 </Button>
               </Link>
             </Box>

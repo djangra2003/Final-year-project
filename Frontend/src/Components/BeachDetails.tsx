@@ -1,5 +1,6 @@
-import { Box, Grid, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
-import React from 'react';
+import { Favorite, FavoriteBorder, Share } from '@mui/icons-material';
+import { Box, Grid, IconButton, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import beachesData from './beaches.json';
 import Footer from './Footer';
@@ -32,6 +33,8 @@ interface BeachesData {
 }
 
 const BeachDetails: React.FC = () => {
+  const [favorite, setFavorite] = useState(false);
+  const [showShare, setShowShare] = useState(false);
   const { beachId } = useParams<{ beachId: string }>();
   
   // Convert URL format (e.g., "PuriBeach") to JSON format (e.g., "Puri Beach")
@@ -52,7 +55,7 @@ const BeachDetails: React.FC = () => {
     return (
       <>
         <Header />
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3, bgcolor: '#f5f9fc' }}>
           <Typography variant="h4">Beach not found</Typography>
           <Typography variant="body1" color="text.secondary">
             The beach "{beachId}" could not be found. Please check the URL and try again.
@@ -73,8 +76,25 @@ const BeachDetails: React.FC = () => {
         title={convertUrlToJsonFormat(beachId || '')}
         subtitle={beach.location}
       />
-      <Box sx={{ p: 3 }}>
-        <Typography variant="h4" gutterBottom>
+      <Box sx={{ p: 3, bgcolor: '#f5f9fc' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+          <Typography variant="h4" sx={{ color: '#1a73e8' }} gutterBottom>
+            {convertUrlToJsonFormat(beachId || '')}
+            <IconButton
+              onClick={() => setFavorite(!favorite)}
+              sx={{ ml: 2, color: favorite ? '#ff1744' : 'grey.500' }}
+            >
+              {favorite ? <Favorite /> : <FavoriteBorder />}
+            </IconButton>
+            <IconButton
+              onClick={() => setShowShare(!showShare)}
+              sx={{ color: '#1a73e8' }}
+            >
+              <Share />
+            </IconButton>
+          </Typography>
+        </Box>
+        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
           {convertUrlToJsonFormat(beachId || '')}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" gutterBottom>
@@ -84,7 +104,17 @@ const BeachDetails: React.FC = () => {
         <Grid container spacing={3}>
           {/* Description */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 About
               </Typography>
@@ -94,7 +124,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Google Maps */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Location
               </Typography>
@@ -115,7 +155,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Activities */}
           <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Activities
               </Typography>
@@ -131,7 +181,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Attractions */}
           <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Attractions
               </Typography>
@@ -147,7 +207,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Accommodation */}
           <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Accommodation
               </Typography>
@@ -164,7 +234,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Food Specialties */}
           <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Food Specialties
               </Typography>
@@ -180,7 +260,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Best Time to Visit */}
           <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Best Time to Visit
               </Typography>
@@ -190,7 +280,17 @@ const BeachDetails: React.FC = () => {
 
           {/* How to Reach */}
           <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 How to Reach
               </Typography>
@@ -200,7 +300,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Tips */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Tips
               </Typography>
@@ -216,7 +326,17 @@ const BeachDetails: React.FC = () => {
 
           {/* Nearby Places */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{
+                p: 2,
+                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 3,
+                  bgcolor: 'rgba(236, 246, 252, 0.8)'
+                },
+                bgcolor: 'rgba(236, 246, 252, 0.4)',
+                borderRadius: 2
+              }}>
               <Typography variant="h6" gutterBottom>
                 Nearby Places
               </Typography>

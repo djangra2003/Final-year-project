@@ -1,4 +1,5 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useTheme } from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
 import Footer from "../Components/Footer";
 import Gallery from "../Components/Gallery";
@@ -12,19 +13,58 @@ import WelcomeSection from "../Components/WelcomeSection";
 import Reviews from "../Components/Reviews"; // ✅ Import Reviews component
 
 const Home: React.FC = () => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}'); // Fetch user data from local storage
+  const theme = useTheme();
+
+  // Animation variants for staggered animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <Box sx={{ fontFamily: "sans-serif", backgroundColor: "#f9fafb" }}>
+    <Box
+      component={motion.div}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      sx={{ fontFamily: "sans-serif", backgroundColor: "#f9fafb" }}
+    >
       {/* Header and Hero Section */}
       <Header />
       <HeroSection title="Discover India's Coastal Gems" subtitle="Your ultimate guide to beaches across the nation" />
 
       {/* Main Content with Sidebar */}
       <Grid 
+        component={motion.div}
+        variants={itemVariants}
         container 
         spacing={{ xs: 2, md: 4 }} 
         sx={{ 
           px: { xs: 2, sm: 4 },
-          flexDirection: { xs: 'column-reverse', md: 'row' } 
+          flexDirection: { xs: 'column-reverse', md: 'row' },
+          '& > *': {
+            transition: 'transform 0.3s ease-in-out',
+            '&:hover': {
+              transform: 'translateY(-5px)'
+            }
+          }
         }}
       >
         <Grid item xs={12} md={8}>
@@ -38,10 +78,14 @@ const Home: React.FC = () => {
       </Grid>
 
       {/* Gallery */}
-      <Gallery />
+      <Box component={motion.div} variants={itemVariants}>
+        <Gallery />
+      </Box>
 
       {/* Tour Booking */}
-      <TourBooking />
+      <Box component={motion.div} variants={itemVariants}>
+        <TourBooking />
+      </Box>
 
       {/* ✅ Reviews Section placed just before Footer */}
       <Box sx={{ mt: 6, mx: "auto", maxWidth: "1500px" }}>
@@ -49,7 +93,9 @@ const Home: React.FC = () => {
       </Box>
 
       {/* Footer */}
-      <Footer />
+      <Box component={motion.div} variants={itemVariants}>
+        <Footer />
+      </Box>
     </Box>
   );
 };

@@ -3,13 +3,19 @@ require('dotenv').config(); // Load environment variables
 const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
-
+const authRoutes = require('./routes/authRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Use auth routes
+app.use('/api/auth', authRoutes);
+// Use contact routes
+app.use('/api/contacts', contactRoutes);
 
 // Create database tables
 const createTablesQuery = `
@@ -20,6 +26,7 @@ const createTablesQuery = `
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
+
 `;
 
 // Initialize database
@@ -35,6 +42,8 @@ const initializeDatabase = async () => {
 
 // Initialize database before starting server
 initializeDatabase();
+
+// Routes
 
 // Test route
 app.get('/', (req, res) => {

@@ -1,14 +1,31 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
+import { motion } from "framer-motion";
+import React, { useEffect } from "react";
 
 const WelcomeSection: React.FC = () => {
+  const theme = useTheme();
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  
+  useEffect(() => {
+    // Add any additional initialization logic here
+  }, []);
   return (
     <Box
-      component="section"
+      component={motion.section}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
       p={4}
       bgcolor="white"
       boxShadow={2}
       borderRadius={2}
+      sx={{
+        '&:hover': {
+          transform: 'scale(1.01)',
+          transition: 'transform 0.3s ease-in-out',
+          boxShadow: 4,
+        },
+      }}
     >
       {/* Heading */}
       <Typography
@@ -18,7 +35,7 @@ const WelcomeSection: React.FC = () => {
         color="primary"
         mb={2}
       >
-        WELCOME TO BEACH BUDDY
+        {`Welcome${user.name ? `, ${user.name}` : ''} to Beach Buddy`}
       </Typography>
 
       {/* Description Paragraph 1 */}

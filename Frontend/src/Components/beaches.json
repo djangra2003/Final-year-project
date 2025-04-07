@@ -2143,8 +2143,8 @@
     "Puri Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.79683654077223,
+            "lng": 85.83122461534981
         },
         "images": [],
         "activities": [
@@ -2181,11 +2181,388 @@
         "name": "Puri Beach",
         "location": "Odisha"
     },
+    "Pati Sonepur Sea Beach": {
+        "description": "A serene and relatively untouched beach in Odisha, known for its golden sands, clear blue waters, and tranquil environment.",
+        "coordinates": {
+            "lat": 19.0391,
+            "lng": 84.7436
+        },
+        "images": [],
+        "activities": [
+            "Swimming",
+            "Boating",
+            "Photography",
+            "Picnicking"
+        ],
+        "bestTimeToVisit": "October to June for pleasant weather.",
+        "howToReach": "Accessible via road from Berhampur (approximately 30 km away); nearest railway station is Berhampur Railway Station; nearest airport is Biju Patnaik International Airport in Bhubaneswar (approximately 197 km away).",
+        "attractions": [
+            "Scenic confluence of the Bahuda River and Bay of Bengal",
+            "Sunrise and sunset views",
+            "Proximity to ancient temple of Lord Sri Sri Laxminarayan"
+        ],
+        "accommodation": {
+            "budget": "Local guesthouses and lodges available in nearby areas.",
+            "luxury": "Limited luxury accommodations; options available in Berhampur."
+        },
+        "foodSpecialties": [
+            "Fresh seafood",
+            "Traditional Odia cuisine"
+        ],
+        "tips": [
+            "Carry sunscreen and hats to protect from the sun.",
+            "Be aware of high tide timings and areas safe for swimming.",
+            "Maintain cleanliness; avoid littering to preserve the beach's natural beauty."
+        ],
+        "nearbyPlaces": [
+            "Gopalpur Beach",
+            "Berhampur city",
+            "Taptapani hot springs"
+        ],
+        "id": "pati_sonepur_sea_beach",
+        "name": "Pati Sonepur Sea Beach",
+        "location": "Odisha"
+    }, "Kadmat Beach": {
+        "description": "A stunning beach in Lakshadweep known for its pristine white sands, turquoise waters, and vibrant marine life, making it a paradise for water sports enthusiasts.",
+        "coordinates": {
+            "lat": 11.2108,
+            "lng": 72.7845
+        },
+        "images": [],
+        "activities": [
+            "Snorkeling",
+            "Scuba Diving",
+            "Kayaking",
+            "Swimming",
+            "Sunbathing"
+        ],
+        "bestTimeToVisit": "October to May for pleasant weather and clear waters.",
+        "howToReach": "Accessible via ships and flights from Kochi to Agatti Island, followed by a boat transfer to Kadmat Island.",
+        "attractions": [
+            "Rich coral reefs",
+            "Crystal-clear lagoons",
+            "Diverse marine life"
+        ],
+        "accommodation": {
+            "budget": "Basic lodges and government-run guesthouses.",
+            "luxury": "Kadmat Island Beach Resort offers premium stays."
+        },
+        "foodSpecialties": [
+            "Fresh seafood",
+            "Coconut-based dishes",
+            "Traditional Lakshadweep cuisine"
+        ],
+        "tips": [
+            "Ensure proper permits before visiting, as entry is restricted for non-residents.",
+            "Respect marine life and avoid damaging coral reefs.",
+            "Pack essentials like sunscreen, beachwear, and snorkeling gear."
+        ],
+        "nearbyPlaces": [
+            "Agatti Island",
+            "Bangaram Island",
+            "Kalpeni Island"
+        ],
+        "id": "kadmat_beach",
+        "name": "Kadmat Beach",
+        "location": "Lakshadweep"
+    },
+    "Ghoghla Beach": {
+        "description": "A beautiful and less crowded beach in Diu, known for its golden sands, clear waters, and various adventure sports opportunities.",
+        "coordinates": {
+            "lat": 20.738277550601104,
+            "lng":  71.01036210669072
+        },
+        "images": [],
+        "activities": [
+            "Swimming",
+            "Parasailing",
+            "Jet Skiing",
+            "Sunbathing",
+            "Photography"
+        ],
+        "bestTimeToVisit": "October to March for pleasant weather.",
+        "howToReach": "Accessible via Diu Airport (10 km away) and well-connected roads from Gujarat and Maharashtra.",
+        "attractions": [
+            "Golden sandy shoreline",
+            "Crystal-clear waters",
+            "Nearby forts and Portuguese architecture"
+        ],
+        "accommodation": {
+            "budget": "Guesthouses and budget hotels in Diu town.",
+            "luxury": "Beachfront resorts offering premium stays."
+        },
+        "foodSpecialties": [
+            "Fresh seafood",
+            "Portuguese-inspired dishes",
+            "Local Gujarati cuisine"
+        ],
+        "tips": [
+            "Carry sunscreen and beachwear for a comfortable visit.",
+            "Try water sports for an adventurous experience.",
+            "Best visited during early morning or evening for a peaceful ambiance."
+        ],
+        "nearbyPlaces": [
+            "Diu Fort",
+            "Naida Caves",
+            "Nagoa Beach",
+            "St. Paul's Church"
+        ],
+        "id": "ghoghla_beach",
+        "name": "Ghoghla Beach",
+        "location": "Diu"
+    },
+    "Dumas Beach": {
+        "description": "A famous black sand beach near Surat, Gujarat, known for its serene coastline and local street food.",
+        "coordinates": {
+            "lat": 21.0833,
+            "lng": 72.6529
+        },
+        "images": [],
+        "activities": [
+            "Walking",
+            "Street Food Tasting",
+            "Photography"
+        ],
+        "bestTimeToVisit": "October to March for pleasant weather.",
+        "howToReach": "Accessible by road from Surat (about 20 km away); Surat Railway Station is the nearest rail link.",
+        "attractions": [
+            "Black sand beach",
+            "Local food stalls",
+            "Peaceful environment"
+        ],
+        "accommodation": {
+            "budget": "Budget hotels available in Surat.",
+            "luxury": "Luxury hotels in Surat city."
+        },
+        "foodSpecialties": [
+            "Locho",
+            "Ponk",
+            "Bhajiya"
+        ],
+        "tips": [
+            "Visit during early morning or evening for a better experience.",
+            "Avoid visiting late at night due to local superstitions."
+        ],
+        "nearbyPlaces": [
+            "Surat City",
+            "Dutch Garden",
+            "Jagdishchandra Bose Aquarium"
+        ],
+        "id": "dumas_beach",
+        "name": "Dumas Beach",
+        "location": "Gujarat"
+    },
+    "Suvali Beach": {
+        "description": "A peaceful, less crowded black sand beach near Surat, ideal for relaxation and nature lovers.",
+        "coordinates": {
+            "lat": 21.1746,
+            "lng": 72.6010
+        },
+        "images": [],
+        "activities": [
+            "Photography",
+            "Walking",
+            "Relaxing"
+        ],
+        "bestTimeToVisit": "October to February for comfortable weather.",
+        "howToReach": "Accessible via road from Surat (about 20 km away).",
+        "attractions": [
+            "Black sand shoreline",
+            "Tranquil atmosphere"
+        ],
+        "accommodation": {
+            "budget": "Hotels available in Surat.",
+            "luxury": "Luxury stays available in Surat."
+        },
+        "foodSpecialties": [
+            "Gujarati snacks",
+            "Local seafood"
+        ],
+        "tips": [
+            "Carry your own food and water as options are limited.",
+            "Visit in the evening for a peaceful experience."
+        ],
+        "nearbyPlaces": [
+            "Dumas Beach",
+            "Surat City",
+            "Gopi Talav"
+        ],
+        "id": "suvali_beach",
+        "name": "Suvali Beach",
+        "location": "Gujarat"
+    },
+    "Umbharat Beach": {
+        "description": "A scenic and clean beach near Navsari, Gujarat, known for its golden sands and peaceful environment.",
+        "coordinates": {
+            "lat": 21.02263453560118,
+            "lng":  72.72830122351985
+        },
+        "images": [],
+        "activities": [
+            "Swimming",
+            "Picnicking",
+            "Photography"
+        ],
+        "bestTimeToVisit": "November to March for the best experience.",
+        "howToReach": "Accessible by road from Navsari (about 50 km away).",
+        "attractions": [
+            "Golden sand coastline",
+            "Quiet and serene surroundings"
+        ],
+        "accommodation": {
+            "budget": "Limited budget accommodations nearby.",
+            "luxury": "Luxury stays available in Navsari."
+        },
+        "foodSpecialties": [
+            "Local Gujarati food",
+            "Fresh seafood"
+        ],
+        "tips": [
+            "Carry your own food and water as amenities are limited.",
+            "Visit early in the morning for a peaceful experience."
+        ],
+        "nearbyPlaces": [
+            "Dandi Beach",
+            "Navsari City"
+        ],
+        "id": "umbharat_beach",
+        "name": "Umbharat Beach",
+        "location": "Gujarat"
+    },
+    "Dandi Beach": {
+        "description": "A historically significant beach in Gujarat, known for the Salt March led by Mahatma Gandhi in 1930.",
+        "coordinates": {
+            "lat": 20.8995,
+            "lng": 72.7463
+        },
+        "images": [],
+        "activities": [
+            "Historical exploration",
+            "Walking",
+            "Photography"
+        ],
+        "bestTimeToVisit": "November to February for cool weather.",
+        "howToReach": "Accessible by road from Navsari (about 25 km away).",
+        "attractions": [
+            "Salt Satyagraha Memorial",
+            "Serene beach views"
+        ],
+        "accommodation": {
+            "budget": "Budget hotels available in Navsari.",
+            "luxury": "Luxury hotels in Surat."
+        },
+        "foodSpecialties": [
+            "Gujarati thali",
+            "Dhokla",
+            "Thepla"
+        ],
+        "tips": [
+            "Visit the Salt Satyagraha Memorial to understand its historical significance.",
+            "Carry water and snacks."
+        ],
+        "nearbyPlaces": [
+            "Navsari",
+            "Surat"
+        ],
+        "id": "dandi_beach",
+        "name": "Dandi Beach",
+        "location": "Gujarat"
+    },
+    "Dabhari Beach": {
+        "description": "A quiet and untouched beach in Gujarat, perfect for solitude and nature lovers.",
+        "coordinates": {
+            "lat": 21.2333,
+            "lng": 72.6833
+        },
+        "images": [],
+        "activities": [
+            "Relaxation",
+            "Nature photography"
+        ],
+        "bestTimeToVisit": "October to March.",
+        "howToReach": "Accessible via road.",
+        "attractions": [
+            "Secluded environment",
+            "Peaceful atmosphere"
+        ],
+        "accommodation": {
+            "budget": "Limited stay options.",
+            "luxury": "Hotels available in nearby towns."
+        },
+        "foodSpecialties": [
+            "Local snacks"
+        ],
+        "tips": [
+            "Carry essentials as there are no facilities."
+        ],
+        "nearbyPlaces": [],
+        "id": "dabhari_beach",
+        "name": "Dabhari Beach",
+        "location": "Gujarat"
+    },
+    "Diu Beach": {
+        "description": "A beautiful beach in Diu known for its calm waters and scenic beauty.",
+        "coordinates": {
+            "lat": 20.7146,
+            "lng": 70.9870
+        },
+        "activities": [
+            "Swimming",
+            "Boating"
+        ],
+        "bestTimeToVisit": "October to March.",
+        "howToReach": "Reachable via road and nearest airport in Diu.",
+        "id": "diu_beach",
+        "name": "Diu Beach",
+        "location": "Diu"
+    },
+    "Tithal Beach": {
+        "description": "A famous black sand beach in Valsad, Gujarat, known for its scenic sunset views.",
+        "coordinates": {
+            "lat": 20.5796,
+            "lng": 72.9043
+        },
+        "activities": [
+            "Swimming",
+            "Photography"
+        ],
+        "id": "tithal_beach",
+        "name": "Tithal Beach",
+        "location": "Gujarat"
+    },
+    "Mandavi Beach": {
+        "description": "A peaceful beach in Mandvi, Kutch, famous for its white sands and calm waters.",
+        "coordinates": {
+            "lat": 22.8333,
+            "lng": 69.3524
+        },
+        "activities": [
+            "Camel rides",
+            "Sunbathing"
+        ],
+        "id": "mandavi_beach",
+        "name": "Mandavi Beach",
+        "location": "Gujarat"
+    },
+    "Khambhat Beach": {
+        "description": "A less-explored beach near Khambhat, known for its unique coastal terrain.",
+        "coordinates": {
+            "lat": 22.3167,
+            "lng": 72.6167
+        },
+        "activities": [
+            "Walking",
+            "Photography"
+        ],
+        "id": "khambhat_beach",
+        "name": "Khambhat Beach",
+        "location": "Gujarat"
+    },
     "Satpada Beach": {
         "description": "A picturesque beach in Odisha, known for its serene coastline, golden sands, and cultural significance.",
         "coordinates": {
-            "lat": 19.8,
-            "lng": 85.8
+            "lat": 19.7983,
+            "lng": 85.8249
         },
         "images": [],
         "activities": [
