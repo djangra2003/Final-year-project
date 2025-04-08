@@ -10,12 +10,13 @@ import LoginPage from "./Pages/LoginPage";
 import ProfilePage from "./Pages/ProfilePage";
 import SignupPage from "./Pages/SignupPage";
 import UserProfile from "./Pages/UserProfile";
+import AddReviewPage from "./Pages/AddReviewPage"; // ✅ Import the Add Review Page
 import { ThemeProvider } from './context/ThemeContext';
 import { UserProvider } from './context/UserContext';
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
-  { path: "/", element: <Home /> }, // ✅ Keep only Home (Reviews is inside it)
+  { path: "/", element: <Home /> }, // ✅ Home (contains Reviews)
   { path: "/signup", element: <SignupPage /> },
   { path: "/contact", element: <ContactUs /> },
   { path: "/about", element: <AboutUs /> },
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   { path: "/forgot-password", element: <ForgotPasswordPage /> },
   { path: "/profile", element: <ProfilePage /> },
   { path: "/user-profile", element: <UserProfile /> },
+  { path: "/add-review", element: <AddReviewPage /> }, // ✅ Added new route for Add Review Page
 ]);
 
 const App: React.FC = () => {
@@ -40,4 +42,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

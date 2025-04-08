@@ -3,7 +3,6 @@ import { Box, Button, Divider, Grid, IconButton, InputAdornment, TextField, Typo
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import flight from "../assets/login.png";
-import Header from "../Components/Header";
 import { useUser } from "../context/UserContext";
 import { validatePassword } from "../utils/utils";
 
@@ -66,7 +65,6 @@ const LoginPage: React.FC = () => {
 
   return (
     <Box className="flex h-screen">
-      <Header />
       <Grid container>
         <Grid item xs={12} md={6} sx={{ backgroundImage: `url(${flight})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent="center" bgcolor="white" px={{ xs: 2, sm: 4 }}>
