@@ -1,7 +1,8 @@
 "use client"
 
 import { Email, Phone } from "@mui/icons-material"
-import { Alert, Box, Button, Card, CardContent, Container, Snackbar, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Card, CardContent, Container, Snackbar, TextField, Typography, useTheme } from "@mui/material"
+import { motion } from "framer-motion"
 import type React from "react"
 import { useState } from "react"
 import Footer from "../Components/Footer"
@@ -9,6 +10,27 @@ import Header from "../Components/Header"
 import HeroSection from "../Components/HeroSection"
 
 const ContactUs: React.FC = () => {
+  const theme = useTheme()
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3 }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  }
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -60,7 +82,27 @@ const ContactUs: React.FC = () => {
   }
 
   return (
-    <Box className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
+    <Box 
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen flex flex-col"
+      sx={{
+        background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
+        position: "relative",
+        overflow: "hidden",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%)",
+          pointerEvents: "none"
+        }
+      }}>
       <Header />
       <HeroSection title="Need Assistance?" subtitle="We're Just a Message Away!" />
       <Container maxWidth="lg" className="flex-grow py-12">
@@ -68,13 +110,13 @@ const ContactUs: React.FC = () => {
           {/* Left Content */}
           <Box className="space-y-8">
             <Box className="space-y-4">
-              <Typography variant="body1" className="text-gray-600 leading-relaxed">
+              <Typography variant="body1" className="text-black-800 leading-relaxed">
                 We would love to hear from you! Whether you have a query, suggestion, or collaboration request, feel
                 free to reach out to us. Your thoughts and feedback are invaluable in helping us enhance our platform
                 and bring you the best beach travel experience. If you have recommendations for new destinations,
                 insider tips, or simply want to share your travel stories, we're all ears!
               </Typography>
-              <Typography variant="body1" className="text-gray-600 leading-relaxed">
+              <Typography variant="body1" className="text-black-600 leading-relaxed">
                 We strive to provide prompt responses and assist you with all your beach-related inquiries. Whether you
                 need travel advice, accommodation recommendations, or help planning your perfect beach getaway, our team
                 is here to support you every step of the way.
@@ -82,7 +124,17 @@ const ContactUs: React.FC = () => {
             </Box>
 
             <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="bg-white shadow-md">
+              <Card
+                component={motion.div}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                sx={{
+                  background: "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)",
+                  borderRadius: 2,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(255,255,255,0.3)"
+                }}>
                 <CardContent className="p-4">
                   <Typography variant="h6" className="font-semibold mb-2">
                     Customer Support
@@ -93,7 +145,17 @@ const ContactUs: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white shadow-md">
+              <Card
+                component={motion.div}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                sx={{
+                  background: "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)",
+                  borderRadius: 2,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(255,255,255,0.3)"
+                }}>
                 <CardContent className="p-4">
                   <Typography variant="h6" className="font-semibold mb-2">
                     Feedback and Suggestions
@@ -105,7 +167,17 @@ const ContactUs: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white shadow-md">
+              <Card
+                component={motion.div}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                sx={{
+                  background: "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)",
+                  borderRadius: 2,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(255,255,255,0.3)"
+                }}>
                 <CardContent className="p-4">
                   <Typography variant="h6" className="font-semibold mb-2">
                     Media Inquiries
@@ -119,7 +191,18 @@ const ContactUs: React.FC = () => {
           </Box>
 
           {/* Contact Form */}
-          <Card elevation={3} className="bg-white p-6 shadow-lg">
+          <Card
+            component={motion.div}
+            variants={itemVariants}
+            elevation={3}
+            sx={{
+              background: "rgba(255,255,255,0.9)",
+              backdropFilter: "blur(10px)",
+              borderRadius: 2,
+              p: 6,
+              boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+              border: "1px solid rgba(255,255,255,0.3)"
+            }}>
             <CardContent>
               <Typography variant="h5" className="font-semibold mb-6">
                 Get in Touch
@@ -190,12 +273,23 @@ const ContactUs: React.FC = () => {
                 />
 
                 <Button
+                  component={motion.button}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
                   variant="contained"
                   fullWidth
                   size="large"
-                  className="bg-blue-600 hover:bg-blue-700 py-3 text-white"
                   disabled={isSubmitting}
+                  sx={{
+                    background: "linear-gradient(135deg, #1976d2 0%, #1565c0 100%)",
+                    color: "white",
+                    py: 1.5,
+                    mt: 2,
+                    "&:hover": {
+                      background: "linear-gradient(135deg, #1565c0 0%, #0d47a1 100%)"
+                    }
+                  }}
                 >
                   {isSubmitting ? "Sending..." : "Submit"}
                 </Button>

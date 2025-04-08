@@ -1,10 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { Box, IconButton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import hero4 from "../assets/candolim.png";
-import hero5 from "../assets/radhanagar.png";
 import hero1 from "../assets/herosection1.jpg";
 import hero2 from "../assets/herosection2.jpg";
 import hero3 from "../assets/herosection3.jpg";
+import hero5 from "../assets/radhanagar.png";
 
 interface HeroSectionProps {
   title: string;
@@ -14,6 +15,14 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
   const images = [hero1, hero2, hero3, hero4, hero5];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   // Automatically switch images every 4 seconds
   useEffect(() => {
@@ -34,6 +43,66 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
     >
       {/* Sliding Background Images */}
       <Box position="absolute" top={0} left={0} width="100%" height="100%">
+        {/* Navigation Buttons */}
+        <IconButton
+          onClick={handlePrevImage}
+          sx={{
+            position: "absolute",
+            left: 16,
+            top: "50%",
+            transform: "translateY(-50%)",
+            backgroundColor: "rgba(255, 255, 255, 0.3)",
+            color: "white",
+            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.5)" },
+            zIndex: 3,
+          }}
+        >
+          <ChevronLeft />
+        </IconButton>
+        <IconButton
+          onClick={handleNextImage}
+          sx={{
+            position: "absolute",
+            right: 16,
+            top: "50%",
+            transform: "translateY(-50%)",
+            backgroundColor: "rgba(255, 255, 255, 0.3)",
+            color: "white",
+            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.5)" },
+            zIndex: 3,
+          }}
+        >
+          <ChevronRight />
+        </IconButton>
+
+        {/* Dot Indicators */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 16,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: 1,
+            zIndex: 3,
+          }}
+        >
+          {images.map((_, index) => (
+            <Box
+              key={`dot-${index}`}
+              onClick={() => setCurrentImageIndex(index)}
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: currentImageIndex === index ? "white" : "rgba(255, 255, 255, 0.5)",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease",
+              }}
+            />
+          ))}
+        </Box>
+
         {images.map((image, index) => (
           <Box
             key={index}

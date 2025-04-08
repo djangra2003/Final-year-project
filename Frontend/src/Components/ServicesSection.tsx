@@ -1,8 +1,9 @@
 import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
-import tidalImage from "../assets/games.png"; // Path to your image
-import beachImage from "../assets/guides.png"; // Path to your image
-import hotelImage from "../assets/hotel 1.png"; // Path to your image
+import tidalImage from "../assets/games.png";
+import beachImage from "../assets/guides.png";
+import hotelImage from "../assets/hotel 1.png";
 import tidal from "../assets/tidal.png";
 
 interface Service {
@@ -39,45 +40,80 @@ const services: Service[] = [
 ];
 
 const ServicesSection: React.FC = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3 }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
-    <Box sx={{ p: { xs: 2, sm: 4 } }}>
-      {/* Container for Overlapping Text */}
+    <Box 
+      component={motion.div}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      sx={{ 
+        p: { xs: 2, sm: 4 },
+        background: "linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%)",
+        borderRadius: 4,
+        boxShadow: "0 8px 32px rgba(0,0,0,0.1)"
+      }}
+    >
       <Box sx={{ position: "relative", textAlign: "center", mb: { xs: 4, sm: 6 } }}>
-        {/* Main Title */}
         <Typography 
           variant="h4" 
-          align="center" 
-          gutterBottom 
-          color="primary" 
+          component={motion.h4}
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
           sx={{ 
             fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
-            zIndex: 2 
+            zIndex: 2,
+            color: "#1a237e",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+            fontWeight: "bold"
           }}
         >
           Discover The Wide Range Of Services We Offer
         </Typography>
 
-        {/* Overlapping SERVICES Text */}
         <Typography
           variant="h2"
           sx={{
             position: "absolute",
-            top: "50%", // Position vertically in the middle
+            top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%)", // Center horizontally and vertically
+            transform: "translate(-50%, -50%)",
             zIndex: 1,
-            color: "grey",
-            opacity: 0.5, // Adjust opacity for overlap effect
-            fontWeight: "bold",
-            letterSpacing: 4,
+            color: "rgba(25, 118, 210, 0.1)",
+            fontWeight: 900,
+            letterSpacing: 8,
+            fontSize: { xs: '3rem', sm: '4rem', md: '5rem' }
           }}
         >
           SERVICES
         </Typography>
       </Box>
 
-      {/* Service Cards */}
       <Box
+        component={motion.div}
+        variants={containerVariants}
         sx={{
           display: "grid",
           gridTemplateColumns: {
@@ -92,53 +128,89 @@ const ServicesSection: React.FC = () => {
       >
         {services.map((service, index) => (
           <Card
+            component={motion.div}
+            variants={cardVariants}
             key={index}
             sx={{
               display: "flex",
               flexDirection: "column",
-              height: "100%", // Ensures the cards are all of equal height
-              boxShadow: 3,
-              borderRadius: 2,
+              height: "100%",
+              borderRadius: 4,
+              overflow: "hidden",
+              transition: "all 0.3s ease-in-out",
+              background: "rgba(255, 255, 255, 0.9)",
+              backdropFilter: "blur(10px)",
+              '&:hover': {
+                transform: "translateY(-8px)",
+                boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
+                '& .MuiCardMedia-root': {
+                  transform: "scale(1.1)"
+                }
+              }
             }}
           >
-            {/* Image */}
             <CardMedia
               component="img"
               alt={service.title}
-              height="150" // Reduced height for smaller boxes
+              height="200"
               image={service.image}
               sx={{
-                objectFit: "cover",
+                transition: "transform 0.5s ease-in-out",
+                objectFit: "cover"
               }}
             />
-            {/* Content */}
             <CardContent
               sx={{
-                flexGrow: 1, // Ensures the content expands evenly
+                flexGrow: 1,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                p: { xs: 2, sm: 3 }, // Reduced padding for smaller boxes
+                p: { xs: 2, sm: 3 },
+                background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)"
               }}
             >
               <Box>
-                <Typography variant="h6" component="div" gutterBottom sx={{ mb: 1 }}>
+                <Typography 
+                  variant="h6" 
+                  component="div" 
+                  gutterBottom 
+                  sx={{ 
+                    mb: 1,
+                    color: "#1a237e",
+                    fontWeight: "bold"
+                  }}
+                >
                   {service.title}
                 </Typography>
                 <Typography
                   variant="body2"
-                  color="text.secondary"
-                  sx={{ flexGrow: 1, mb: 2, lineHeight: 1.5, fontSize: { xs: "0.875rem", sm: "1rem", md: "1.25rem" } }} // Reduced font size
+                  sx={{ 
+                    flexGrow: 1, 
+                    mb: 2, 
+                    lineHeight: 1.6,
+                    fontSize: { xs: "0.875rem", sm: "1rem" },
+                    color: "#37474f"
+                  }}
                 >
                   {service.description}
                 </Typography>
               </Box>
-              {/* Learn More Button */}
               <Button
-                variant="outlined"
-                color="primary"
+                variant="contained"
                 fullWidth
-                sx={{ mt: "auto" }} // Push the button to the bottom
+                sx={{
+                  mt: "auto",
+                  background: "linear-gradient(45deg, #1a237e 30%, #283593 90%)",
+                  color: "white",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  borderRadius: 2,
+                  boxShadow: "0 3px 5px 2px rgba(26, 35, 126, .3)",
+                  '&:hover': {
+                    background: "linear-gradient(45deg, #283593 30%, #1a237e 90%)",
+                    transform: "scale(1.02)"
+                  }
+                }}
                 onClick={() => alert(`Learn more about ${service.title}`)}
               >
                 Learn More
