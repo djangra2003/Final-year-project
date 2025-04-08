@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import weatherImage from "../assets/map 1.png"; // Replace with your image path
 
 const WEATHER_API_KEY = "d6415f00dd1055c7373167ce14275fbc"; // Replace with your OpenWeatherMap API key
-const STORMGLASS_API_KEY = "597240a6-088f-11f0-803a-0242ac130003-59724150-088f-11f0-803a-0242ac130003";
+const STORMGLASS_API_KEY = "0b679498-13c4-11f0-a364-0242ac130003-0b6794fc-13c4-11f0-a364-0242ac130003";
 
 interface WeatherData {
   temperature: number;
