@@ -1,4 +1,5 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 import {
   Box,
   Button,
@@ -9,43 +10,58 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+
 import React, { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import beachImage from "../assets/login.png";
-import Header from "../Components/Header";
+
 import { validateEmail, validatePassword } from "../utils/utils";
 
+
 const SignupPage: React.FC = () => {
-  // State to store form inputs and errors
+  
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
+
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
+
   // Handle Input Change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    
     const { name, value } = e.target;
+
     setFormData({ ...formData, [name]: value });
+
     // Reset errors dynamically
     setErrors({ ...errors, [name]: "" });
   };
 
+
   // Handle Form Submit
   const handleSubmit = async () => {
     try {
+
       const newErrors = { email: "", password: "" };
+
       if (!validateEmail(formData.email)) {
         newErrors.email = "Please enter a valid email address.";
       }
+
       if (!validatePassword(formData.password)) {
         newErrors.password = "Password must be at least 8 characters.";
       }
@@ -56,60 +72,68 @@ const SignupPage: React.FC = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Signup failed');
+        throw new Error(data.message || "Signup failed");
       }
 
       // Store token in localStorage
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify({
-        username: formData.username,
-        email: formData.email
-      }));
+      localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+        })
+      );
 
       // Navigate to home page
       navigate("/");
+
     } catch (error: any) {
-      alert(error.message || 'An error occurred during signup');
+      alert(error.message || "An error occurred during signup");
     }
   };
+
 
   // Handle Google Sign In
   const handleGoogleSignIn = async (credentialResponse: any) => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/google', {
-        method: 'POST',
+
+      const res = await fetch("http://localhost:5000/api/auth/google", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token: credentialResponse.credential })
+        body: JSON.stringify({ token: credentialResponse.credential }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || 'Google signup failed');
+        throw new Error(data.message || "Google signup failed");
       }
 
       // Store token in localStorage
-      localStorage.setItem('token', data.token);
+      localStorage.setItem("token", data.token);
 
       // Navigate to home page
       navigate("/");
+
     } catch (error: any) {
-      alert(error.message || 'An error occurred during Google signup');
+      alert(error.message || "An error occurred during Google signup");
     }
   };
+
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -119,10 +143,13 @@ const SignupPage: React.FC = () => {
     event.preventDefault();
   };
 
+
   return (
+    
     <GoogleOAuthProvider clientId="312125406891-jr87qn3usq6p05kthp51mldg13fldhgv.apps.googleusercontent.com">
+
       <Box className="flex h-screen">
-        <Header />
+        
         {/* Left Section: Image */}
         <Box
           className="w-1/2 bg-cover bg-center"
@@ -133,6 +160,7 @@ const SignupPage: React.FC = () => {
           }}
         ></Box>
 
+
         {/* Right Section: Form */}
         <Box
           className="w-1/2 flex items-center justify-center bg-white"
@@ -140,14 +168,18 @@ const SignupPage: React.FC = () => {
           elevation={6}
         >
           <Box className="w-full max-w-md px-8 py-6">
+            
             {/* Heading */}
             <Typography variant="h4" align="center" fontWeight="bold" gutterBottom>
               Welcome to Beach Buddy!
             </Typography>
+
             <Typography variant="body2" align="center" color="textSecondary" gutterBottom>
               Create your account
             </Typography>
+
             <Divider className="mb-4" />
+
 
             {/* Username Input */}
             <TextField
@@ -163,6 +195,7 @@ const SignupPage: React.FC = () => {
                 startAdornment: <i className="fas fa-user text-gray-400 mr-2" />,
               }}
             />
+
 
             {/* Email Input */}
             <TextField
@@ -181,13 +214,14 @@ const SignupPage: React.FC = () => {
               }}
             />
 
+
             {/* Password Input */}
             <TextField
               fullWidth
               margin="normal"
               label="Password"
               name="password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               variant="outlined"
               onChange={handleChange}
               placeholder="Enter your password"
@@ -210,16 +244,18 @@ const SignupPage: React.FC = () => {
               }}
             />
 
+
             {/* Sign Up Button */}
             <Button
               fullWidth
               variant="contained"
               color="primary"
-              sx={{ mt: 2 ,  borderRadius: "50px"}}
+              sx={{ mt: 2, borderRadius: "50px" }}
               onClick={handleSubmit}
             >
               Sign Up
             </Button>
+
 
             {/* OR Divider */}
             <Box display="flex" alignItems="center" my={2}>
@@ -230,11 +266,13 @@ const SignupPage: React.FC = () => {
               <Divider sx={{ flex: 1 }} />
             </Box>
 
+
             {/* Google Sign-in */}
             <GoogleLogin
               onSuccess={handleGoogleSignIn}
-              onError={() => console.error('Google Sign In Error')}
+              onError={() => console.error("Google Sign In Error")}
             />
+
 
             {/* Login Redirect */}
             <Typography
@@ -248,11 +286,16 @@ const SignupPage: React.FC = () => {
                 Login
               </Link>
             </Typography>
+
           </Box>
         </Box>
+
       </Box>
+      
     </GoogleOAuthProvider>
   );
+
 };
+
 
 export default SignupPage;
