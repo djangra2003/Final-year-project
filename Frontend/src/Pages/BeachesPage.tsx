@@ -1,7 +1,8 @@
 "use client";
 
-import { KeyboardArrowDown, KeyboardArrowRight, Search } from "@mui/icons-material";
-import { Box, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+import { KeyboardArrowDown, KeyboardArrowRight, Search, WavesOutlined } from "@mui/icons-material";
+import { Box, IconButton, InputAdornment, TextField, Typography, useTheme } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
@@ -23,8 +24,29 @@ interface Beach {
 }
 
 const BeachWiki: React.FC = () => {
+  const theme = useTheme();
   const [expandedSections, setExpandedSections] = useState<string[]>(["west-coast"]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) =>
@@ -74,12 +96,45 @@ const BeachWiki: React.FC = () => {
   };
 
   return (
-    <div>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      sx={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
+        position: "relative",
+        overflow: "hidden",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%)",
+          pointerEvents: "none"
+        }
+      }}>
       <Header />
       <HeroSection title="Beaches" subtitle="Discover the Best Beaches in India" />
 
       {/* Search Bar */}
-      <Box className="p-4 bg-white shadow-md">
+      <Box
+        component={motion.div}
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        sx={{
+          p: 4,
+          background: "rgba(255,255,255,0.9)",
+          backdropFilter: "blur(10px)",
+          borderRadius: 2,
+          boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+          border: "1px solid rgba(255,255,255,0.3)",
+          mx: 4
+        }}>
         <TextField
           fullWidth
           variant="outlined"
@@ -97,9 +152,27 @@ const BeachWiki: React.FC = () => {
       </Box>
 
       {/* Main Wrapper */}
-      <Box className="flex min-h-screen bg-gray-50 relative">
+      <Box className="flex min-h-screen relative">
         {/* Left Sidebar (Sticky below HeroSection) */}
-        <Box className="w-64 bg-white shadow-md p-4 sticky top-0 h-screen overflow-y-auto">
+        <Box
+          component={motion.div}
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          sx={{
+            width: 256,
+            background: "rgba(255,255,255,0.9)",
+            backdropFilter: "blur(10px)",
+            borderRadius: 2,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+            border: "1px solid rgba(255,255,255,0.3)",
+            p: 4,
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+            overflowY: "auto",
+            m: 2
+          }}>
           <Typography variant="h6" className="mb-4 text-gray-800">
             Quick Navigation
           </Typography>
@@ -142,7 +215,22 @@ const BeachWiki: React.FC = () => {
         </Box>
 
         {/* Main Content */}
-        <Box className="ml-4 p-8 flex-grow bg-white shadow-inner">
+        <Box
+          component={motion.div}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          sx={{
+            ml: 4,
+            p: 8,
+            flexGrow: 1,
+            background: "rgba(255,255,255,0.9)",
+            backdropFilter: "blur(10px)",
+            borderRadius: 2,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+            border: "1px solid rgba(255,255,255,0.3)",
+            m: 2
+          }}>
           {searchQuery.trim() ? (
             // Search Results View
             <Box>
@@ -151,7 +239,21 @@ const BeachWiki: React.FC = () => {
               </Typography>
               <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filteredBeaches?.map((beach) => (
-                  <Box key={beach.name} className="bg-blue-100 p-4 rounded">
+                  <Box
+                    component={motion.div}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.02 }}
+                    key={beach.name}
+                    sx={{
+                      p: 4,
+                      borderRadius: 2,
+                      background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        boxShadow: "0 8px 32px rgba(0,0,0,0.15)"
+                      }
+                    }}>
                     <Link 
                       to={`/beaches/${beach.name.replace(/\s+/g, '')}`} 
                       className="text-gray-600 hover:underline block"
@@ -179,7 +281,21 @@ const BeachWiki: React.FC = () => {
                     </Typography>
                     <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {(beachesData as BeachData)[sectionId][subsectionId].map((beach: string) => (
-                        <Box key={beach} className="bg-blue-100 p-2 rounded">
+                        <Box
+                          component={motion.div}
+                          variants={itemVariants}
+                          whileHover={{ scale: 1.02 }}
+                          key={beach}
+                          sx={{
+                            p: 2,
+                            borderRadius: 2,
+                            background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
+                            boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                            transition: "all 0.3s ease",
+                            "&:hover": {
+                              boxShadow: "0 8px 32px rgba(0,0,0,0.15)"
+                            }
+                          }}>
                           <Link to={`/beaches/${beach.replace(/\s+/g, '')}`} className="text-gray-600 hover:underline">
                             {beach}
                           </Link>
@@ -194,7 +310,7 @@ const BeachWiki: React.FC = () => {
         </Box>
       </Box>
       <Footer />
-    </div>
+    </Box>
   );
 };
 

@@ -1,15 +1,59 @@
+import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
-import HeroSection from "../Components/HeroSection";
-import { Container, Typography, Box, Grid } from "@mui/material";
 import tidalImage from "../assets/games.png";
 import beachImage from "../assets/guides.png";
 import hotelImage from "../assets/hotel 1.png";
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
+import HeroSection from "../Components/HeroSection";
 
 const AboutUs: React.FC = () => {
+  const theme = useTheme();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
   return (
-    <div className="min-h-screen flex flex-col">
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
+        position: "relative",
+        overflow: "hidden",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%)",
+          pointerEvents: "none"
+        }
+      }}>
       <Header />
       <HeroSection
         title="About Us"
@@ -19,7 +63,20 @@ const AboutUs: React.FC = () => {
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ pt: 12, pb: 8 }}>
         {/* Welcome Section */}
-        <Box sx={{ mb: 8 }}>
+        <Box
+          component={motion.div}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          sx={{
+            mb: 8,
+            background: "rgba(255,255,255,0.9)",
+            backdropFilter: "blur(10px)",
+            borderRadius: 2,
+            p: 4,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+            border: "1px solid rgba(255,255,255,0.3)"
+          }}>
           <Typography variant="h4" className="text-2xl font-bold mb-4" color="primary">
             Welcome to Beach Buddy
           </Typography>
@@ -35,7 +92,20 @@ const AboutUs: React.FC = () => {
         </Box>
 
         {/* Our Mission Section */}
-        <Box sx={{ mb: 8 }}>
+        <Box
+          component={motion.div}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          sx={{
+            mb: 8,
+            background: "rgba(255,255,255,0.9)",
+            backdropFilter: "blur(10px)",
+            borderRadius: 2,
+            p: 4,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+            border: "1px solid rgba(255,255,255,0.3)"
+          }}>
           <Typography variant="h4" className="text-2xl font-bold mb-4" color="primary">
             Our Mission
           </Typography>
@@ -53,16 +123,40 @@ const AboutUs: React.FC = () => {
             </Box>
             <Grid container spacing={2} className="flex-1">
               <Grid item xs={12} sm={6}>
-                <img src={beachImage} alt="Beach Sunset" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                <Box
+                  component={motion.div}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={beachImage} alt="Beach Sunset" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <img src={hotelImage} alt="Beach Waves" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                <Box
+                  component={motion.div}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={hotelImage} alt="Beach Waves" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <img src={tidalImage} alt="Palm Trees" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                <Box
+                  component={motion.div}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={tidalImage} alt="Palm Trees" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <img src={tidalImage} alt="Aerial Beach View" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                <Box
+                  component={motion.div}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={tidalImage} alt="Aerial Beach View" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                </Box>
               </Grid>
             </Grid>
           </Box>
@@ -93,7 +187,7 @@ const AboutUs: React.FC = () => {
         </Box>
       </Container>
       <Footer />
-    </div>
+    </Box>
   );
 };
 
