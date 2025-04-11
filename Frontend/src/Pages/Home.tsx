@@ -1,47 +1,33 @@
 import { Box, Grid, useTheme } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import React from "react";
 import Footer from "../Components/Footer";
 import Gallery from "../Components/Gallery";
 import Header from "../Components/Header";
 import HeroSection from "../Components/HeroSection";
-import Reviews from "../Components/Reviews"; // ✅ Import Reviews component
+import Reviews from "../Components/Reviews";
 import SearchBar from "../Components/SearchBar";
 import ServicesSection from "../Components/ServicesSection";
 import Sidebar from "../Components/Sidebar";
 import TourBooking from "../Components/TourBooking";
 import WelcomeSection from "../Components/WelcomeSection";
+import { fadeUpVariants, scaleVariants, staggerContainerVariants, slideInVariants, bounceVariants } from "../utils/animations";
 
 const Home: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}'); // Fetch user data from local storage
   const theme = useTheme();
 
-  // Animation variants for staggered animations
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
     <Box
       component={motion.div}
-      variants={containerVariants}
+      variants={staggerContainerVariants}
       initial="hidden"
       animate="visible"
       sx={{
@@ -68,7 +54,9 @@ const Home: React.FC = () => {
       {/* Main Content with Sidebar */}
       <Grid 
         component={motion.div}
-        variants={itemVariants}
+        variants={fadeUpVariants}
+        whileHover="hover"
+        whileTap="tap"
         container 
         spacing={{ xs: 2, md: 4 }} 
         sx={{ 
@@ -103,7 +91,9 @@ const Home: React.FC = () => {
       {/* Gallery */}
       <Box 
         component={motion.div} 
-        variants={itemVariants}
+        variants={scaleVariants}
+        whileHover="hover"
+        whileTap="tap"
         sx={{
           mt: 6,
           mx: 'auto',
@@ -125,7 +115,7 @@ const Home: React.FC = () => {
       {/* Tour Booking */}
       <Box 
         component={motion.div} 
-        variants={itemVariants}
+        variants={slideInVariants}
         sx={{
           mt: 6,
           mx: 'auto',
@@ -148,7 +138,9 @@ const Home: React.FC = () => {
       {/* ✅ Reviews Section placed just before Footer */}
       <Box 
         component={motion.div}
-        variants={itemVariants}
+        variants={scaleVariants}
+        whileHover="hover"
+        whileTap="tap"
         sx={{ 
           mt: 6, 
           mx: "auto", 
@@ -168,8 +160,28 @@ const Home: React.FC = () => {
         <Reviews />
       </Box>
 
+      {/* Progress Bar */}
+      <motion.div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "4px",
+          background: "linear-gradient(to right, #4fc3f7, #2196f3)",
+          transformOrigin: "0%",
+          scaleX,
+          zIndex: 1000
+        }}
+      />
+
       {/* Footer */}
-      <Box component={motion.div} variants={itemVariants}>
+      <Box 
+        component={motion.div} 
+        variants={fadeUpVariants}
+        whileHover="hover"
+        whileTap="tap"
+      >
         <Footer />
       </Box>
     </Box>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Container, TextField, Typography, Rating } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../styles/AddReviewPage.css"; // Import the CSS file
+import Header from "../Components/Header";
 
 const AddReviewPage: React.FC = () => {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ const AddReviewPage: React.FC = () => {
 
   return (
     <Box className="add-review-page">
+      <Header />
       <Container maxWidth="sm">
         <Box className="review-box">
           <Typography variant="h4" fontWeight="bold" textAlign="center" mb={3}>

@@ -1,15 +1,16 @@
 import { Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui/material"
 import type React from "react"
-import varkala from "../assets/varkala.jpg"
-import marina from "../assets/marina.png"
-import radhanagar from "../assets/radhanagar.png"
+import { Link } from "react-router-dom"
 import baga from "../assets/baga.png"
-import varca from "../assets/varca.png"
-import dhanushkodi from "../assets/dhanushkodi.png"
 import candolim from "../assets/candolim.png"
+import dhanushkodi from "../assets/dhanushkodi.png"
 import kovalam from "../assets/kovalam.png"
-import palolem from "../assets/palolem.png"
+import marina from "../assets/marina.png"
 import om from "../assets/om.png"
+import palolem from "../assets/palolem.png"
+import radhanagar from "../assets/radhanagar.png"
+import varca from "../assets/varca.png"
+import varkala from "../assets/varkala.jpg"
 
 interface Beach {
   name: string
@@ -18,7 +19,6 @@ interface Beach {
 }
 
 const beaches: Beach[] = [
-  { name: "Varkala Beach", location: "Kerala", image: varkala },
   { name: "Marina Beach", location: "Tamil Nadu", image: marina },
   { name: "Radhanagar Beach", location: "Havelock Island", image: radhanagar },
   { name: "Baga Beach", location: "Goa", image: baga },
@@ -28,9 +28,14 @@ const beaches: Beach[] = [
   { name: "Kovalam Beach", location: "Kerela", image: kovalam },
   { name: "Palolem Beach", location: "Goa", image: palolem },
   { name: "Om Beach", location: "Karnataka", image: om },
+  { name: "Varkala Beach", location: "Kerala", image: varkala }
 ]
 
 const Sidebar: React.FC = () => {
+  // Convert beach name to URL format (e.g., "Varkala Beach" to "VarkalaBeach")
+  const convertToUrlFormat = (name: string) => {
+    return name.replace(/\s+/g, "");
+  };
   return (
     <Paper
       elevation={3}
@@ -59,6 +64,10 @@ const Sidebar: React.FC = () => {
       <Grid container spacing={2}>
         {beaches.map((beach, index) => (
           <Grid item xs={6} key={index}>
+            <Link 
+              to={`/beaches/${convertToUrlFormat(beach.name)}`}
+              style={{ textDecoration: "none" }}
+            >
             <Card
               sx={{
                 width: "100%",
@@ -120,6 +129,7 @@ const Sidebar: React.FC = () => {
                 </Typography>
               </CardContent>
             </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>

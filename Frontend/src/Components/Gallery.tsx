@@ -97,7 +97,12 @@ const Gallery = () => {
   }, [currentIndex, selectedImage, images]);
 
   return (
-    <div className="relative w-full overflow-hidden bg-white py-10 px-4 md:px-8 lg:px-12">
+    <div className="relative w-full overflow-hidden py-10 px-4 md:px-8 lg:px-12" style={{
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)',
+      backdropFilter: 'blur(10px)',
+      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+      borderRadius: '200px'
+    }}>
       <Box className="relative flex flex-col items-center justify-center h-40 text-center px-4">
         {/* Overlapping Background Text */}
         <Typography
@@ -120,19 +125,31 @@ const Gallery = () => {
       <div className="flex justify-center gap-2 md:gap-4 mb-4">
         <IconButton
           onClick={() => handleScroll("left")}
-          className="bg-blue-100 hover:bg-blue-200"
+          className="hover:bg-blue-50 transition-all duration-300"
+          style={{
+            background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+            boxShadow: '0 4px 12px rgba(33, 150, 243, 0.1)'
+          }}
         >
           <ChevronLeft />
         </IconButton>
         <IconButton
           onClick={() => setIsPlaying(!isPlaying)}
-          className="bg-blue-100 hover:bg-blue-200"
+          className="hover:bg-blue-50 transition-all duration-300"
+          style={{
+            background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+            boxShadow: '0 4px 12px rgba(33, 150, 243, 0.1)'
+          }}
         >
           {isPlaying ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={() => handleScroll("right")}
-          className="bg-blue-100 hover:bg-blue-200"
+          className="hover:bg-blue-50 transition-all duration-300"
+          style={{
+            background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+            boxShadow: '0 4px 12px rgba(33, 150, 243, 0.1)'
+          }}
         >
           <ChevronRight />
         </IconButton>
@@ -173,7 +190,7 @@ const Gallery = () => {
                     setSelectedImage(image);
                     setCurrentIndex(index);
                   }}
-                  className="h-80 w-auto rounded-lg shadow-lg cursor-pointer object-cover"
+                  className="h-80 w-auto rounded-lg shadow-lg cursor-pointer object-cover transition-all duration-300 hover:shadow-xl"
                 />
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg"
@@ -198,7 +215,11 @@ const Gallery = () => {
         className="flex items-center justify-center"
       >
         <Fade in={!!selectedImage}>
-          <div className="bg-white p-4 rounded-lg max-w-4xl max-h-[90vh] relative">
+          <div className="p-4 rounded-lg max-w-4xl max-h-[90vh] relative" style={{
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)'
+          }}>
             <IconButton
               onClick={() => setSelectedImage(null)}
               className="absolute top-2 right-2 bg-white"
