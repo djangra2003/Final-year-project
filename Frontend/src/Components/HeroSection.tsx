@@ -1,11 +1,16 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import hero4 from "../assets/candolim.png";
 import hero1 from "../assets/herosection1.jpg";
 import hero2 from "../assets/herosection2.jpg";
 import hero3 from "../assets/herosection3.jpg";
-import hero5 from "../assets/radhanagar.png";
+import hero4 from "../assets/herosection4.jpg";
+import hero5 from  "../assets/herosection5.jpg";
+import hero6 from  "../assets/herosection6.jpg";
+import hero7 from  "../assets/herosection7.jpg";
+import hero8 from  "../assets/herosection8.jpg";
+import hero9 from  "../assets/herosection9.jpg";
+
 
 interface HeroSectionProps {
   title: string;
@@ -13,7 +18,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
-  const images = [hero1, hero2, hero3, hero4, hero5];
+  const images = [hero1, hero2, hero3, hero4, hero5, hero6, hero7, hero8, hero9];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handlePrevImage = () => {

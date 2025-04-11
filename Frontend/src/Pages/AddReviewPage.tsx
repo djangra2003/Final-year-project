@@ -61,6 +61,7 @@ const AddReviewPage: React.FC = () => {
 
   return (
     <Box className="add-review-page">
+      <Header />
       <Container maxWidth="sm">
         <Box className="review-box">
           <Typography variant="h4" fontWeight="bold" textAlign="center" mb={3}>

@@ -14,7 +14,7 @@ const Reviews: React.FC = () => {
   const navigate = useNavigate();  // Hook for navigation
 
   return (
-    <div className="relative w-full overflow-hidden bg-gray-100 pt-4 pb-20"> 
+    <div className="relative w-full overflow-hidden bg-gray-100 pt-4 pb-20  ">
       <Box className="relative flex flex-col items-center justify-center h-32 text-center px-4">
         <Typography variant="h2" className="absolute text-4xl md:text-6xl font-bold text-gray-400 opacity-50 tracking-wider">REVIEWS</Typography>
         <Typography variant="h4" className="relative text-xl md:text-3xl font-semibold text-blue-600 z-10">What Our Users Say</Typography>
