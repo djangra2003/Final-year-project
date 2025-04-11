@@ -1,21 +1,20 @@
 .add-review-page {
-    background-image: url('https://images.unsplash.com/photo-1468413253725-0d5181091126?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh; /* Ensures full viewport height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .review-box {
-    background: rgba(255, 255, 255, 0.2); /* Transparent white background */
-    backdrop-filter: blur(10px); /* Apply blur effect */
-    padding: 24px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    width: 100%;
-  }
-  
+  background-image: url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/usa-hawaii-waikiki-beach-oahu-unsplash.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensures full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-box {
+  background: rgba(255, 255, 255, 0.2); /* Transparent white background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+}
