@@ -4,6 +4,7 @@ import React from "react";
 import tidalImage from "../assets/games.png";
 import beachImage from "../assets/guides.png";
 import hotelImage from "../assets/hotel 1.png";
+import hero from "../assets/herosection1.jpg";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import HeroSection from "../Components/HeroSection";
@@ -146,7 +147,7 @@ const AboutUs: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <img src={tidalImage} alt="Palm Trees" className="w-full h-48 object-cover rounded-lg shadow-md" />
+                  <img src={hero} alt="Palm Trees" className="w-full h-48 object-cover rounded-lg shadow-md" />
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6}>

@@ -1,5 +1,5 @@
 import { Favorite, FavoriteBorder, Share } from '@mui/icons-material';
-import { Box, Grid, IconButton, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
+import { Box, Grid, IconButton, List, ListItem, ListItemText, Paper, Snackbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import beachesData from './beaches.json';
@@ -35,6 +35,7 @@ interface BeachesData {
 const BeachDetails: React.FC = () => {
   const [favorite, setFavorite] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const [showShareSuccess, setShowShareSuccess] = useState(false);
   const { beachId } = useParams<{ beachId: string }>();
   
   // Convert URL format (e.g., "PuriBeach") to JSON format (e.g., "Puri Beach")
@@ -69,6 +70,23 @@ const BeachDetails: React.FC = () => {
     );
   }
 
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `Beach Buddy - ${convertUrlToJsonFormat(beachId || '')}`,
+          text: `Check out ${convertUrlToJsonFormat(beachId || '')} on Beach Buddy!`,
+          url: window.location.href
+        });
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        setShowShareSuccess(true);
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -87,7 +105,7 @@ const BeachDetails: React.FC = () => {
               {favorite ? <Favorite /> : <FavoriteBorder />}
             </IconButton>
             <IconButton
-              onClick={() => setShowShare(!showShare)}
+              onClick={handleShare}
               sx={{ color: '#1a73e8' }}
             >
               <Share />
@@ -351,6 +369,13 @@ const BeachDetails: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
+      <Snackbar
+        open={showShareSuccess}
+        autoHideDuration={3000}
+        onClose={() => setShowShareSuccess(false)}
+        message="Link copied to clipboard!"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
       <Footer />
     </>
   );

@@ -16,10 +16,20 @@ interface Location {
 interface FlightSegment {
   departure: {
     iataCode: string;
+    terminal?: string;
+    at: string;
   };
   arrival: {
     iataCode: string;
+    terminal?: string;
+    at: string;
   };
+  carrierCode: string;
+  number: string;
+  aircraft: {
+    code: string;
+  };
+  duration: string;
 }
 
 interface FlightItinerary {
@@ -45,7 +55,8 @@ const TourBooking: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [flights, setFlights] = useState<Flight[]>([]);
-  const [locations, setLocations] = useState<Location[]>([
+  const [originLocations, setOriginLocations] = useState<Location[]>([]);
+  const [destinationLocations, setDestinationLocations] = useState<Location[]>([
     { name: "Mumbai", code: "BOM" },
     { name: "Delhi", code: "DEL" },
     { name: "Bangalore", code: "BLR" },
@@ -64,7 +75,7 @@ const TourBooking: React.FC = () => {
   const decrementChildren = () => setChildren((prev) => (prev > 0 ? prev - 1 : 0));
 
    // Search for locations as user types
-   const searchLocations = async (searchTerm: string) => {
+   const searchLocations = async (searchTerm: string, isOrigin: boolean) => {
     if (!searchTerm) return;
     
     try {
@@ -100,7 +111,15 @@ const TourBooking: React.FC = () => {
         name: loc.name,
         code: loc.iataCode
       }));
-      setLocations(formattedLocations);
+      if (isOrigin) {
+        setOriginLocations(formattedLocations);
+      } else {
+        // Filter out the origin city from destination options if origin is selected
+        const filteredLocations = origin
+          ? formattedLocations.filter(loc => loc.code !== origin.code)
+          : formattedLocations;
+        setDestinationLocations(filteredLocations);
+      }
     } catch (err) {
       console.error('Error fetching locations:', err);
       setError("Failed to search locations. Please try again.");
@@ -238,10 +257,16 @@ const TourBooking: React.FC = () => {
               <Grid item xs={12} sm={6}>
                 <Autocomplete
                   fullWidth
-                  options={locations}
+                  options={originLocations}
                   getOptionLabel={(option) => `${option.name} (${option.code})`}
-                  onChange={(_, newValue) => setOrigin(newValue)}
-                  onInputChange={(_, newInputValue) => searchLocations(newInputValue)}
+                  onChange={(_, newValue) => {
+                    setOrigin(newValue);
+                    // Clear destination if the new origin matches it
+                    if (destination && newValue?.code === destination.code) {
+                      setDestination(null);
+                    }
+                  }}
+                  onInputChange={(_, newInputValue) => searchLocations(newInputValue, true)}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -255,10 +280,10 @@ const TourBooking: React.FC = () => {
               <Grid item xs={12} sm={6}>
                 <Autocomplete
                   fullWidth
-                  options={locations}
+                  options={destinationLocations}
                   getOptionLabel={(option) => `${option.name} (${option.code})`}
                   onChange={(_, newValue) => setDestination(newValue)}
-                  onInputChange={(_, newInputValue) => searchLocations(newInputValue)}
+                  onInputChange={(_, newInputValue) => searchLocations(newInputValue, false)}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -340,13 +365,57 @@ const TourBooking: React.FC = () => {
                <Typography variant="h6" gutterBottom>Available Flights:</Typography>
                {flights.map((flight, index) => (
                  <Box key={index} sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: 1 }}>
-                   <Typography>
+                   <Typography variant="subtitle1" fontWeight="bold">
                      {flight.itineraries[0].segments[0].departure.iataCode} →{" "}
                      {flight.itineraries[0].segments[0].arrival.iataCode}
                    </Typography>
-                   <Typography>
+                   <Typography variant="body2" color="text.secondary">
+                     Flight: {flight.itineraries[0].segments[0].carrierCode} {flight.itineraries[0].segments[0].number}
+                   </Typography>
+                   <Typography variant="body2" color="text.secondary">
+                     Aircraft: {flight.itineraries[0].segments[0].aircraft.code}
+                   </Typography>
+                   <Typography variant="body2" color="text.secondary">
+                     Departure: {new Date(flight.itineraries[0].segments[0].departure.at).toLocaleString()}
+                   </Typography>
+                   <Typography variant="body2" color="text.secondary">
+                     Duration: {flight.itineraries[0].segments[0].duration}
+                   </Typography>
+                   <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
                      Price: ₹{flight.price.total}
                    </Typography>
+                   <Button
+                     variant="contained"
+                     color="primary"
+                     fullWidth
+                     sx={{ mt: 2, borderRadius: '50px' }}
+                     onClick={() => {
+                       const carrierCode = flight.itineraries[0].segments[0].carrierCode.toLowerCase();
+                       let bookingUrl = '';
+                       
+                       // Map carrier codes to their booking websites
+                       switch(carrierCode) {
+                         case 'ai':
+                           bookingUrl = 'https://www.airindia.com';
+                           break;
+                         case '6e':
+                           bookingUrl = 'https://www.goindigo.in';
+                           break;
+                         case 'uk':
+                           bookingUrl = 'https://www.airvistara.com';
+                           break;
+                         case 'sg':
+                           bookingUrl = 'https://www.spicejet.com';
+                           break;
+                         default:
+                           bookingUrl = `https://www.google.com/flights?q=${flight.itineraries[0].segments[0].carrierCode}%20${flight.itineraries[0].segments[0].number}`;
+                       }
+                       
+                       window.open(bookingUrl, '_blank');
+                     }}
+                   >
+                     Book Now
+                   </Button>
                  </Box>
                ))}
              </Box>
