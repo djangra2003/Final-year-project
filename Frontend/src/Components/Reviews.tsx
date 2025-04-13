@@ -1,7 +1,8 @@
-import React from "react"; 
-import { Card, CardContent, Typography, Avatar, Box, Container, IconButton } from "@mui/material";
-import { Star, StarBorder, Add } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";  // Import navigation hook
+import { Add, Star, StarBorder } from "@mui/icons-material";
+import { Avatar, Box, Card, CardContent, Container, IconButton, Typography } from "@mui/material";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from '../context/UserContext';
 
 const reviews = [
   { id: 1, name: "Amit Sharma", location: "Goa, India", review: "Beautiful beaches! Had an amazing experience.", rating: 5, avatar: "https://randomuser.me/api/portraits/men/1.jpg" },
@@ -11,7 +12,16 @@ const reviews = [
 ];
 
 const Reviews: React.FC = () => {
-  const navigate = useNavigate();  // Hook for navigation
+  const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+
+  const handleAddReview = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    } else {
+      navigate('/add-review');
+    }
+  };  // Hook for navigation
 
   return (
     <div className="relative w-full overflow-hidden bg-gray-100 pt-4 pb-20  ">
@@ -45,7 +55,7 @@ const Reviews: React.FC = () => {
           {/* Add New Review Card with Hover Effect */}
           <Card 
             className="flex flex-col min-w-[320px] rounded-lg shadow-md bg-gray-200 items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-            onClick={() => navigate("/add-review")}  // Navigate to AddReviewPage
+            onClick={handleAddReview}
           >
             <CardContent className="flex flex-col items-center justify-center">
               <IconButton color="primary">

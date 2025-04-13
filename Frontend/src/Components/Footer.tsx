@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
           <ul className="text-sm text-gray-700 space-y-2">
             <li>Email: <a href="mailto:info@beachesofindia.com" className="text-blue-500">info@beachesofindia.com</a></li>
             <li>Phone: +91-8860542549</li>
-            <li>Address: [City, State], India</li>
+            <li>Address: New Delhi, India</li>
           </ul>
         </div>
 

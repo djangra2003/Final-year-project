@@ -23,7 +23,7 @@ const beaches: Beach[] = [
   { name: "Radhanagar Beach", location: "Havelock Island", image: radhanagar },
   { name: "Baga Beach", location: "Goa", image: baga },
   { name: "Varca Beach", location: "South Goa", image: varca },
-  { name: "Dhanushkodi Beach Point", location: "Tamil Nadu", image: dhanushkodi },
+  { name: "Dhanushkodi Beach", location: "Tamil Nadu", image: dhanushkodi },
   { name: "Candolim Beach", location: "North Goa", image: candolim },
   { name: "Kovalam Beach", location: "Kerela", image: kovalam },
   { name: "Palolem Beach", location: "Goa", image: palolem },
