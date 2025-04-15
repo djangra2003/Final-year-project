@@ -1,15 +1,17 @@
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Search } from "@mui/icons-material";
+import { Autocomplete, Box, IconButton, TextField, Typography } from "@mui/material";
+import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import beachesData from "../Pages/name.json";
 import hero1 from "../assets/herosection1.jpg";
 import hero2 from "../assets/herosection2.jpg";
 import hero3 from "../assets/herosection3.jpg";
 import hero4 from "../assets/herosection4.jpg";
-import hero5 from  "../assets/herosection5.jpg";
-import hero6 from  "../assets/herosection6.jpg";
-import hero7 from  "../assets/herosection7.jpg";
-import hero8 from  "../assets/herosection8.jpg";
-import hero9 from  "../assets/herosection9.jpg";
+import hero5 from "../assets/herosection5.jpg";
+import hero6 from "../assets/herosection6.jpg";
+import hero7 from "../assets/herosection7.jpg";
+import hero8 from "../assets/herosection8.jpg";
+import hero9 from "../assets/herosection9.jpg";
 
 
 interface HeroSectionProps {
@@ -18,8 +20,26 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
+  const navigate = useNavigate();
   const images = [hero1, hero2, hero3, hero4, hero5, hero6, hero7, hero8, hero9];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Prepare beach data for search with location information
+  const allBeaches = useMemo(() => {
+    const beaches: { name: string; region: string; state: string }[] = [];
+    Object.entries(beachesData).forEach(([region, states]) => {
+      Object.entries(states).forEach(([state, beachList]) => {
+        beachList.forEach((beach: string) => {
+          beaches.push({
+            name: beach,
+            region: region.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+            state: state
+          });
+        });
+      });
+    });
+    return beaches;
+  }, []);
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -138,42 +158,82 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle }) => {
       ></Box>
       {/* Content */}
       <Box
-        position="absolute"
-        top={0}
-        left={0}
-        width="100%"
-        height="100%"
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        textAlign="center"
-        color="white"
-        px={{ xs: 2, sm: 4 }}
-        zIndex={2}
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+          color: "white",
+          zIndex: 2,
+          width: "100%",
+          maxWidth: "600px",
+          px: 2
+        }}
       >
-        <Typography
-          variant="h2"
-          component="h1"
-          fontWeight="bold"
-          sx={{
-            fontStyle: "italic",
-            textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
-            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-          }}
-        >
+        <Typography variant="h2" fontWeight="bold" mb={2}>
           {title}
         </Typography>
-        <Typography
-          variant="h5"
-          mt={2}
-          sx={{
-            textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
-            fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
+        <Typography variant="h5" mb={4}>{subtitle}</Typography>
+        
+        <Autocomplete
+          options={allBeaches}
+          getOptionLabel={(option) => `${option.name} - ${option.state}, ${option.region}`}
+          groupBy={(option) => option.region}
+          filterOptions={(options, { inputValue }) => {
+            const searchValue = inputValue.toLowerCase();
+            return options.filter(
+              (option) =>
+                option.name.toLowerCase().includes(searchValue) ||
+                option.state.toLowerCase().includes(searchValue) ||
+                option.region.toLowerCase().includes(searchValue)
+            );
           }}
-        >
-          {subtitle}
-        </Typography>
+          value={null}
+          onChange={(_, newValue) => {
+            if (newValue) {
+              const beachId = newValue.name.replace(/\s+/g, "");
+              navigate(`/beaches/${beachId}`);
+            }
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              placeholder="Search for beaches by name or location..."
+              variant="outlined"
+              fullWidth
+              sx={{
+                backgroundColor: "rgba(255, 255, 255, 0.9)",
+                borderRadius: 1,
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "primary.main",
+                  },
+                },
+              }}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: (
+                  <Search sx={{ color: "text.secondary", ml: 1, mr: 0.5 }} />
+                ),
+              }}
+            />
+          )}
+          renderOption={(props, option) => (
+            <Box component="li" {...props}>
+              <Typography variant="body1">{option.name}</Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ ml: 1 }}>
+                {option.state}
+              </Typography>
+            </Box>
+          )}
+        />
       </Box>
     </Box>
   );

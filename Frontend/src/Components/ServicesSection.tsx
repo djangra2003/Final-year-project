@@ -63,12 +63,12 @@ const ServicesSection: React.FC = () => {
   };
 
   return (
-    <Box 
+    <Box
       component={motion.div}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      sx={{ 
+      sx={{
         p: { xs: 2, sm: 4 },
         background: "linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%)",
         borderRadius: 4,

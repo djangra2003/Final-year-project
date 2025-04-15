@@ -1,9 +1,10 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, IconButton, Toolbar, Typography, useScrollTrigger } from "@mui/material";
+import { AppBar, Box, Button, CardMedia, IconButton, Toolbar, Typography, useScrollTrigger } from "@mui/material";
 import { keyframes } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
+import logo from '../assets/logo.png';
 import { useUser } from '../context/UserContext';
 import UserMenu from './UserMenu';
 
@@ -105,21 +106,35 @@ const Header: React.FC = () => {
             flexWrap: "wrap",
           }}
         >
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            sx={{
-              textShadow: isLoginOrSignupPage ? "none" : "0 2px 4px rgba(0,0,0,0.3)",
-              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-              animation: `${pulse} 2s infinite`,
-              '&:hover': {
-                color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
-                transition: 'color 0.3s ease-in-out',
-              },
-            }}
-          >
-            Beach Buddy
-          </Typography>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', marginRight: 'auto' }}>
+              <CardMedia
+                component="img"
+                alt="Logo"
+                height="100%"
+                image={logo}
+                sx={{
+                  width: "auto",
+                  height: "60px",
+                  objectFit: "contain",
+                  padding: "8px 0",
+                  '&:hover': {
+                    animation: `${pulse} 1s infinite`,
+                    cursor: 'pointer'
+                  }
+                }}
+              />
+              <Typography variant="h6" component="div" sx={{ 
+                ml: 1, 
+                fontWeight: 'bold', 
+                '&:hover': { 
+                  color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                  animation: `${pulse} 1s infinite`
+                } 
+              }}>
+                Beach Buddy
+              </Typography>
+            </Link>
+
 
           <Box sx={{ display: { xs: "block", md: "none" } }}>
             <IconButton
@@ -159,6 +174,9 @@ const Header: React.FC = () => {
                 transform: { md: "translateX(-50%)" },
                 zIndex: 1,
                 mb: { xs: 2, md: 0 },
+                '& > *': {
+                  animation: `${fadeIn} 0.5s ease-in-out`
+                }
               }}
             >
               <Link to="/">
