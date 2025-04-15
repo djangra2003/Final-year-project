@@ -301,8 +301,21 @@ const TourBooking: React.FC = () => {
                   variant="outlined"
                   type="date"
                   value={departDate}
-                  onChange={(e) => setDepartDate(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value) {
+                      const year = new Date(value).getFullYear();
+                      if (year.toString().length > 4) {
+                        return; // Prevent invalid year input
+                      }
+                    }
+                    setDepartDate(value);
+                  }}
                   InputLabelProps={{ shrink: true }}
+                  inputProps={{
+                    max: '9999-12-31', // Prevent dates beyond year 9999
+                    min: new Date().toISOString().split('T')[0] // Prevent past dates
+                  }}
                   required
                 />
               </Grid>

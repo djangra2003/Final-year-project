@@ -1,8 +1,9 @@
 "use client";
 
-import { KeyboardArrowDown, KeyboardArrowRight, Search, WavesOutlined } from "@mui/icons-material";
-import { Box, IconButton, InputAdornment, TextField, Typography, useTheme } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
+import { KeyboardArrowDown, KeyboardArrowRight, Search } from "@mui/icons-material";
+import { Box, IconButton, InputAdornment, TextField, Tooltip, Typography, useTheme } from "@mui/material";
+import beachDetails from "../Components/beaches.json";
+import { motion} from "framer-motion";
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
@@ -280,27 +281,53 @@ const BeachWiki: React.FC = () => {
                       {subsectionId}
                     </Typography>
                     <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {(beachesData as BeachData)[sectionId][subsectionId].map((beach: string) => (
-                        <Box
-                          component={motion.div}
-                          variants={itemVariants}
-                          whileHover={{ scale: 1.02 }}
-                          key={beach}
-                          sx={{
-                            p: 2,
-                            borderRadius: 2,
-                            background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
-                            boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-                            transition: "all 0.3s ease",
-                            "&:hover": {
-                              boxShadow: "0 8px 32px rgba(0,0,0,0.15)"
-                            }
-                          }}>
-                          <Link to={`/beaches/${beach.replace(/\s+/g, '')}`} className="text-gray-600 hover:underline">
-                            {beach}
-                          </Link>
-                        </Box>
-                      ))}
+                      {(beachesData as BeachData)[sectionId][subsectionId].map((beach: string) => {
+                        const beachInfo = (beachDetails as any)[beach];
+                        const tooltipContent = beachInfo ? (
+                          <Box sx={{ p: 1, maxWidth: 300 }}>
+                            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
+                              {beach}
+                            </Typography>
+                            <Typography variant="body2">
+                              {beachInfo.description}
+                            </Typography>
+                            {beachInfo.bestTimeToVisit && (
+                              <Typography variant="caption" display="block" sx={{ mt: 0.5 }}>
+                                Best Time: {beachInfo.bestTimeToVisit}
+                              </Typography>
+                            )}
+                          </Box>
+                        ) : beach;
+                        
+                        return (
+                          <Tooltip
+                            key={beach}
+                            title={tooltipContent}
+                            placement="right"
+                            arrow
+                          >
+                            <Box
+                              component={motion.div}
+                              variants={itemVariants}
+                              whileHover={{ scale: 1.02 }}
+                              sx={{
+                                p: 2,
+                                borderRadius: 2,
+                                background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
+                                boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                                transition: "all 0.3s ease",
+                                "&:hover": {
+                                  boxShadow: "0 8px 32px rgba(0,0,0,0.15)"
+                                }
+                              }}
+                            >
+                              <Link to={`/beaches/${beach.replace(/\s+/g, '')}`} className="text-gray-600 hover:underline">
+                                {beach}
+                              </Link>
+                            </Box>
+                          </Tooltip>
+                        );
+                      })}
                     </Box>
                   </Box>
                 ))}

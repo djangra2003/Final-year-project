@@ -32,6 +32,7 @@ const createTablesQuery = `
 
   CREATE TABLE IF NOT EXISTS reviews ( 
     id SERIAL PRIMARY KEY,
+    beach_id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     location VARCHAR(255) NOT NULL,
     review TEXT NOT NULL,

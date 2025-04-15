@@ -1,6 +1,6 @@
 import { Favorite, FavoriteBorder, Share } from '@mui/icons-material';
-import { Box, Grid, IconButton, List, ListItem, ListItemText, Paper, Snackbar, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Box, Button, Grid, IconButton, List, ListItem, ListItemText, Paper, Rating, Snackbar, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import beachesData from './beaches.json';
 import Footer from './Footer';
@@ -36,6 +36,11 @@ const BeachDetails: React.FC = () => {
   const [favorite, setFavorite] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [showShareSuccess, setShowShareSuccess] = useState(false);
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [newReview, setNewReview] = useState('');
+  const [rating, setRating] = useState<number>(0);
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
   const { beachId } = useParams<{ beachId: string }>();
   
   // Convert URL format (e.g., "PuriBeach") to JSON format (e.g., "Puri Beach")
@@ -84,6 +89,59 @@ const BeachDetails: React.FC = () => {
       }
     } catch (error) {
       console.error('Error sharing:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (beachId) {
+      fetchReviews();
+    }
+  }, [beachId]);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${beachId}`);
+      if (!response.ok) throw new Error('Failed to fetch reviews');
+      const data = await response.json();
+      setReviews(data);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  };
+
+  const handleSubmitReview = async () => {
+    if (!newReview || rating === 0) {
+      alert('Please provide both a review and rating');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${beachId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          location: beach.location,
+          review: newReview,
+          rating
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to submit review');
+      
+      alert('Thank you for your review!');
+      setNewReview('');
+      setRating(0);
+      setName('');
+      fetchReviews(); // Refresh reviews after submission
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to submit review. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -194,6 +252,76 @@ const BeachDetails: React.FC = () => {
                   </ListItem>
                 ))}
               </List>
+            </Paper>
+          </Grid>
+
+          {/* Reviews Section */}
+          <Grid item xs={12}>
+            <Paper sx={{
+              p: 2,
+              transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: 3,
+                bgcolor: 'rgba(236, 246, 252, 0.8)'
+              },
+              bgcolor: 'rgba(236, 246, 252, 0.4)',
+              borderRadius: 2
+            }}>
+              <Typography variant="h6" gutterBottom>
+                Reviews
+              </Typography>
+
+              {/* Add Review Form */}
+              <Box sx={{ mb: 4 }}>
+                <TextField
+                  fullWidth
+                  label="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  sx={{ mb: 2 }}
+                />
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={4}
+                  label="Write your review"
+                  value={newReview}
+                  onChange={(e) => setNewReview(e.target.value)}
+                  sx={{ mb: 2 }}
+                />
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Typography component="legend">Rating:</Typography>
+                  <Rating
+                    value={rating}
+                    onChange={(_, newValue) => setRating(newValue || 0)}
+                  />
+                </Box>
+                <Button
+                  variant="contained"
+                  onClick={handleSubmitReview}
+                  disabled={loading}
+                  sx={{ mt: 1 }}
+                >
+                  {loading ? 'Submitting...' : 'Submit Review'}
+                </Button>
+              </Box>
+
+              {/* Display Reviews */}
+              <Box sx={{ mt: 4 }}>
+                {reviews.map((review, index) => (
+                  <Paper key={index} sx={{ p: 2, mb: 2, bgcolor: 'white' }}>
+                    <Typography variant="h6">{review.name}</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', my: 1 }}>
+                      <Rating value={review.rating} readOnly />
+                    </Box>
+                    <Typography variant="body1">{review.review}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {new Date(review.created_at).toLocaleDateString()}
+                    </Typography>
+                  </Paper>
+                ))}
+              </Box>
             </Paper>
           </Grid>
 

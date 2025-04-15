@@ -11,7 +11,7 @@ import ServicesSection from "../Components/ServicesSection";
 import Sidebar from "../Components/Sidebar";
 import TourBooking from "../Components/TourBooking";
 import WelcomeSection from "../Components/WelcomeSection";
-import { fadeUpVariants, scaleVariants, staggerContainerVariants, slideInVariants, bounceVariants } from "../utils/animations";
+import { fadeUpVariants, scaleVariants, slideInVariants, staggerContainerVariants } from "../utils/animations";
 
 const Home: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}'); // Fetch user data from local storage
@@ -35,6 +35,8 @@ const Home: React.FC = () => {
         background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
         position: "relative",
         overflow: "hidden",
+        minHeight: "100vh",
+        padding: 0,
         '&::before': {
           content: '""',
           position: "absolute",
@@ -44,6 +46,13 @@ const Home: React.FC = () => {
           bottom: 0,
           background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)",
           pointerEvents: "none"
+        },
+        '& > *': {
+          marginBottom: 0
+        },
+        '& > div': {
+          borderRadius: 0,
+          boxShadow: 'none'
         }
       }}
     >
@@ -73,9 +82,10 @@ const Home: React.FC = () => {
           position: 'relative',
           zIndex: 1,
           backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
           borderRadius: 4,
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+          boxShadow: 'none',
+          mb: 0
         }}
       >
         <Grid item xs={12} md={8}>
@@ -95,13 +105,15 @@ const Home: React.FC = () => {
         whileHover="hover"
         whileTap="tap"
         sx={{
-          mt: 6,
+          mt: 0,
+          pt: 4,
+          pb: 2,
           mx: 'auto',
           maxWidth: '1500px',
-          background: 'rgba(255, 255, 255, 0.8)',
+          background: 'transparent',
           backdropFilter: 'blur(10px)',
-          borderRadius: 4,
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+          borderRadius: 0,
+          boxShadow: 'none',
           overflow: 'hidden',
           transition: 'transform 0.3s ease-in-out',
           '&:hover': {
@@ -117,18 +129,19 @@ const Home: React.FC = () => {
         component={motion.div} 
         variants={slideInVariants}
         sx={{
-          mt: 6,
+          mt: 0,
+          pt: 2,
+          pb: 2,
           mx: 'auto',
           maxWidth: '1500px',
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)',
+          background: 'transparent',
           backdropFilter: 'blur(10px)',
-          borderRadius: 4,
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+          borderRadius: 0,
+          boxShadow: 'none',
           overflow: 'hidden',
           transition: 'all 0.3s ease-in-out',
           '&:hover': {
-            transform: 'translateY(-5px)',
-            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)'
+            transform: 'translateY(-5px)'
           }
         }}
       >
@@ -142,18 +155,19 @@ const Home: React.FC = () => {
         whileHover="hover"
         whileTap="tap"
         sx={{ 
-          mt: 6, 
+          mt: 0, 
+          pt: 2,
+          pb: 4,
           mx: "auto", 
           maxWidth: "1500px",
-          background: 'rgba(255, 255, 255, 0.8)',
+          background: 'transparent',
           backdropFilter: 'blur(10px)',
-          borderRadius: 4,
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+          borderRadius: 0,
+          boxShadow: 'none',
           overflow: 'hidden',
           transition: 'all 0.3s ease-in-out',
           '&:hover': {
-            transform: 'translateY(-5px)',
-            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)'
+            transform: 'translateY(-5px)'
           }
         }}
       >
