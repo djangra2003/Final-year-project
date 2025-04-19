@@ -254,77 +254,6 @@ const BeachDetails: React.FC = () => {
               </List>
             </Paper>
           </Grid>
-
-          {/* Reviews Section */}
-          <Grid item xs={12}>
-            <Paper sx={{
-              p: 2,
-              transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-              '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: 3,
-                bgcolor: 'rgba(236, 246, 252, 0.8)'
-              },
-              bgcolor: 'rgba(236, 246, 252, 0.4)',
-              borderRadius: 2
-            }}>
-              <Typography variant="h6" gutterBottom>
-                Reviews
-              </Typography>
-
-              {/* Add Review Form */}
-              <Box sx={{ mb: 4 }}>
-                <TextField
-                  fullWidth
-                  label="Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  sx={{ mb: 2 }}
-                />
-                <TextField
-                  fullWidth
-                  multiline
-                  rows={4}
-                  label="Write your review"
-                  value={newReview}
-                  onChange={(e) => setNewReview(e.target.value)}
-                  sx={{ mb: 2 }}
-                />
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <Typography component="legend">Rating:</Typography>
-                  <Rating
-                    value={rating}
-                    onChange={(_, newValue) => setRating(newValue || 0)}
-                  />
-                </Box>
-                <Button
-                  variant="contained"
-                  onClick={handleSubmitReview}
-                  disabled={loading}
-                  sx={{ mt: 1 }}
-                >
-                  {loading ? 'Submitting...' : 'Submit Review'}
-                </Button>
-              </Box>
-
-              {/* Display Reviews */}
-              <Box sx={{ mt: 4 }}>
-                {reviews.map((review, index) => (
-                  <Paper key={index} sx={{ p: 2, mb: 2, bgcolor: 'white' }}>
-                    <Typography variant="h6">{review.name}</Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', my: 1 }}>
-                      <Rating value={review.rating} readOnly />
-                    </Box>
-                    <Typography variant="body1">{review.review}</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {new Date(review.created_at).toLocaleDateString()}
-                    </Typography>
-                  </Paper>
-                ))}
-              </Box>
-            </Paper>
-          </Grid>
-
           {/* Attractions */}
           <Grid item xs={12} md={6}>
             <Paper sx={{
@@ -493,6 +422,127 @@ const BeachDetails: React.FC = () => {
                   </ListItem>
                 ))}
               </List>
+            </Paper>
+          </Grid>
+          {/* Reviews Section */}
+          <Grid item xs={12}>
+            <Paper sx={{
+              p: 2,
+              transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: 3,
+                bgcolor: 'rgba(236, 246, 252, 0.8)'
+              },
+              bgcolor: 'rgba(236, 246, 252, 0.4)',
+              borderRadius: 2
+            }}>
+              <Typography variant="h6" gutterBottom>
+                Reviews
+              </Typography>
+
+              {/* Add Review Form */}
+              <Box sx={{ mb: 4 }}>
+                <TextField
+                  fullWidth
+                  label="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  sx={{ mb: 2 }}
+                />
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={4}
+                  label="Write your review"
+                  value={newReview}
+                  onChange={(e) => setNewReview(e.target.value)}
+                  sx={{ mb: 2 }}
+                />
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Typography component="legend">Rating:</Typography>
+                  <Rating
+                    value={rating}
+                    onChange={(_, newValue) => setRating(newValue || 0)}
+                  />
+                </Box>
+                <Button
+                  variant="contained"
+                  onClick={handleSubmitReview}
+                  disabled={loading}
+                  sx={{ mt: 1 }}
+                >
+                  {loading ? 'Submitting...' : 'Submit Review'}
+                </Button>
+              </Box>
+
+              {/* Display Reviews */}
+              <Box sx={{ mt: 4, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                {reviews.length === 0 ? (
+                  <Typography variant="body2" color="text.secondary">No reviews yet. Be the first to review!</Typography>
+                ) : (
+                  reviews.map((review, index) => (
+                    <Paper
+                      key={index}
+                      sx={{
+                        p: 2,
+                        mb: 2,
+                        bgcolor: 'white',
+                        borderRadius: 3,
+                        boxShadow: 3,
+                        minWidth: 300,
+                        maxWidth: 400,
+                        flex: '1 1 320px',
+                        transition: 'transform 0.2s, box-shadow 0.2s',
+                        '&:hover': {
+                          transform: 'translateY(-4px) scale(1.03)',
+                          boxShadow: 6,
+                        },
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        position: 'relative',
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                        <Box sx={{
+                          width: 48,
+                          height: 48,
+                          borderRadius: '50%',
+                          overflow: 'hidden',
+                          mr: 2,
+                          boxShadow: 1,
+                          bgcolor: '#e3f2fd',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}>
+                          <img
+                            src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(review.name || 'User')}`}
+                            alt={review.name}
+                            style={{ width: '100%', height: '100%' }}
+                          />
+                        </Box>
+                        <Box>
+                          <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#1976d2' }}>{review.name}</Typography>
+                          <Typography variant="caption" color="text.secondary">
+                            {review.location || ''}
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                        <Rating value={review.rating} readOnly size="small" />
+                        <Typography variant="caption" color="text.secondary" sx={{ ml: 1 }}>
+                          {new Date(review.created_at).toLocaleDateString()}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body1" sx={{ mb: 1, color: '#333', fontStyle: 'italic' }}>
+                        "{review.review}"
+                      </Typography>
+                    </Paper>
+                  ))
+                )}
+              </Box>
             </Paper>
           </Grid>
         </Grid>

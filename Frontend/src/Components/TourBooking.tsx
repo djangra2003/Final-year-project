@@ -198,7 +198,7 @@ const TourBooking: React.FC = () => {
         backgroundSize: "cover",
         backdropFilter: 'blur(10px)',
       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-      borderRadius: '100px',
+      borderRadius: '10px',
         backgroundPosition: "center",
         py: 8,
         px: 4,
