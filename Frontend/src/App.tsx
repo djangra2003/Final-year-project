@@ -11,6 +11,7 @@ import ProfilePage from "./Pages/ProfilePage";
 import SignupPage from "./Pages/SignupPage";
 import UserProfile from "./Pages/UserProfile";
 import AddReviewPage from "./Pages/AddReviewPage"; // ✅ Import the Add Review Page
+import HotelBookingPage from "./Pages/HotelBookingPage";
 import { ThemeProvider } from './context/ThemeContext';
 import { UserProvider } from './context/UserContext';
 
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
   { path: "/forgot-password", element: <ForgotPasswordPage /> },
   { path: "/profile", element: <ProfilePage /> },
   { path: "/user-profile", element: <UserProfile /> },
-  { path: "/add-review", element: <AddReviewPage /> }, // ✅ Added new route for Add Review Page
+  { path: "/add-review", element: <AddReviewPage /> },
+  {path: "/hotel-booking", element: <HotelBookingPage />},
 ]);
 
 const App: React.FC = () => {

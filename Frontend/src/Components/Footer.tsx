@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
           <ul className="space-y-2 text-sm text-gray-700">
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/location'>Explore Beaches</Link></li>
+            <li><Link to='/beaches'>Explore Beaches</Link></li>
             <li><Link to='/activities'>Activities & Adventures</Link></li>
             <li><Link to='/blog'>Blog</Link></li>
             <li><Link to='/contact'>Contact Us</Link></li>
