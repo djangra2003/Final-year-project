@@ -207,6 +207,20 @@ const Header: React.FC = () => {
                   Beaches
                 </Button>
               </Link>
+              <Link to="/hotel-booking">
+                <Button
+                  color="inherit"
+                  sx={{
+                    '&:hover': {
+                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                      transition: 'all 0.3s ease-in-out',
+                    },
+                  }}
+                >
+                  Hotels
+                </Button>
+              </Link>
               <Link to="/about">
                 <Button
                   color="inherit"
