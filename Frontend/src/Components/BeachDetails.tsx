@@ -1,11 +1,12 @@
 import { Favorite, FavoriteBorder, Share } from '@mui/icons-material';
 import { Box, Button, Grid, IconButton, List, ListItem, ListItemText, Paper, Rating, Snackbar, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import beachesData from './beaches.json';
 import Footer from './Footer';
 import Header from './Header';
 import HeroSection from './HeroSection';
+import { useUser } from '../context/UserContext';
 
 interface Beach {
   description: string;
@@ -42,12 +43,19 @@ const BeachDetails: React.FC = () => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const { beachId } = useParams<{ beachId: string }>();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
   
   // Convert URL format (e.g., "PuriBeach") to JSON format (e.g., "Puri Beach")
   const convertUrlToJsonFormat = (urlName: string) => {
     // Add space before capital letters and trim
     return urlName.replace(/([A-Z])/g, ' $1').trim();
   };
+  const handleAddReview = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  };  // Hook for navigation
 
   // Debug logging
   console.log('BeachId from URL:', beachId);
@@ -468,7 +476,10 @@ const BeachDetails: React.FC = () => {
                 </Box>
                 <Button
                   variant="contained"
-                  onClick={handleSubmitReview}
+                  onClick={() => {
+                    handleSubmitReview();
+                    handleAddReview();
+                  }}
                   disabled={loading}
                   sx={{ mt: 1 }}
                 >
