@@ -5,7 +5,8 @@ const cors = require('cors');
 const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
-const reviewRoutes = require('./routes/reviewRoutes'); // ✅ Import review routes
+const reviewRoutes = require('./routes/reviewRoutes');
+const chatbotRoutes = require('./routes/chatbotRoutes') // ✅ Import review routes
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/reviews', reviewRoutes); // ✅ Added review routes
+app.use("/api/chatbot", chatbotRoutes);
 
 // Create database tables
 const createTablesQuery = `
@@ -27,6 +29,8 @@ const createTablesQuery = `
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
+
+  DROP TABLE IF EXISTS reviews;
 
   CREATE TABLE IF NOT EXISTS reviews ( 
     id SERIAL PRIMARY KEY,

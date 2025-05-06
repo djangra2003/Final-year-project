@@ -45,9 +45,11 @@ const WelcomeSection: React.FC = () => {
         lineHeight={1.8}
         textAlign="left"
       >
-  Discover the beauty of India’s pristine coastlines with Beach Buddy. Whether you're planning a relaxing getaway or an adventure by the sea, we’ve got you covered.
-Track live tide updates, explore beaches with integrated Google Maps, and uncover hidden gems along the shores.
-Plan your next beach escape effortlessly and experience the perfect blend of serenity and adventure. With Beach Buddy, the waves are always calling.
+  Your ultimate guide to exploring India’s beautiful and diverse coastlines. Whether you’re planning a peaceful beach retreat, a thrilling day of water sports, or a spontaneous weekend by the sea, Beach Buddy is here to make your coastal travel smooth and exciting. Discover the best beaches in India, from popular destinations to hidden gems that offer peace, beauty, and unforgettable views. With detailed beach guides, local travel tips, and curated experiences, we help you find the perfect coastal escape tailored to your style.
+  <br/>
+  Beach Buddy goes beyond just beach recommendations. Get live tide updates, accurate weather forecasts, and easy navigation with our integrated Google Maps feature. Whether you're searching for family-friendly beaches, romantic sunset spots, or offbeat coastal adventures, we’ve got everything you need. Find the best time to visit, explore beach activities, and discover eco-friendly tips to travel responsibly.
+  <br/>
+  Plan your stay with recommended hotels and explore top-rated food spots near the shoreline. Beach Buddy is more than just a travel guide—it’s your one-stop platform for everything beach-related in India. Join our growing community of beach lovers and make every wave count. The coast is calling—let’s go!
       </Typography>
     </Box>
   );

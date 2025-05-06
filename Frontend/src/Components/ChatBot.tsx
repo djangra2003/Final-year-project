@@ -27,52 +27,41 @@ const ChatBot: React.FC = () => {
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
-
+  
     const userMessage = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
-
+  
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch('http://localhost:5000/api/chatbot/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({
-          contents: [{
-            role: "user",
-            parts: [{ text: `You are a beach travel assistant. Answer this query: ${userMessage}` }]
-          }]
-        })
+        body: JSON.stringify({ message: userMessage })
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('API Error:', errorData);
-        throw new Error(errorData.error?.message || 'Failed to get response from Gemini');
+        console.error('Backend Error:', errorData);
+        throw new Error(errorData.error || 'Failed to get response from backend');
       }
-
+  
       const data = await response.json();
-      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-        const aiResponse = data.candidates[0].content.parts[0].text;
-        setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
-      } else {
-        throw new Error('Invalid response format from API');
-      }
-
+      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
+  
     } catch (err) {
       console.error('Error details:', err);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'I apologize, but I encountered an error. Please try again in a moment.' 
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: 'I apologize, but I encountered an error. Please try again in a moment.'
       }]);
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();

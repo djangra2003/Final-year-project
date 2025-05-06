@@ -13,6 +13,7 @@ import UserProfile from "./Pages/UserProfile";
 import AddReviewPage from "./Pages/AddReviewPage"; // ✅ Import the Add Review Page
 import { ThemeProvider } from './context/ThemeContext';
 import { UserProvider } from './context/UserContext';
+//import Wishlist from './Pages/Wishlist';
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
   { path: "/forgot-password", element: <ForgotPasswordPage /> },
   { path: "/profile", element: <ProfilePage /> },
   { path: "/user-profile", element: <UserProfile /> },
-  { path: "/add-review", element: <AddReviewPage /> }, // ✅ Added new route for Add Review Page
+  { path: "/add-review", element: <AddReviewPage /> },
+  //{path: "/wishlist", element: <Wishlist />},
 ]);
 
 const App: React.FC = () => {
