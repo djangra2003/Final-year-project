@@ -31,8 +31,6 @@ const createTablesQuery = `
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
-  DROP TABLE IF EXISTS reviews;
-
   CREATE TABLE IF NOT EXISTS reviews ( 
     id SERIAL PRIMARY KEY,
     beach_id VARCHAR(255) NOT NULL,
