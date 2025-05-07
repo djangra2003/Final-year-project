@@ -11,7 +11,6 @@ import ProfilePage from "./Pages/ProfilePage";
 import SignupPage from "./Pages/SignupPage";
 import UserProfile from "./Pages/UserProfile";
 import AddReviewPage from "./Pages/AddReviewPage"; // ✅ Import the Add Review Page
-import HotelBookingPage from "./Pages/HotelBookingPage";
 import { ThemeProvider } from './context/ThemeContext';
 import { UserProvider } from './context/UserContext';
 //import Wishlist from './Pages/Wishlist';
@@ -28,12 +27,6 @@ const router = createBrowserRouter([
   { path: "/profile", element: <ProfilePage /> },
   { path: "/user-profile", element: <UserProfile /> },
   { path: "/add-review", element: <AddReviewPage /> },
-<<<<<<< HEAD
-  //{path: "/wishlist", element: <Wishlist />},
-=======
-  {path: "/hotel-booking", element: <HotelBookingPage />},
->>>>>>> 51289bc25c511c328301940561cb7dfc96d9f696
-]);
 
 const App: React.FC = () => {
   return (
