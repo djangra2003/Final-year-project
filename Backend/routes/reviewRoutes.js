@@ -7,7 +7,11 @@ router.post('/:beachId', async (req, res) => {
   const { beachId } = req.params;
   const { name, location, review, rating } = req.body;
 
+  // Debug log
+  console.log('Received review data:', { beachId, name, location, review, rating });
+
   if (!beachId || !name || !location || !review || rating == null) {
+    console.log('Missing fields:', { beachId, name, location, review, rating });
     return res.status(400).json({ message: 'All fields are required' });
   }
 
@@ -20,6 +24,53 @@ router.post('/:beachId', async (req, res) => {
     res.status(201).json({ message: 'Review submitted successfully', review: newReview.rows[0] });
   } catch (error) {
     console.error('Error saving review:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Route to edit a review
+router.put('/:reviewId', async (req, res) => {
+  const { reviewId } = req.params;
+  const { name, location, review, rating } = req.body;
+
+  if (!name || !location || !review || rating == null) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
+  try {
+    const updatedReview = await pool.query(
+      'UPDATE reviews SET name = $1, location = $2, review = $3, rating = $4 WHERE id = $5 RETURNING *',
+      [name, location, review, rating, reviewId]
+    );
+
+    if (updatedReview.rows.length === 0) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
+
+    res.status(200).json({ message: 'Review updated successfully', review: updatedReview.rows[0] });
+  } catch (error) {
+    console.error('Error updating review:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Route to delete a review
+router.delete('/:reviewId', async (req, res) => {
+  const { reviewId } = req.params;
+
+  try {
+    const deletedReview = await pool.query(
+      'DELETE FROM reviews WHERE id = $1 RETURNING *',
+      [reviewId]
+    );
+
+    if (deletedReview.rows.length === 0) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
+
+    res.status(200).json({ message: 'Review deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting review:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
