@@ -27,6 +27,7 @@ const router = createBrowserRouter([
   { path: "/profile", element: <ProfilePage /> },
   { path: "/user-profile", element: <UserProfile /> },
   { path: "/add-review", element: <AddReviewPage /> },
+  ]);
 
 const App: React.FC = () => {
   return (
