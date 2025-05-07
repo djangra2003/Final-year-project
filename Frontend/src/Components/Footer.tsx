@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
           <ul className="space-y-2 text-sm text-gray-700">
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/location'>Explore Beaches</Link></li>
+            <li><Link to='/beaches'>Explore Beaches</Link></li>
             <li><Link to='/activities'>Activities & Adventures</Link></li>
             <li><Link to='/blog'>Blog</Link></li>
             <li><Link to='/contact'>Contact Us</Link></li>
@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
           <ul className="text-sm text-gray-700 space-y-2">
             <li>Email: <a href="mailto:info@beachesofindia.com" className="text-blue-500">info@beachesofindia.com</a></li>
             <li>Phone: +91-8860542549</li>
-            <li>Address: [City, State], India</li>
+            <li>Address: New Delhi, India</li>
           </ul>
         </div>
 

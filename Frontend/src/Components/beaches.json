@@ -43,6 +43,7 @@
         "INS Kurusura Submarine Museum (8 km)"
     ]
 },
+
     "Eden Beach": {
     "description": "A beautiful beach in Puducherry, known for its serene atmosphere and French colonial influence.",
     "coordinates": {
@@ -4157,11 +4158,11 @@
         "name": "Kappad Beach",
         "location": "Kerala"
     },
-    "Varkala Beach / Papanasham Beach": {
+    "Varkala Beach ": {
         "description": "A stunning beach in Kerala, known for its natural beauty, serene ambiance, and local charm.",
         "coordinates": {
-            "lat": 10.0,
-            "lng": 76.0
+            "lat": 8.735831405560715,
+            "lng":  76.70301309084363
         },
         "images": [],
         "activities": [
@@ -4194,8 +4195,8 @@
             "Famous temples",
             "Local cultural spots"
         ],
-        "id": "varkala_beach_/_papanasham_beach",
-        "name": "Varkala Beach / Papanasham Beach",
+        "id": "varkala_beach",
+        "name": "Varkala Beach",
         "location": "Kerala"
     },
     "Padinjarekkara Beach": {
@@ -4906,11 +4907,11 @@
         "name": "Apsarakonda Beach",
         "location": "Karnataka"
     },
-    "Om Beach, Gokarna": {
+    "Om Beach": {
         "description": "A beautiful beach in Karnataka, known for its scenic beauty and peaceful surroundings.",
         "coordinates": {
-            "lat": 13.0,
-            "lng": 75.0
+            "lat": 14.519336009851408, 
+            "lng": 74.32297382619315
         },
         "images": [],
         "activities": [
@@ -4940,8 +4941,8 @@
             "Nearby temples",
             "Local tourist spots"
         ],
-        "id": "om_beach_gokarna",
-        "name": "Om Beach, Gokarna",
+        "id": "om_beach",
+        "name": "Om Beach",
         "location": "Karnataka"
     },
     "Kaup Beach": {
