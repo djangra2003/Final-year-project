@@ -79,3 +79,4 @@ function UserProvider({ children }: { children: React.ReactNode }) {
 
 // Export both as named exports
 export { UserProvider, useUser };
+

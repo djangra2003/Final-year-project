@@ -1,12 +1,11 @@
-import { Favorite, FavoriteBorder, Share } from '@mui/icons-material';
+import { Delete, Edit, Favorite, FavoriteBorder, Share } from '@mui/icons-material';
 import { Box, Button, Grid, IconButton, List, ListItem, ListItemText, Paper, Rating, Snackbar, TextField, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import beachesData from './beaches.json';
 import Footer from './Footer';
 import Header from './Header';
 import HeroSection from './HeroSection';
-import { useUser } from '../context/UserContext';
 
 interface Beach {
   description: string;
@@ -20,8 +19,7 @@ interface Beach {
   howToReach: string;
   attractions: string[];
   accommodation: {
-    budget: string;
-    luxury: string;
+    [key: string]: string;
   };
   foodSpecialties: string[];
   tips: string[];
@@ -33,29 +31,33 @@ interface BeachesData {
   [key: string]: Beach;
 }
 
+interface Review {
+  id: number;
+  name: string;
+  location: string;
+  review: string;
+  rating: number;
+  created_at: string;
+}
+
 const BeachDetails: React.FC = () => {
   const [favorite, setFavorite] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [showShareSuccess, setShowShareSuccess] = useState(false);
-  const [reviews, setReviews] = useState<any[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [newReview, setNewReview] = useState('');
   const [rating, setRating] = useState<number>(0);
-  const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
   const { beachId } = useParams<{ beachId: string }>();
-  const navigate = useNavigate();
-  const { isAuthenticated } = useUser();
+  const [editingReview, setEditingReview] = useState<Review | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editReview, setEditReview] = useState('');
+  const [editRating, setEditRating] = useState<number>(0);
   
-  // Convert URL format (e.g., "PuriBeach") to JSON format (e.g., "Puri Beach")
-  const convertUrlToJsonFormat = (urlName: string) => {
-    // Add space before capital letters and trim
+  const convertUrlToJsonFormat = useCallback((urlName: string) => {
     return urlName.replace(/([A-Z])/g, ' $1').trim();
-  };
-  const handleAddReview = () => {
-    if (!isAuthenticated) {
-      navigate('/login');
-    }
-  };  // Hook for navigation
+  }, []);
 
   // Debug logging
   console.log('BeachId from URL:', beachId);
@@ -63,7 +65,7 @@ const BeachDetails: React.FC = () => {
   console.log('Available beach keys:', Object.keys(beachesData));
   
   // Access the beach data using the converted name
-  const beach = (beachesData as BeachesData)[convertUrlToJsonFormat(beachId || '')];
+  const beach = (beachesData as unknown as BeachesData)[convertUrlToJsonFormat(beachId || '')];
 
   if (!beach) {
     return (
@@ -83,6 +85,22 @@ const BeachDetails: React.FC = () => {
     );
   }
 
+  const fetchReviews = useCallback(async () => {
+    if (!beachId) return;
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${beachId}`);
+      if (!response.ok) throw new Error('Failed to fetch reviews');
+      const data = await response.json();
+      setReviews(data);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  }, [beachId]);
+
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
+
   const handleShare = async () => {
     try {
       if (navigator.share) {
@@ -100,56 +118,105 @@ const BeachDetails: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (beachId) {
-      fetchReviews();
-    }
-  }, [beachId]);
-
-  const fetchReviews = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/reviews/${beachId}`);
-      if (!response.ok) throw new Error('Failed to fetch reviews');
-      const data = await response.json();
-      setReviews(data);
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-    }
-  };
-
   const handleSubmitReview = async () => {
-    if (!newReview || rating === 0) {
-      alert('Please provide both a review and rating');
+    if (!newReview || rating === 0 || !name) {
+      alert('Please provide your name, review, and rating');
       return;
     }
 
     setLoading(true);
     try {
+      const reviewData = {
+        name: name,
+        location: beach.location,
+        review: newReview,
+        rating: rating
+      };
+
+      // Debug logs
+      console.log('Submitting review with data:', reviewData);
+
       const response = await fetch(`http://localhost:5000/api/reviews/${beachId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name,
-          location: beach.location,
-          review: newReview,
-          rating
-        }),
+        body: JSON.stringify(reviewData),
       });
 
-      if (!response.ok) throw new Error('Failed to submit review');
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Server response:', errorData);
+        throw new Error(errorData.message || 'Failed to submit review');
+      }
       
       alert('Thank you for your review!');
       setNewReview('');
       setRating(0);
       setName('');
-      fetchReviews(); // Refresh reviews after submission
+      fetchReviews();
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to submit review. Please try again.');
+      alert(error instanceof Error ? error.message : 'Failed to submit review. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleEditReview = (review: Review) => {
+    setEditingReview(review);
+    setEditName(review.name);
+    setEditReview(review.review);
+    setEditRating(review.rating);
+  };
+
+  const handleUpdateReview = async () => {
+    if (!editingReview) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${editingReview.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: editName,
+          location: beach.location,
+          review: editReview,
+          rating: editRating
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update review');
+      }
+
+      setEditingReview(null);
+      fetchReviews();
+    } catch (error) {
+      console.error('Error updating review:', error);
+      alert(error instanceof Error ? error.message : 'Failed to update review');
+    }
+  };
+
+  const handleDeleteReview = async (reviewId: number) => {
+    if (!window.confirm('Are you sure you want to delete this review?')) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${reviewId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to delete review');
+      }
+
+      fetchReviews();
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      alert(error instanceof Error ? error.message : 'Failed to delete review');
     }
   };
 
@@ -305,12 +372,11 @@ const BeachDetails: React.FC = () => {
                 Accommodation
               </Typography>
               <List>
-                <ListItem>
-                  <ListItemText primary={`Budget: ${beach.accommodation.budget}`} />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary={`Luxury: ${beach.accommodation.luxury}`} />
-                </ListItem>
+                {Object.entries(beach.accommodation).map(([key, value]) => (
+                  <ListItem key={key}>
+                    <ListItemText primary={`${key}: ${value}`} />
+                  </ListItem>
+                ))}
               </List>
             </Paper>
           </Grid>
@@ -476,10 +542,7 @@ const BeachDetails: React.FC = () => {
                 </Box>
                 <Button
                   variant="contained"
-                  onClick={() => {
-                    handleSubmitReview();
-                    handleAddReview();
-                  }}
+                  onClick={handleSubmitReview}
                   disabled={loading}
                   sx={{ mt: 1 }}
                 >
@@ -487,14 +550,59 @@ const BeachDetails: React.FC = () => {
                 </Button>
               </Box>
 
+              {/* Edit Review Form */}
+              {editingReview && (
+                <Box sx={{ mb: 4, p: 2, bgcolor: 'rgba(255, 255, 255, 0.8)', borderRadius: 2 }}>
+                  <Typography variant="h6" gutterBottom>Edit Review</Typography>
+                  <TextField
+                    fullWidth
+                    label="Your Name"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={4}
+                    label="Write your review"
+                    value={editReview}
+                    onChange={(e) => setEditReview(e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Typography component="legend">Rating:</Typography>
+                    <Rating
+                      value={editRating}
+                      onChange={(_, newValue) => setEditRating(newValue || 0)}
+                    />
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Button
+                      variant="contained"
+                      onClick={handleUpdateReview}
+                      disabled={loading}
+                    >
+                      Update Review
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      onClick={() => setEditingReview(null)}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              )}
+
               {/* Display Reviews */}
               <Box sx={{ mt: 4, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                 {reviews.length === 0 ? (
                   <Typography variant="body2" color="text.secondary">No reviews yet. Be the first to review!</Typography>
                 ) : (
-                  reviews.map((review, index) => (
+                  reviews.map((review) => (
                     <Paper
-                      key={index}
+                      key={review.id}
                       sx={{
                         p: 2,
                         mb: 2,
@@ -515,30 +623,48 @@ const BeachDetails: React.FC = () => {
                         position: 'relative',
                       }}
                     >
-                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                        <Box sx={{
-                          width: 48,
-                          height: 48,
-                          borderRadius: '50%',
-                          overflow: 'hidden',
-                          mr: 2,
-                          boxShadow: 1,
-                          bgcolor: '#e3f2fd',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}>
-                          <img
-                            src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(review.name || 'User')}`}
-                            alt={review.name}
-                            style={{ width: '100%', height: '100%' }}
-                          />
+                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, width: '100%', justifyContent: 'space-between' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                          <Box sx={{
+                            width: 48,
+                            height: 48,
+                            borderRadius: '50%',
+                            overflow: 'hidden',
+                            mr: 2,
+                            boxShadow: 1,
+                            bgcolor: '#e3f2fd',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}>
+                            <img
+                              src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(review.name || 'User')}`}
+                              alt={review.name}
+                              style={{ width: '100%', height: '100%' }}
+                            />
+                          </Box>
+                          <Box>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#1976d2' }}>{review.name}</Typography>
+                            <Typography variant="caption" color="text.secondary">
+                              {review.location || ''}
+                            </Typography>
+                          </Box>
                         </Box>
                         <Box>
-                          <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#1976d2' }}>{review.name}</Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            {review.location || ''}
-                          </Typography>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleEditReview(review)}
+                            sx={{ color: '#1976d2' }}
+                          >
+                            <Edit />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleDeleteReview(review.id)}
+                            sx={{ color: '#d32f2f' }}
+                          >
+                            <Delete />
+                          </IconButton>
                         </Box>
                       </Box>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
