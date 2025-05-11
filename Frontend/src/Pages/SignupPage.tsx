@@ -1,4 +1,5 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import {
   Box,
@@ -10,20 +11,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-
+import { GoogleLogin } from "@react-oauth/google";
 import React, { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import beachImage from "../assets/login.png";
-
 import { validateEmail, validatePassword } from "../utils/utils";
 
-
 const SignupPage: React.FC = () => {
-  
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -39,23 +33,16 @@ const SignupPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-
   // Handle Input Change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     const { name, value } = e.target;
-
     setFormData({ ...formData, [name]: value });
-
-    // Reset errors dynamically
     setErrors({ ...errors, [name]: "" });
   };
-
 
   // Handle Form Submit
   const handleSubmit = async () => {
     try {
-
       const newErrors = { email: "", password: "" };
 
       if (!validateEmail(formData.email)) {
@@ -104,11 +91,9 @@ const SignupPage: React.FC = () => {
     }
   };
 
-
   // Handle Google Sign In
   const handleGoogleSignIn = async (credentialResponse: any) => {
     try {
-
       const res = await fetch("http://localhost:5000/api/auth/google", {
         method: "POST",
         headers: {
@@ -134,7 +119,6 @@ const SignupPage: React.FC = () => {
     }
   };
 
-
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -143,13 +127,9 @@ const SignupPage: React.FC = () => {
     event.preventDefault();
   };
 
-
   return (
-    
-    <GoogleOAuthProvider clientId="312125406891-jr87qn3usq6p05kthp51mldg13fldhgv.apps.googleusercontent.com">
-
+    <GoogleOAuthProvider clientId="943071771956-fag1ocg1pd3bm8fp299vge5rummkv0ik.apps.googleusercontent.com">
       <Box className="flex h-screen">
-        
         {/* Left Section: Image */}
         <Box
           className="w-1/2 bg-cover bg-center"
@@ -160,7 +140,6 @@ const SignupPage: React.FC = () => {
           }}
         ></Box>
 
-
         {/* Right Section: Form */}
         <Box
           className="w-1/2 flex items-center justify-center bg-white"
@@ -168,7 +147,6 @@ const SignupPage: React.FC = () => {
           elevation={6}
         >
           <Box className="w-full max-w-md px-8 py-6">
-            
             {/* Heading */}
             <Typography variant="h4" align="center" fontWeight="bold" gutterBottom>
               Welcome to Beach Buddy!
@@ -179,7 +157,6 @@ const SignupPage: React.FC = () => {
             </Typography>
 
             <Divider className="mb-4" />
-
 
             {/* Username Input */}
             <TextField
@@ -195,7 +172,6 @@ const SignupPage: React.FC = () => {
                 startAdornment: <i className="fas fa-user text-gray-400 mr-2" />,
               }}
             />
-
 
             {/* Email Input */}
             <TextField
@@ -213,7 +189,6 @@ const SignupPage: React.FC = () => {
                 startAdornment: <i className="fas fa-envelope text-gray-400 mr-2" />,
               }}
             />
-
 
             {/* Password Input */}
             <TextField
@@ -244,7 +219,6 @@ const SignupPage: React.FC = () => {
               }}
             />
 
-
             {/* Sign Up Button */}
             <Button
               fullWidth
@@ -256,7 +230,6 @@ const SignupPage: React.FC = () => {
               Sign Up
             </Button>
 
-
             {/* OR Divider */}
             <Box display="flex" alignItems="center" my={2}>
               <Divider sx={{ flex: 1 }} />
@@ -266,13 +239,11 @@ const SignupPage: React.FC = () => {
               <Divider sx={{ flex: 1 }} />
             </Box>
 
-
             {/* Google Sign-in */}
             <GoogleLogin
               onSuccess={handleGoogleSignIn}
               onError={() => console.error("Google Sign In Error")}
             />
-
 
             {/* Login Redirect */}
             <Typography
@@ -286,16 +257,11 @@ const SignupPage: React.FC = () => {
                 Login
               </Link>
             </Typography>
-
           </Box>
         </Box>
-
       </Box>
-      
     </GoogleOAuthProvider>
   );
-
 };
-
 
 export default SignupPage;

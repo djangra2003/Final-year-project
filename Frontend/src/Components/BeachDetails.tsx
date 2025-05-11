@@ -101,6 +101,18 @@ const BeachDetails: React.FC = () => {
     fetchReviews();
   }, [fetchReviews]);
 
+  useEffect(() => {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const isFavorite = wishlist.some((item: any) => item.id === beachId);
+    setFavorite(isFavorite);
+  }, [beachId]);
+  
+  useEffect(() => {
+    if (beachId) {
+      fetchReviews();
+    }
+  }, [beachId]);
+
   const handleShare = async () => {
     try {
       if (navigator.share) {
@@ -232,11 +244,32 @@ const BeachDetails: React.FC = () => {
           <Typography variant="h4" sx={{ color: '#1a73e8' }} gutterBottom>
             {convertUrlToJsonFormat(beachId || '')}
             <IconButton
-              onClick={() => setFavorite(!favorite)}
+              onClick={() => {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                const index = wishlist.findIndex((item: any) => item.id === beachId);
+            
+                if (index !== -1) {
+                  // Already in wishlist → remove it
+                  wishlist.splice(index, 1);
+                  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                  setFavorite(false);
+                } else {
+                  // Not in wishlist → add it
+                  wishlist.push({
+                    id: beachId,
+                    name: convertUrlToJsonFormat(beachId || ''),
+                    location: beach.location,
+                    image: `/images/${beach?.images?.[0] || 'default.jpg'}`, // use correct image path
+                  });
+                  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                  setFavorite(true);
+                }
+              }}
               sx={{ ml: 2, color: favorite ? '#ff1744' : 'grey.500' }}
             >
               {favorite ? <Favorite /> : <FavoriteBorder />}
             </IconButton>
+            
             <IconButton
               onClick={handleShare}
               sx={{ color: '#1a73e8' }}
