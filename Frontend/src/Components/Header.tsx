@@ -126,6 +126,7 @@ const Header: React.FC = () => {
               <Typography variant="h6" component="div" sx={{ 
                 ml: 1, 
                 fontWeight: 'bold', 
+                fontFamily: "'Montserrat', sans-serif",
                 '&:hover': { 
                   color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
                   animation: `${pulse} 1s infinite`
@@ -183,6 +184,7 @@ const Header: React.FC = () => {
                 <Button
                   color="inherit"
                   sx={{
+                    fontFamily: "'Montserrat', sans-serif",
                     '&:hover': {
                       color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
                       backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
@@ -197,6 +199,7 @@ const Header: React.FC = () => {
                 <Button
                   color="inherit"
                   sx={{
+                    fontFamily: "'Montserrat', sans-serif",
                     '&:hover': {
                       color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
                       backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
@@ -204,6 +207,7 @@ const Header: React.FC = () => {
                     },
                   }}
                 >
+                  
                   Beaches
                 </Button>
               </Link>
@@ -211,6 +215,7 @@ const Header: React.FC = () => {
                 <Button
                   color="inherit"
                   sx={{
+                    fontFamily: "'Montserrat', sans-serif",
                     '&:hover': {
                       color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
                       backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
@@ -225,6 +230,7 @@ const Header: React.FC = () => {
                 <Button
                   color="inherit"
                   sx={{
+                    fontFamily: "'Montserrat', sans-serif",
                     '&:hover': {
                       color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
                       backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',

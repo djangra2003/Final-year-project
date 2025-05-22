@@ -2,11 +2,12 @@ require('dotenv').config(); // Load environment variables
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
-const chatbotRoutes = require('./routes/chatbotRoutes') // ✅ Import review routes
+const chatbotRoutes = require('./routes/chatbotRoutes');
 
 const app = express();
 
@@ -14,15 +15,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Use Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
-app.use('/api/reviews', reviewRoutes); // ✅ Added review routes
+app.use('/api/reviews', reviewRoutes);
 app.use("/api/chatbot", chatbotRoutes);
 
 // Create database tables
-const createTablesQuery = `
-  CREATE TABLE IF NOT EXISTS users (
+const createTablesQuery = `  CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -31,7 +34,6 @@ const createTablesQuery = `
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
-  DROP TABLE IF EXISTS reviews;
 
   CREATE TABLE IF NOT EXISTS reviews ( 
     id SERIAL PRIMARY KEY,

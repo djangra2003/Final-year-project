@@ -2,10 +2,10 @@
 
 import { KeyboardArrowDown, KeyboardArrowRight, Search } from "@mui/icons-material";
 import { Box, IconButton, InputAdornment, TextField, Tooltip, Typography, useTheme } from "@mui/material";
-import beachDetails from "../Components/beaches.json";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import beachDetails from "../Components/beaches.json";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import HeroSection from "../Components/HeroSection";
@@ -33,7 +33,7 @@ const BeachWiki: React.FC = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { staggerChildren: 0.05  }
     }
   };
 
@@ -128,13 +128,14 @@ const BeachWiki: React.FC = () => {
         initial="hidden"
         animate="visible"
         sx={{
-          p: 4,
+          p: { xs: 2, sm: 3, md: 4 },
           background: "rgba(255,255,255,0.9)",
           backdropFilter: "blur(10px)",
           borderRadius: 2,
           boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
           border: "1px solid rgba(255,255,255,0.3)",
-          mx: 4
+          mx: { xs: 2, sm: 3, md: 4 },
+          mb: { xs: 2, sm: 3 }
         }}>
         <TextField
           fullWidth
@@ -149,32 +150,48 @@ const BeachWiki: React.FC = () => {
               </InputAdornment>
             ),
           }}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              fontSize: { xs: '0.9rem', sm: '1rem' }
+            }
+          }}
         />
       </Box>
 
       {/* Main Wrapper */}
-      <Box className="flex min-h-screen relative">
-        {/* Left Sidebar (Sticky below HeroSection) */}
+      <Box className="flex min-h-screen relative" sx={{ 
+        flexDirection: { xs: 'column', sm: 'row' },
+        gap: { xs: 2, sm: 3 }
+      }}>
+        {/* Left Sidebar */}
         <Box
           component={motion.div}
           variants={itemVariants}
           initial="hidden"
           animate="visible"
           sx={{
-            width: 256,
+            width: { xs: '100%', sm: 256 },
             background: "rgba(255,255,255,0.9)",
             backdropFilter: "blur(10px)",
             borderRadius: 2,
             boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
             border: "1px solid rgba(255,255,255,0.3)",
-            p: 4,
-            position: "sticky",
-            top: 0,
-            height: "100vh",
-            overflowY: "auto",
-            m: 2
+            p: { xs: 2, sm: 3 },
+            position: { xs: 'relative', sm: 'sticky' },
+            top: { xs: 0, sm: 0 },
+            height: { xs: 'auto', sm: '100vh' },
+            overflowY: { xs: 'visible', sm: 'auto' },
+            m: { xs: 2, sm: 2 },
+            mb: { xs: 2, sm: 2 }
           }}>
-          <Typography variant="h6" className="mb-4 text-gray-800">
+          <Typography 
+            variant="h6" 
+            className="mb-4 text-gray-800"
+            sx={{ 
+              fontSize: { xs: '1.1rem', sm: '1.25rem' },
+              textAlign: { xs: 'center', sm: 'left' }
+            }}
+          >
             Quick Navigation
           </Typography>
           <Box className="space-y-2">
@@ -183,6 +200,9 @@ const BeachWiki: React.FC = () => {
                 <Box
                   className="flex items-center hover:bg-gray-100 rounded px-3 py-2 cursor-pointer transition-colors"
                   onClick={() => toggleSection(sectionId)}
+                  sx={{
+                    justifyContent: { xs: 'center', sm: 'flex-start' }
+                  }}
                 >
                   <IconButton size="small" className="p-0 mr-2">
                     {expandedSections.includes(sectionId) ? (
@@ -191,19 +211,37 @@ const BeachWiki: React.FC = () => {
                       <KeyboardArrowRight fontSize="small" />
                     )}
                   </IconButton>
-                  <Typography className="text-blue-600 hover:underline text-sm">
+                  <Typography 
+                    className="text-blue-600 hover:underline text-sm"
+                    sx={{
+                      fontSize: { xs: '0.9rem', sm: '0.875rem' }
+                    }}
+                  >
                     {formatSectionName(sectionId)}
                   </Typography>
                 </Box>
                 {expandedSections.includes(sectionId) && (
-                  <Box className="ml-6 space-y-1">
+                  <Box 
+                    className="ml-6 space-y-1"
+                    sx={{
+                      ml: { xs: 2, sm: 6 }
+                    }}
+                  >
                     {Object.keys((beachesData as BeachData)[sectionId]).map((subsectionId) => (
                       <Box
                         key={subsectionId}
                         onClick={() => scrollToSection(subsectionId)}
                         className="flex items-center hover:bg-gray-100 rounded px-3 py-2 cursor-pointer transition-colors"
+                        sx={{
+                          justifyContent: { xs: 'center', sm: 'flex-start' }
+                        }}
                       >
-                        <Typography className="text-blue-600 hover:underline text-sm">
+                        <Typography 
+                          className="text-blue-600 hover:underline text-sm"
+                          sx={{
+                            fontSize: { xs: '0.85rem', sm: '0.875rem' }
+                          }}
+                        >
                           {subsectionId}
                         </Typography>
                       </Box>
@@ -222,20 +260,27 @@ const BeachWiki: React.FC = () => {
           initial="hidden"
           animate="visible"
           sx={{
-            ml: 4,
-            p: 8,
+            ml: { xs: 0, sm: 4 },
+            p: { xs: 2, sm: 3, md: 4 },
             flexGrow: 1,
             background: "rgba(255,255,255,0.9)",
             backdropFilter: "blur(10px)",
             borderRadius: 2,
             boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
             border: "1px solid rgba(255,255,255,0.3)",
-            m: 2
+            m: { xs: 2, sm: 2 }
           }}>
           {searchQuery.trim() ? (
             // Search Results View
             <Box>
-              <Typography variant="h4" className="mb-6 text-gray-800">
+              <Typography 
+                variant="h4" 
+                className="mb-6 text-gray-800"
+                sx={{ 
+                  fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' },
+                  textAlign: { xs: 'center', sm: 'left' }
+                }}
+              >
                 Search Results
               </Typography>
               <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -246,7 +291,7 @@ const BeachWiki: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     key={beach.name}
                     sx={{
-                      p: 4,
+                      p: { xs: 2, sm: 3, md: 4 },
                       borderRadius: 2,
                       background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
                       boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
@@ -259,8 +304,21 @@ const BeachWiki: React.FC = () => {
                       to={`/beaches/${beach.name.replace(/\s+/g, '')}`} 
                       className="text-gray-600 hover:underline block"
                     >
-                      <Typography variant="h6">{beach.name}</Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography 
+                        variant="h6"
+                        sx={{ 
+                          fontSize: { xs: '1.1rem', sm: '1.25rem' }
+                        }}
+                      >
+                        {beach.name}
+                      </Typography>
+                      <Typography 
+                        variant="body2" 
+                        color="text.secondary"
+                        sx={{ 
+                          fontSize: { xs: '0.8rem', sm: '0.875rem' }
+                        }}
+                      >
                         {formatSectionName(beach.section)} • {beach.subsection}
                       </Typography>
                     </Link>
@@ -272,12 +330,27 @@ const BeachWiki: React.FC = () => {
             // Regular View
             Object.keys(beachesData as BeachData).map((sectionId) => (
               <React.Fragment key={sectionId}>
-                <Typography variant="h4" id={sectionId} className="mb-6 text-gray-800">
+                <Typography 
+                  variant="h4" 
+                  id={sectionId} 
+                  className="mb-6 text-gray-800"
+                  sx={{ 
+                    fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' },
+                    textAlign: { xs: 'center', sm: 'left' }
+                  }}
+                >
                   {formatSectionName(sectionId)}
                 </Typography>
                 {Object.keys((beachesData as BeachData)[sectionId]).map((subsectionId) => (
                   <Box id={subsectionId} className="mb-6" key={subsectionId}>
-                    <Typography variant="h5" className="mb-2 text-gray-700">
+                    <Typography 
+                      variant="h5" 
+                      className="mb-2 text-gray-700"
+                      sx={{ 
+                        fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                        textAlign: { xs: 'center', sm: 'left' }
+                      }}
+                    >
                       {subsectionId}
                     </Typography>
                     <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -285,14 +358,33 @@ const BeachWiki: React.FC = () => {
                         const beachInfo = (beachDetails as any)[beach];
                         const tooltipContent = beachInfo ? (
                           <Box sx={{ p: 1, maxWidth: 300 }}>
-                            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
+                            <Typography 
+                              variant="subtitle2" 
+                              sx={{ 
+                                fontWeight: 'bold', 
+                                mb: 0.5,
+                                fontSize: { xs: '0.9rem', sm: '1rem' }
+                              }}
+                            >
                               {beach}
                             </Typography>
-                            <Typography variant="body2">
+                            <Typography 
+                              variant="body2"
+                              sx={{ 
+                                fontSize: { xs: '0.8rem', sm: '0.875rem' }
+                              }}
+                            >
                               {beachInfo.description}
                             </Typography>
                             {beachInfo.bestTimeToVisit && (
-                              <Typography variant="caption" display="block" sx={{ mt: 0.5 }}>
+                              <Typography 
+                                variant="caption" 
+                                display="block" 
+                                sx={{ 
+                                  mt: 0.5,
+                                  fontSize: { xs: '0.7rem', sm: '0.75rem' }
+                                }}
+                              >
                                 Best Time: {beachInfo.bestTimeToVisit}
                               </Typography>
                             )}
@@ -311,7 +403,7 @@ const BeachWiki: React.FC = () => {
                               variants={itemVariants}
                               whileHover={{ scale: 1.02 }}
                               sx={{
-                                p: 2,
+                                p: { xs: 2, sm: 3 },
                                 borderRadius: 2,
                                 background: "linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)",
                                 boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
@@ -321,8 +413,17 @@ const BeachWiki: React.FC = () => {
                                 }
                               }}
                             >
-                              <Link to={`/beaches/${beach.replace(/\s+/g, '')}`} className="text-gray-600 hover:underline">
-                                {beach}
+                              <Link 
+                                to={`/beaches/${beach.replace(/\s+/g, '')}`} 
+                                className="text-gray-600 hover:underline"
+                              >
+                                <Typography 
+                                  sx={{ 
+                                    fontSize: { xs: '1rem', sm: '1.1rem' }
+                                  }}
+                                >
+                                  {beach}
+                                </Typography>
                               </Link>
                             </Box>
                           </Tooltip>
