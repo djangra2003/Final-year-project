@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight, Close, Pause, PlayArrow } from "@mui/icons-material";
 import { Box, Fade, IconButton, Modal, Typography } from "@mui/material";
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import tidalImage from "../assets/games.png";
 import beachImage from "../assets/guides.png";
@@ -18,65 +17,76 @@ const images = [
   { src: hotelImage, caption: "Luxury Hotel" },
   { src: valkara, caption: "Scenic Beach Views" },
   { src: hero, caption: "Good pic" },
-  { src: hero1, caption: "" },
+  { src: hero1, caption: "Best Beach" },
   { src: hero2, caption: "" },
   { src: hero3, caption: "" },
   { src: hero4, caption: "" },
 ];
 
 const Gallery = () => {
-  const galleryRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [selectedImage, setSelectedImage] = useState<null | { src: string; caption: string }>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Handle auto-scroll
   useEffect(() => {
-    const gallery = galleryRef.current;
-    if (!gallery || !isPlaying) return;
+    if (!isPlaying) return;
 
-    const interval = setInterval(() => {
-      if (!gallery) return;
-      const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+    const scrollSpeed = 1; // pixels per frame
+    const frameRate = 60; // frames per second
+    const interval = 1000 / frameRate;
+
+    const scroll = () => {
+      if (!containerRef.current) return;
       
-      if (gallery.scrollLeft >= maxScroll) {
-        gallery.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        gallery.scrollBy({
-          left: 2,
-          behavior: "smooth",
-        });
-      }
-    }, 30);
+      const container = containerRef.current;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      
+      setScrollPosition(prev => {
+        const newPosition = prev + scrollSpeed;
+        if (newPosition >= maxScroll) {
+          return 0;
+        }
+        return newPosition;
+      });
+    };
 
-    return () => clearInterval(interval);
+    const scrollInterval = setInterval(scroll, interval);
+    return () => clearInterval(scrollInterval);
   }, [isPlaying]);
 
-  const handleScroll = (direction: "left" | "right") => {
-    const gallery = galleryRef.current;
-    if (!gallery) return;
+  // Apply scroll position
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft = scrollPosition;
+    }
+  }, [scrollPosition]);
 
-    const scrollDistance = 300;
-    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
-    let newScrollAmount = direction === "left"
-      ? gallery.scrollLeft - scrollDistance
-      : gallery.scrollLeft + scrollDistance;
+  const handleScroll = (direction: "left" | "right") => {
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const scrollAmount = container.clientWidth * 0.8; // Scroll 80% of container width
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    
+    let newPosition = direction === "left"
+      ? scrollPosition - scrollAmount
+      : scrollPosition + scrollAmount;
 
     // Handle edge cases
-    if (newScrollAmount < 0) {
-      newScrollAmount = maxScroll;
-    } else if (newScrollAmount > maxScroll) {
-      newScrollAmount = 0;
+    if (newPosition < 0) {
+      newPosition = maxScroll;
+    } else if (newPosition > maxScroll) {
+      newPosition = 0;
     }
 
-    gallery.scrollTo({
-      left: newScrollAmount,
-      behavior: "smooth",
-    });
-
-    // Pause auto-scroll when manual navigation is used
+    setScrollPosition(newPosition);
     setIsPlaying(false);
   };
 
+  // Handle keyboard navigation for modal
   useEffect(() => {
     const handleKeyDownEvent = (event: KeyboardEvent) => {
       if (selectedImage) {
@@ -91,10 +101,8 @@ const Gallery = () => {
     };
     
     document.addEventListener("keydown", handleKeyDownEvent);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDownEvent);
-    };
-  }, [currentIndex, selectedImage, images]);
+    return () => document.removeEventListener("keydown", handleKeyDownEvent);
+  }, [currentIndex, selectedImage]);
 
   return (
     <div className="relative w-full overflow-hidden py-10 px-4 md:px-8 lg:px-12" style={{
@@ -156,56 +164,52 @@ const Gallery = () => {
       </div>
 
       {/* Image Gallery */}
-      <motion.div
-        ref={galleryRef}
+      <div
+        ref={containerRef}
         className="mt-6 relative w-full overflow-hidden"
-        style={{ height: "400px" }}
+        style={{ 
+          height: "400px",
+          scrollBehavior: "smooth",
+          WebkitOverflowScrolling: "touch"
+        }}
       >
-        <motion.div
-          className="flex absolute"
-          animate={{
-            x: isPlaying ? ["-100%", "0%"] : undefined,
-          }}
-          transition={{
-            x: {
-              repeat: isPlaying ? Infinity : 0,
-              duration: 20,
-              ease: "linear",
-            },
-          }}
-          style={{ paddingLeft: "100%" }}
-        >
-          <AnimatePresence>
-            {images.map((image, index) => (
-              <motion.div
-                key={index}
-                className="relative mx-3 flex-shrink-0"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <img
-                  src={image.src}
-                  alt={image.caption}
-                  onClick={() => {
-                    setSelectedImage(image);
-                    setCurrentIndex(index);
-                  }}
-                  className="h-80 w-auto rounded-lg shadow-lg cursor-pointer object-cover transition-all duration-300 hover:shadow-xl"
-                />
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                >
+        <div className="flex">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="relative mx-3 flex-shrink-0"
+              style={{
+                transition: "transform 0.3s ease-out",
+                transform: "scale(1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              <img
+                src={image.src}
+                alt={image.caption}
+                onClick={() => {
+                  setSelectedImage(image);
+                  setCurrentIndex(index);
+                }}
+                className="h-80 w-auto rounded-lg shadow-lg cursor-pointer object-cover transition-all duration-300 hover:shadow-xl"
+                loading="lazy"
+              />
+              {image.caption && (
+                <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <Typography variant="body2" className="text-center">
                     {image.caption}
                   </Typography>
-                </motion.div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </motion.div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Modal for enlarged image view */}
       <Modal
@@ -233,9 +237,11 @@ const Gallery = () => {
                   alt={selectedImage.caption}
                   className="max-h-[80vh] w-auto object-contain"
                 />
-                <Typography variant="h6" className="text-center mt-4">
-                  {selectedImage.caption}
-                </Typography>
+                {selectedImage.caption && (
+                  <Typography variant="h6" className="text-center mt-4">
+                    {selectedImage.caption}
+                  </Typography>
+                )}
               </>
             )}
           </div>

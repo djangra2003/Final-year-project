@@ -55,7 +55,18 @@ const TourBooking: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [flights, setFlights] = useState<Flight[]>([]);
-  const [originLocations, setOriginLocations] = useState<Location[]>([]);
+  const [originLocations, setOriginLocations] = useState<Location[]>([
+    { name: "Mumbai", code: "BOM" },
+    { name: "Delhi", code: "DEL" },
+    { name: "Bangalore", code: "BLR" },
+    { name: "Chennai", code: "MAA" },
+    { name: "Kolkata", code: "CCU" },
+    { name: "Hyderabad", code: "HYD" },
+    { name: "Ahmedabad", code: "AMD" },
+    { name: "Kochi", code: "COK" },
+    { name: "Goa", code: "GOI" },
+    { name: "Pune", code: "PNQ" }
+  ]);
   const [destinationLocations, setDestinationLocations] = useState<Location[]>([
     { name: "Mumbai", code: "BOM" },
     { name: "Delhi", code: "DEL" },
@@ -76,7 +87,37 @@ const TourBooking: React.FC = () => {
 
    // Search for locations as user types
    const searchLocations = async (searchTerm: string, isOrigin: boolean) => {
-    if (!searchTerm) return;
+    if (!searchTerm) {
+      // Reset to default locations if search term is empty
+      if (isOrigin) {
+        setOriginLocations([
+          { name: "Mumbai", code: "BOM" },
+          { name: "Delhi", code: "DEL" },
+          { name: "Bangalore", code: "BLR" },
+          { name: "Chennai", code: "MAA" },
+          { name: "Kolkata", code: "CCU" },
+          { name: "Hyderabad", code: "HYD" },
+          { name: "Ahmedabad", code: "AMD" },
+          { name: "Kochi", code: "COK" },
+          { name: "Goa", code: "GOI" },
+          { name: "Pune", code: "PNQ" }
+        ]);
+      } else {
+        setDestinationLocations([
+          { name: "Mumbai", code: "BOM" },
+          { name: "Delhi", code: "DEL" },
+          { name: "Bangalore", code: "BLR" },
+          { name: "Chennai", code: "MAA" },
+          { name: "Kolkata", code: "CCU" },
+          { name: "Hyderabad", code: "HYD" },
+          { name: "Ahmedabad", code: "AMD" },
+          { name: "Kochi", code: "COK" },
+          { name: "Goa", code: "GOI" },
+          { name: "Pune", code: "PNQ" }
+        ]);
+      }
+      return;
+    }
     
     try {
       // First get the access token
@@ -111,6 +152,7 @@ const TourBooking: React.FC = () => {
         name: loc.name,
         code: loc.iataCode
       }));
+
       if (isOrigin) {
         setOriginLocations(formattedLocations);
       } else {

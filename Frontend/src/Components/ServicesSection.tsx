@@ -26,15 +26,15 @@ const services: Service[] = [
     image: tidalImage,
   },
   {
-    title: "Hotel Bookings",
+    title: "Flight Bookings",
     description:
-      "Find the perfect stay near your favorite beach! Explore a wide range of hotels, from cozy budget stays to luxurious beachfront resorts. Book hassle-free and enjoy a relaxing getaway by the sea.",
+      "Find the perfect for your favorite beach! Explore a wide range of flight prices, from budget flights to business class. Book hassle-free and enjoy a relaxing getaway by the sea.",
     image: hotelImage,
   },
   {
-    title: "Tidal Insights",
+    title: "Chat bot",
     description:
-      "Understanding tides is key to a safe and enjoyable beach visit. Check tidal timings to plan activities like swimming, fishing, or exploring tidal pools. Avoid venturing too far during high tide, and observe patterns for safety. With the right timing, every beach visit becomes memorable!",
+      "Meet our intelligent chatbot assistant, your personal guide to all things beach-related! Get instant answers about weather conditions, local attractions, safety tips, and more. Available 24/7 to help plan your perfect beach adventure with real-time information and friendly assistance!",
     image: tidal,
   },
 ];
@@ -195,7 +195,7 @@ const ServicesSection: React.FC = () => {
                   {service.description}
                 </Typography>
               </Box>
-              <Button
+              {/* <Button
                 variant="contained"
                 fullWidth
                 sx={{
@@ -214,7 +214,7 @@ const ServicesSection: React.FC = () => {
                 onClick={() => alert(`Learn more about ${service.title}`)}
               >
                 Learn More
-              </Button>
+              </Button> */}
             </CardContent>
           </Card>
         ))}

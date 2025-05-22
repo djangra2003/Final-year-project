@@ -1,6 +1,7 @@
 require('dotenv').config(); // Load environment variables
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const pool = require('./config/db');
 const helmet = require('helmet'); // Added helmet for security headers
 
@@ -17,15 +18,17 @@ app.use(cors());
 app.use(express.json());
 app.use(helmet()); // Added security headers
 
-// API Routes
-app.use('/api/auth', authRoutes);           // Includes Google Sign-In now
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Use Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/reviews', reviewRoutes);
-app.use('/api/chatbot', chatbotRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 
-// Create database tables (only for development)
-const createTablesQuery = `
-  CREATE TABLE IF NOT EXISTS users (
+// Create database tables
+const createTablesQuery = `  CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255),
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -33,6 +36,9 @@ const createTablesQuery = `
     profile_picture TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
+
+
+  CREATE TABLE IF NOT EXISTS reviews ( 
 
     id SERIAL PRIMARY KEY,
     beach_id VARCHAR(255) NOT NULL,

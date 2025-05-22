@@ -99,26 +99,34 @@ const Header: React.FC = () => {
           }}
         >
           <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', marginRight: 'auto' }}>
-            <CardMedia
-              component="img"
-              alt="Logo"
-              height="100%"
-              image={logo}
-              sx={{
-                width: 'auto',
-                height: '60px',
-                objectFit: 'contain',
-                padding: '8px 0',
-                '&:hover': {
-                  animation: `${pulse} 1s infinite`,
-                  cursor: 'pointer'
-                }
-              }}
-            />
-            <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold', '&:hover': { color: '#ff6f61', animation: `${pulse} 1s infinite` } }}>
-              Beach Buddy
-            </Typography>
-          </Link>
+              <CardMedia
+                component="img"
+                alt="Logo"
+                height="100%"
+                image={logo}
+                sx={{
+                  width: "auto",
+                  height: "60px",
+                  objectFit: "contain",
+                  padding: "8px 0",
+                  '&:hover': {
+                    animation: `${pulse} 1s infinite`,
+                    cursor: 'pointer'
+                  }
+                }}
+              />
+              <Typography variant="h6" component="div" sx={{ 
+                ml: 1, 
+                fontWeight: 'bold', 
+                fontFamily: "'Montserrat', sans-serif",
+                '&:hover': { 
+                  color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                  animation: `${pulse} 1s infinite`
+                } 
+              }}>
+                Beach Buddy
+              </Typography>
+            </Link>
 
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton
@@ -163,11 +171,67 @@ const Header: React.FC = () => {
                 }
               }}
             >
-              <Link to="/"><Button color="inherit" sx={navBtnStyle(isLoginOrSignupPage)}>Home</Button></Link>
-              <Link to="/beaches"><Button color="inherit" sx={navBtnStyle(isLoginOrSignupPage)}>Beaches</Button></Link>
-              <Link to="/about"><Button color="inherit" sx={navBtnStyle(isLoginOrSignupPage)}>About Us</Button></Link>
-              <Link to="/contact"><Button color="inherit" sx={navBtnStyle(isLoginOrSignupPage)}>Contact Us</Button></Link>
-              <Link to="/wishlist"><Button color="inherit" sx={navBtnStyle(isLoginOrSignupPage)}>Favourites</Button></Link>
+              <Link to="/">
+                <Button
+                  color="inherit"
+                  sx={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    '&:hover': {
+                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                      transition: 'all 0.3s ease-in-out',
+                    },
+                  }}
+                >
+                  Home
+                </Button>
+              </Link>
+              <Link to="/beaches">
+                <Button
+                  color="inherit"
+                  sx={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    '&:hover': {
+                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                      transition: 'all 0.3s ease-in-out',
+                    },
+                  }}
+                >
+                  
+                  Beaches
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button
+                  color="inherit"
+                  sx={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    '&:hover': {
+                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                      transition: 'all 0.3s ease-in-out',
+                    },
+                  }}
+                >
+                  About Us
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button
+                  color="inherit"
+                  sx={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    '&:hover': {
+                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                      transition: 'all 0.3s ease-in-out',
+                    },
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </Link>
             </Box>
 
             <Box
