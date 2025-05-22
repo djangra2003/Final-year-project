@@ -8,13 +8,17 @@ const pool = new Pool({
   ssl: isLocal ? false : { rejectUnauthorized: false }, // Disable SSL for local DB
 });
 
-// Test the connection
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
+// Test the connection (using async/await for better error handling)
+const testConnection = async () => {
+  try {
+    const res = await pool.query('SELECT NOW()');
+    console.log('✅ Database connected successfully:', res.rows[0]);
+  } catch (err) {
     console.error('❌ Database Connection Error:', err);
-  } else {
-    console.log('✅ Database connected successfully!');
   }
-});
+};
+
+// Call the test connection function
+testConnection();
 
 module.exports = pool;
