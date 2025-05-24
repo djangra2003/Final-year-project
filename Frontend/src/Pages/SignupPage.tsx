@@ -94,28 +94,60 @@ const SignupPage: React.FC = () => {
   // Handle Google Sign In
   const handleGoogleSignIn = async (credentialResponse: any) => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/google", {
+      // Log the full response for debugging
+      console.log("Full Google Response:", credentialResponse);
+
+      if (!credentialResponse.credential) {
+        throw new Error("No credential received from Google");
+      }
+
+      // Log the request we're about to make
+      console.log("Making request to backend with credential length:", credentialResponse.credential.length);
+
+      const response = await fetch("http://localhost:5000/api/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json"
         },
-        body: JSON.stringify({ token: credentialResponse.credential }),
+        body: JSON.stringify({ 
+          credential: credentialResponse.credential 
+        }),
       });
 
-      const data = await res.json();
+      // Log the raw response
+      console.log("Raw response status:", response.status);
+      const responseText = await response.text();
+      console.log("Raw response text:", responseText);
 
-      if (!res.ok) {
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (e) {
+        console.error("Failed to parse response as JSON:", e);
+        throw new Error("Invalid response from server");
+      }
+
+      console.log("Parsed response data:", data);
+
+      if (!response.ok) {
         throw new Error(data.message || "Google signup failed");
       }
 
-      // Store token in localStorage
+      // Store token and user data in localStorage
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       // Navigate to home page
       navigate("/");
 
     } catch (error: any) {
-      alert(error.message || "An error occurred during Google signup");
+      console.error("Detailed Google Sign In Error:", {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
+      alert(`Google sign-in failed: ${error.message}`);
     }
   };
 
@@ -242,7 +274,16 @@ const SignupPage: React.FC = () => {
             {/* Google Sign-in */}
             <GoogleLogin
               onSuccess={handleGoogleSignIn}
-              onError={() => console.error("Google Sign In Error")}
+              onError={(error) => {
+                console.error("Google Login Component Error:", error);
+                alert("Google sign-in failed. Please try again.");
+              }}
+              useOneTap={false}
+              theme="filled_blue"
+              shape="rectangular"
+              text="signup_with"
+              width="100%"
+              flow="implicit"
             />
 
             {/* Login Redirect */}
