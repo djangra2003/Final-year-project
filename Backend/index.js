@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
 const helmet = require('helmet'); // Added helmet for security headers
+const { OAuth2Client } = require('google-auth-library');
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
@@ -29,12 +30,11 @@ const createTablesQuery = `
     id SERIAL PRIMARY KEY,
     username VARCHAR(255),
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255),
+    password VARCHAR(255) NULL,
     profile_picture TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
-  DROP TABLE IF EXISTS reviews;
 
   CREATE TABLE IF NOT EXISTS reviews (
     id SERIAL PRIMARY KEY,
@@ -94,3 +94,14 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+async function verify(token) {
+  const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+  });
+  const payload = ticket.getPayload();
+  // ...
+}

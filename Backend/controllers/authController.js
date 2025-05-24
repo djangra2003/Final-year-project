@@ -7,6 +7,16 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'; // 🔒 Move to 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID; // ✅ Set this in your .env
 const client = new OAuth2Client(CLIENT_ID);
 
+console.log('Environment variables loaded:', {
+  hasClientId: !!process.env.GOOGLE_CLIENT_ID,
+  clientIdLength: process.env.GOOGLE_CLIENT_ID?.length,
+  nodeEnv: process.env.NODE_ENV
+});
+
+if (!CLIENT_ID) {
+  console.error('GOOGLE_CLIENT_ID is not set in environment variables');
+}
+
 // ------------------ Normal Login ------------------
 exports.login = async (req, res) => {
   try {
@@ -91,21 +101,44 @@ exports.signup = async (req, res) => {
 
 // ------------------ Google Sign-In ------------------
 exports.googleSignIn = async (req, res) => {
+  console.log('Received Google sign-in request');
+  
   const { credential } = req.body;
+  console.log('Request body:', {
+    hasCredential: !!credential,
+    credentialLength: credential?.length
+  });
+
+  if (!credential) {
+    console.log('No credential provided in request');
+    return res.status(400).json({ message: 'No credential provided' });
+  }
+
+  if (!CLIENT_ID) {
+    console.error('GOOGLE_CLIENT_ID is not set in environment variables');
+    return res.status(500).json({ 
+      message: 'Server configuration error: Google Client ID not set',
+      details: 'Please check your .env file'
+    });
+  }
 
   try {
-    // Log the received credential for debugging
-    console.log('Credential received:', credential);
-
-    // Verify Google ID Token
+    console.log('Attempting to verify token with client ID:', CLIENT_ID);
+    
     const ticket = await client.verifyIdToken({
       idToken: credential,
-      audience: CLIENT_ID, // Ensure this matches the Google client ID
+      audience: CLIENT_ID,
+    });
+
+    console.log('Token verification successful');
+    const payload = ticket.getPayload();
+    console.log('Token payload:', {
+      email: payload.email,
+      name: payload.name
     });
 
     // Extract payload from ticket
-    const payload = ticket.getPayload();
-    const { email, name, picture } = payload;
+    const { email, name} = payload;
 
     // Check if user already exists in the database
     const existingUser = await pool.query(
@@ -118,8 +151,8 @@ exports.googleSignIn = async (req, res) => {
     if (existingUser.rows.length === 0) {
       // If user doesn't exist, create a new user without password
       const newUser = await pool.query(
-        'INSERT INTO users (username, email, profile_picture) VALUES ($1, $2, $3) RETURNING id, username, email, profile_picture',
-        [name, email, picture]
+        'INSERT INTO users (username, email) VALUES ($1, $2) RETURNING id, username, email',
+        [name, email]
       );
       user = newUser.rows[0];
     } else {
@@ -139,14 +172,39 @@ exports.googleSignIn = async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email,
-        profile_picture: user.profile_picture,
+        email: user.email
       },
     });
   } catch (error) {
-    console.error('Google Sign-In error:', error);
+    console.error('Google Sign-In error details:', {
+      name: error.name,
+      message: error.message,
+      code: error.code,
+      stack: error.stack
+    });
+
+    // More specific error messages
+    if (error.message.includes('Token used too late')) {
+      return res.status(400).json({ message: 'Token expired. Please try again.' });
+    }
     
-    // Return a more specific error message for debugging
-    res.status(500).json({ message: 'Failed to verify Google token' });
+    if (error.message.includes('Invalid token signature')) {
+      return res.status(400).json({ 
+        message: 'Invalid token. Please try again.',
+        details: 'Token signature verification failed'
+      });
+    }
+
+    if (error.message.includes('Invalid audience')) {
+      return res.status(400).json({ 
+        message: 'Invalid client ID configuration',
+        details: 'The Google Client ID does not match'
+      });
+    }
+
+    res.status(500).json({ 
+      message: 'Failed to verify Google token',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
