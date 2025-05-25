@@ -97,27 +97,7 @@ const ProfilePage: React.FC = () => {
                 id="profile-image-upload"
                 type="file"
                 onChange={handleImageChange}
-              />
-              <label htmlFor="profile-image-upload">
-                <Button
-                  variant="contained"
-                  component={motion.span}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  sx={{
-                    mt: 2,
-                    textTransform: 'none',
-                    bgcolor: theme.palette.secondary.main,
-                    '&:hover': {
-                      bgcolor: theme.palette.secondary.dark,
-                      boxShadow: theme.shadows[4]
-                    },
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  Upload Image
-                </Button>
-              </label>
+              />  
             </Grid>
 
             {/* Profile Information Section */}

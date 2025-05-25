@@ -2,6 +2,7 @@ require('dotenv').config(); // Load environment variables
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const pool = require('./config/db');
 const helmet = require('helmet'); // Added helmet for security headers
 const { OAuth2Client } = require('google-auth-library');
@@ -17,10 +18,36 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(helmet()); // Added security headers
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "blob:", "http:", "https:"],
+    },
+  },
+}));
+
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, 'uploads');
+const reviewsDir = path.join(uploadsDir, 'reviews');
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log('Created uploads directory:', uploadsDir);
+}
+if (!fs.existsSync(reviewsDir)) {
+  fs.mkdirSync(reviewsDir, { recursive: true });
+  console.log('Created reviews directory:', reviewsDir);
+}
 
 // Serve static files from the uploads directory
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  setHeaders: (res, path) => {
+    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.set('Access-Control-Allow-Origin', '*');
+  }
+}));
 
 // Use Routes
 app.use('/api/auth', authRoutes);
@@ -40,7 +67,6 @@ const createTablesQuery = `  CREATE TABLE IF NOT EXISTS users (
 
 
   CREATE TABLE IF NOT EXISTS reviews ( 
-
     id SERIAL PRIMARY KEY,
     beach_id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
