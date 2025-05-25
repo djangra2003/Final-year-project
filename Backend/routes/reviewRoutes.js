@@ -8,7 +8,7 @@ const pool = require('../config/db');
 // Configure multer for image upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = 'uploads/reviews';
+    const uploadDir = path.join(__dirname, '..', 'uploads', 'reviews');
     // Create directory if it doesn't exist
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
@@ -24,20 +24,41 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB limit
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+    files: 5 // Maximum 5 files
   },
   fileFilter: (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error('Invalid file type. Only JPEG, PNG and GIF are allowed.'));
+      cb(new Error('Invalid file type. Only JPEG, PNG, GIF and WebP are allowed.'));
     }
   }
 });
 
+// Error handling middleware for multer
+const handleMulterError = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ 
+        message: 'File too large. Maximum size is 10MB per file.' 
+      });
+    }
+    if (err.code === 'LIMIT_FILE_COUNT') {
+      return res.status(400).json({ 
+        message: 'Too many files. Maximum 5 files allowed.' 
+      });
+    }
+    return res.status(400).json({ 
+      message: 'Error uploading file: ' + err.message 
+    });
+  }
+  next(err);
+};
+
 // Route to submit a review for a specific beach
-router.post('/:beachId', upload.array('images', 5), async (req, res) => {
+router.post('/:beachId', upload.array('images', 5), handleMulterError, async (req, res) => {
   const { beachId } = req.params;
   const { name, location, review, rating } = req.body;
 
@@ -66,7 +87,7 @@ router.post('/:beachId', upload.array('images', 5), async (req, res) => {
 });
 
 // Route to edit a review
-router.put('/:reviewId', upload.array('images', 5), async (req, res) => {
+router.put('/:reviewId', upload.array('images', 5), handleMulterError, async (req, res) => {
   const { reviewId } = req.params;
   const { name, location, review, rating } = req.body;
 
@@ -106,7 +127,8 @@ router.delete('/:reviewId', async (req, res) => {
       // Delete associated images
       const images = review.rows[0].images || [];
       images.forEach(imageUrl => {
-        const imagePath = path.join(__dirname, '..', imageUrl);
+        const filename = imageUrl.split('/').pop();
+        const imagePath = path.join(__dirname, '..', 'uploads', 'reviews', filename);
         if (fs.existsSync(imagePath)) {
           fs.unlinkSync(imagePath);
         }
@@ -157,3 +179,4 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
+

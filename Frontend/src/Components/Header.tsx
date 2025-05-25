@@ -232,6 +232,21 @@ const Header: React.FC = () => {
                   Contact Us
                 </Button>
               </Link>
+              <Link to="/wishlist">
+                <Button
+                  color="inherit"
+                  sx={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    '&:hover': {
+                      color: isLoginOrSignupPage ? '#ff6f61' : '#ff6f61',
+                      backgroundColor: isLoginOrSignupPage ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                      transition: 'all 0.3s ease-in-out',
+                    },
+                  }}
+                >
+                  Favourites
+                </Button>
+              </Link>
             </Box>
 
             <Box

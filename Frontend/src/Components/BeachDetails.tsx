@@ -1258,6 +1258,10 @@ const BeachDetails: React.FC = () => {
                                   objectFit: 'cover',
                                   borderRadius: '4px',
                                 }}
+                                onError={(e) => {
+                                  console.error('Error loading image:', image);
+                                  e.currentTarget.src = '/images/placeholder.jpg';
+                                }}
                               />
                             </Box>
                           ))}
@@ -1378,6 +1382,10 @@ const BeachDetails: React.FC = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain',
+              }}
+              onError={(e) => {
+                console.error('Error loading image:', selectedReviewImages[selectedImageIndex]);
+                e.currentTarget.src = '/images/placeholder.jpg';
               }}
             />
           )}
